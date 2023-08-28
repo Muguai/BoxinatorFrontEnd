@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  Test Login Form with Firebase
+
+  <ng-container *ngIf="authService.currentUser$ | async as user; else loginButton">
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{user.email}}
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </ng-container>
+  <ng-template #loginButton>
+    <button mat-button routerLink="signup">
+      <mat-icon>follow_the_signs</mat-icon>
+      Sign up
+    </button>
+  </ng-template>
+</mat-toolbar>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>

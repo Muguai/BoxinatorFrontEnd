@@ -1,0 +1,56 @@
+<div class="form-container mat-elevation-z5">
+  <form
+    #createLoginForm="ngForm"
+    (ngSubmit)="formLogin(createLoginForm)"
+    class="login"
+  >
+    <h3>Login</h3>
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        ngModel email
+        name="email"
+        #name="ngModel"
+        required
+        minlength="3"
+        maxlength="50"
+        placeholder="Email"
+      />
+      <mat-error *ngIf="name.errors?.['email']">
+        please enter a correct email format
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        ngModel password
+        name="password"
+        #password="ngModel"
+        required
+        minlength="6"
+        maxlength="20"
+        placeholder="password"
+      />
+      
+      <mat-error *ngIf="password.errors?.['minlength']">
+        password needs to be at least 6 characters
+      </mat-error>
+    </mat-form-field>
+
+    <div class="center margin-top">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="createLoginForm.form.invalid"
+        class="login-form-button"
+      >
+        Login
+      </button>
+    </div>
+
+    <span class="center margin-top"> New to our platform? <a (click)="signUpRoute()" class="sign-up-link">Sign up!</a> </span>
+  </form>
+</div>
