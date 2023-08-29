@@ -11,6 +11,7 @@ export class HomeComponent {
   user$ = this.authService.currentUser$;
 
   constructor(private authService: AuthenticationService) {
+    console.log(authService.getFirebaseAuthToken());
   }
 
 }

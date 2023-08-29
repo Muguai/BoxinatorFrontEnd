@@ -45,7 +45,7 @@
           required
           minlength="6"
           maxlength="20"
-          placeholder="password"
+          placeholder="Password"
         />
         
         <mat-error *ngIf="password.errors?.['minlength']">
@@ -64,9 +64,8 @@
           maxlength="20"
           placeholder="Confirm password"
         />
-        
-        <mat-error *ngIf="passwordVal.errors?.['minlength']">
-          password needs to be at least 6 characters
+        <mat-error *ngIf="passwordVal !== password">
+          password dont match
         </mat-error>
       </mat-form-field>
   
@@ -81,6 +80,8 @@
           Sign Up
         </button>
       </div>
-  
+
+      <span class="center margin-top"> Already got an account? <a routerLink="/" class="login-link">Login!</a> </span>
+
     </form>
   </div>

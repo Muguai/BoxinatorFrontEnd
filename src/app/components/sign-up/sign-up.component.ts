@@ -10,6 +10,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent {
+
+  isLoading:boolean = false;
+
   constructor(
     private authService: AuthenticationService,
     private toast: HotToastService,
@@ -34,15 +37,14 @@ export class SignUpComponent {
 
     this.authService
       .signup(name, email, password)
-      .pipe(
-        this.toast.observe({
-          success: 'Your all signed up :D',
-          loading: 'Signing in...',
-          error: (err) => `${err?.message}`,
-        })
-      )
-      .subscribe(() => {
-        this.router.navigate(['/home'])
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/home'])
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
       });
 
   }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'LoginTest';
 
-  constructor(public authService: AuthenticationService, private router: Router){
+  constructor(public authService: AuthenticationService, private router: Router, private activatedRoute: ActivatedRoute){
 
   }
 
@@ -18,5 +19,13 @@ export class AppComponent {
       this.authService.logout().subscribe(() => {
         this.router.navigate(['']);
       });
+  }
+
+  isOnSignUpPage(): boolean {
+    return this.router.url.includes('/signup');
+  }
+
+  isOnLoginPage(): boolean {
+    return this.router.url === '/';  
   }
 }

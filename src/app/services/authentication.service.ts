@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
-import { from, switchMap } from 'rxjs';
+import { from, switchMap, of  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,17 @@ export class AuthenticationService {
  
   logout(){
     return from(this.auth.signOut())
+  }
+
+  getFirebaseAuthToken() {
+    return this.currentUser$.pipe(
+      switchMap(user => {
+        if (user) {
+          return from(user.getIdToken());
+        } else {
+          return of(''); 
+        }
+      })
+    );
   }
 }
