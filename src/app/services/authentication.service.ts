@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
-import { Auth,getAuth, authState, createUserWithEmailAndPassword, getIdToken, signInWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
+import { Auth,getAuth, authState, createUserWithEmailAndPassword, getIdToken, signInWithEmailAndPassword, updateProfile, signInAnonymously } from '@angular/fire/auth';
 import { from, switchMap, of  } from 'rxjs';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class AuthenticationService {
     if(currentUser != null){
         token = await getIdToken(currentUser, true)
     }
-    console.log("Token: " + token);
+    return token
   }
     
 
@@ -27,11 +27,18 @@ export class AuthenticationService {
     return from(signInWithEmailAndPassword(this.auth, username, password));
   }
 
-  signup(name: string, email: string, password: string){
-    return from(createUserWithEmailAndPassword(this.auth,email,password))
-    .pipe(
-      switchMap(({ user }) => updateProfile(user, {displayName: name}))
-    );
+  loginAnonymously() {
+    return from(signInAnonymously(this.auth));
+  }
+
+  signup(name: string, email: string, password: string) {
+    return from(createUserWithEmailAndPassword(this.auth, email, password))
+      .pipe(
+        switchMap(({ user }) => {
+          // Update the user's profile (including display name)
+          return from(updateProfile(user, { displayName: name }));
+        })
+      );
   }
  
   logout(){

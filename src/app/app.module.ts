@@ -20,12 +20,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { MatMenuModule } from '@angular/material/menu';
+import { HttpClientModule } from '@angular/common/http';
+import { TestAuthenticationWeatherComponent } from './components/test-authentication-weather/test-authentication-weather.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    TestAuthenticationWeatherComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +48,7 @@ import { MatMenuModule } from '@angular/material/menu';
     provideAuth(() => getAuth()),
     HotToastModule.forRoot(),
     MatMenuModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
