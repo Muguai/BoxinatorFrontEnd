@@ -81,6 +81,10 @@
         </button>
       </div>
 
+      <span class="center margin-top error-message" *ngIf="signUpErrorMessage.length > 0">
+        {{signUpErrorMessage}}
+      </span>
+
       <span class="center margin-top"> Already got an account? <a routerLink="/" class="login-link">Login!</a> </span>
 
     </form>

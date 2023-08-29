@@ -12,6 +12,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class SignUpComponent {
 
   isLoading:boolean = false;
+  public signUpErrorMessage:string = "";
+
 
   constructor(
     private authService: AuthenticationService,
@@ -44,6 +46,14 @@ export class SignUpComponent {
         },
         error: (error: any) => {
           console.log(error);
+          switch(error.code){
+              case "auth/email-already-in-use":
+                this.signUpErrorMessage = "Email already in use";
+                break;
+              default:
+                this.signUpErrorMessage = "Error signing up";
+                break;
+          }
         },
       });
 

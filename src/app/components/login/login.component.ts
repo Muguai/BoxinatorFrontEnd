@@ -12,6 +12,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class LoginComponent {
 
   isLoading:boolean = false;
+  public loginErrorMessage:string = "";
 
   constructor(
     private authService: AuthenticationService,
@@ -22,7 +23,8 @@ export class LoginComponent {
     if (!form.valid) {
       return;
     }
-    
+
+    this.loginErrorMessage = "";
 
     console.log("gets here");
 
@@ -36,6 +38,17 @@ export class LoginComponent {
         },
         error: (error: any) => {
           console.log(error);
+          switch(error.code){
+            case "auth/user-not-found":
+              this.loginErrorMessage = "User Not Found";
+              break;
+            case "auth/wrong-password":
+              this.loginErrorMessage = "Wrong Password"
+              break;
+            default:
+              this.loginErrorMessage = "Error Logging in";
+              break;
+          }
         },
       });
   }

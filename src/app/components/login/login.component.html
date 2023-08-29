@@ -50,7 +50,9 @@
         Login
       </button>
     </div>
-
+    <span class="center margin-top error-message" *ngIf="loginErrorMessage.length > 0">
+      {{loginErrorMessage}}
+    </span>
     <span class="center margin-top"> New to our platform? <a routerLink="signup" class="sign-up-link">Sign up!</a> </span>
   </form>
 </div>
