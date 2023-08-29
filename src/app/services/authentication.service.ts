@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
+import { FirebaseApp } from '@angular/fire/app';
+import { Auth,getAuth, authState, createUserWithEmailAndPassword, getIdToken, signInWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
 import { from, switchMap, of  } from 'rxjs';
 
 @Injectable({
@@ -8,6 +9,17 @@ import { from, switchMap, of  } from 'rxjs';
 export class AuthenticationService {
 
   currentUser$ = authState(this.auth);
+
+  async getToken(){
+    const auth = getAuth()
+    const { currentUser } = auth
+    let token = "TOKEN NOT FOUND"
+    if(currentUser != null){
+        token = await getIdToken(currentUser, true)
+    }
+    console.log("Token: " + token);
+  }
+    
 
   constructor(private auth: Auth) { }
 
@@ -25,16 +37,5 @@ export class AuthenticationService {
   logout(){
     return from(this.auth.signOut())
   }
-
-  getFirebaseAuthToken() {
-    return this.currentUser$.pipe(
-      switchMap(user => {
-        if (user) {
-          return from(user.getIdToken());
-        } else {
-          return of(''); 
-        }
-      })
-    );
-  }
+ 
 }
