@@ -2,13 +2,16 @@
   Test Login Form with Firebase
 
   <ng-container *ngIf="authService.currentUser$ | async as user; else noUser">
-    <ng-container *ngIf="!user.isAnonymous else noUser">
-      <button mat-button [matMenuTriggerFor]="userMenu">
-        {{ user.displayName }}
-        <mat-icon>account_circle</mat-icon>
-        <mat-icon>expand_more</mat-icon>
-      </button>
-    </ng-container>
+    <div>
+      <ng-container *ngIf="!user.isAnonymous else noUser">
+        <button mat-button [matMenuTriggerFor]="userMenu">
+          {{ user.displayName }}
+          <mat-icon>account_circle</mat-icon>
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <button mat-button (click)="toggleCart()">Open Cart</button>
+      </ng-container>
+    </div>
   </ng-container>
 
   <ng-template #noUser>
@@ -27,10 +30,16 @@
           Sign up
         </button>
       </ng-container>
+      <button mat-button (click)="toggleCart()">Open Cart</button>
     </div>
   </ng-template>
+
 </mat-toolbar>
 
+
+<div class="cart-container">
+  <app-cart #cart></app-cart>
+</div>
 <div class="content">
   <router-outlet></router-outlet>
 </div>

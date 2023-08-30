@@ -19,17 +19,21 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HotToastModule } from '@ngneat/hot-toast';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuItem, MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { TestAuthenticationWeatherComponent } from './components/test-authentication-weather/test-authentication-weather.component';
-
+import { CartComponent } from './components/cart/cart.component';
+import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     LoginComponent,
     HomeComponent,
-    TestAuthenticationWeatherComponent
+    TestAuthenticationWeatherComponent,
+    CartComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,8 @@ import { TestAuthenticationWeatherComponent } from './components/test-authentica
     HotToastModule.forRoot(),
     MatMenuModule,
     HttpClientModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

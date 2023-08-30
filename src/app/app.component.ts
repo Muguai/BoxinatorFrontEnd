@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { CartComponent } from './components/cart/cart.component';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppComponent {
   title = 'LoginTest';
+  items: any[] = []; 
+  @ViewChild('cart') cart!: CartComponent;
+
+
+  
 
   constructor(public authService: AuthenticationService, private router: Router, private activatedRoute: ActivatedRoute){
 
@@ -32,4 +38,10 @@ export class AppComponent {
   isOnHomePage(): boolean {
     return this.router.url === '/';  
   }
+
+  toggleCart() {
+    this.cart.toggleSidebar();
+  }
+
+  
 }
