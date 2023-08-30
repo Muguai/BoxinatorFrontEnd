@@ -30,7 +30,7 @@
           Sign up
         </button>
       </ng-container>
-      <button mat-button (click)="toggleCart()">Open Cart</button>
+      <button *ngIf="isOnHomePage()"  mat-button (click)="toggleCart()">Open Cart</button>
     </div>
   </ng-template>
 
@@ -38,7 +38,7 @@
 
 
 <div class="cart-container">
-  <app-cart #cart></app-cart>
+  <app-cart *ngIf="isOnHomePage()" #cart></app-cart>
 </div>
 <div class="content">
   <router-outlet></router-outlet>
