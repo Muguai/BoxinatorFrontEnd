@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { WeatherService } from 'src/app/services/weather.service';
 
@@ -7,27 +7,27 @@ import { WeatherService } from 'src/app/services/weather.service';
   templateUrl: './test-authentication-weather.component.html',
   styleUrls: ['./test-authentication-weather.component.scss']
 })
-export class TestAuthenticationWeatherComponent implements OnInit {
-  constructor(private weatherService: WeatherService, private auth: AuthenticationService) { 
-   
-    
-  }
+export class TestAuthenticationWeatherComponent {
+  public apiData: any[] = [];
+  public error: string | null = null;
 
-  async start(){
-    this.weatherService.getWeatherData(await this.auth.getToken()).subscribe({
-      next: (data : any) => {
-          console.log(data);
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-    }
-    );
-  }
+  constructor(private weatherService: WeatherService, private auth: AuthenticationService) {}
 
-  async ngOnInit() {
-    setTimeout(() => {
-      this.start()
-    }, 1000);
+  async start() {
+      this.error = null; // Clear any previous errors
+      const token = await this.auth.getToken();
+      this.weatherService.getWeatherData(token).subscribe({
+        next: (weatherData : any) => {
+            this.apiData = weatherData;
+            console.log(weatherData);
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.apiData = [];
+          this.error = 'ERROR retrieving data from the API';
+        },
+      });
   }
 }
+
+

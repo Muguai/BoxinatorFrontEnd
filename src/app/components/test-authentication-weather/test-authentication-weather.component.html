@@ -1,1 +1,17 @@
-<p>test-authentication-weather works!</p>
+<button mat-raised-button color="primary" (click)="start()">Fetch Weather Data</button>
+
+<div *ngIf="apiData.length > 0">
+  <h2>Weather Data:</h2>
+  <ul>
+    <li *ngFor="let item of apiData">
+      <p>Date: {{ item.date }}</p>
+      <p>Temperature (C): {{ item.temperatureC }}</p>
+      <p>Temperature (F): {{ item.temperatureF }}</p>
+      <p>Summary: {{ item.summary }}</p>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="error">
+  <p>{{ error }}</p>
+</div>
