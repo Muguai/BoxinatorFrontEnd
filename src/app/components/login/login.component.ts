@@ -29,12 +29,15 @@ export class LoginComponent {
     console.log("gets here");
 
     const { email, password } = form.value;
+
     this.isLoading = true;
+
     console.log("email " + email + " password " + password)
+
     this.authService.login(email, password).subscribe({
         next: () => {
           this.isLoading = false;
-          this.router.navigate(['/home'])
+          this.router.navigate(['/'])
         },
         error: (error: any) => {
           console.log(error);

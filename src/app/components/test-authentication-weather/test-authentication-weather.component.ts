@@ -8,16 +8,26 @@ import { WeatherService } from 'src/app/services/weather.service';
   styleUrls: ['./test-authentication-weather.component.scss']
 })
 export class TestAuthenticationWeatherComponent implements OnInit {
-  constructor(private weatherService: WeatherService, private auth: AuthenticationService) { }
+  constructor(private weatherService: WeatherService, private auth: AuthenticationService) { 
+   
+    
+  }
+
+  async start(){
+    this.weatherService.getWeatherData(await this.auth.getToken()).subscribe({
+      next: (data : any) => {
+          console.log(data);
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    }
+    );
+  }
 
   async ngOnInit() {
-    this.weatherService.getWeatherData(await this.auth.getToken()).subscribe(
-      (data) => {
-        console.log('Weather Data:', data);
-      },
-      (error) => {
-        console.error('Error fetching weather data:', error);
-      }
-    );
+    setTimeout(() => {
+      this.start()
+    }, 1000);
   }
 }

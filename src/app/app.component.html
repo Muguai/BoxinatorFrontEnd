@@ -1,27 +1,33 @@
 <mat-toolbar color="primary">
   Test Login Form with Firebase
 
-  <ng-container *ngIf="authService.currentUser$ | async as user;">
-    <button mat-button [matMenuTriggerFor]="userMenu">
-      {{user.displayName}}
-      <mat-icon>account_circle</mat-icon>
-      <mat-icon>expand_more</mat-icon>
-    </button>
+  <ng-container *ngIf="authService.currentUser$ | async as user; else noUser">
+    <ng-container *ngIf="!user.isAnonymous else noUser">
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        {{ user.displayName }}
+        <mat-icon>account_circle</mat-icon>
+        <mat-icon>expand_more</mat-icon>
+      </button>
+    </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="isOnSignUpPage()">
-    <button mat-button routerLink="">
-      <mat-icon>login</mat-icon>
-      Login
-    </button>
-  </ng-container>
+  <ng-template #noUser>
+    <div>
+      <ng-container *ngIf="isOnSignUpPage() || isOnHomePage()">
+        <button mat-button routerLink="login">
+          <mat-icon>login</mat-icon>
+          Login
+        </button>
+      </ng-container>
 
-  <ng-container *ngIf="isOnLoginPage()">
-    <button mat-button routerLink="signup">
-      <mat-icon>follow_the_signs</mat-icon>
-      Sign up
-    </button>
-  </ng-container>
+      <ng-container *ngIf="isOnLoginPage() || isOnHomePage()">
+        <button mat-button routerLink="signup">
+          <mat-icon>follow_the_signs</mat-icon>
+          Sign up
+        </button>
+      </ng-container>
+    </div>
+  </ng-template>
 </mat-toolbar>
 
 <div class="content">

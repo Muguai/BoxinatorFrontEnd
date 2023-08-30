@@ -42,7 +42,7 @@ export class SignUpComponent {
       .subscribe({
         next: () => {
           this.isLoading = false;
-          this.router.navigate(['/home'])
+          this.router.navigate(['/'])
         },
         error: (error: any) => {
           console.log(error);
