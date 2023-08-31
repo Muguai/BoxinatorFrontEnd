@@ -25,6 +25,11 @@ import { TestAuthenticationWeatherComponent } from './components/test-authentica
 import { CartComponent } from './components/cart/cart.component';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
+import { AdminBoxesComponent } from './components/admin/admin-boxes/admin-boxes.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import { AdminCountriesComponent } from './components/admin/admin-countries/admin-countries.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +38,11 @@ import {MatListModule} from '@angular/material/list';
     HomeComponent,
     TestAuthenticationWeatherComponent,
     CartComponent,
+    AdminComponent,
+    AdminOrdersComponent,
+    AdminBoxesComponent,
+    AdminUsersComponent,
+    AdminCountriesComponent,
     
   ],
   imports: [

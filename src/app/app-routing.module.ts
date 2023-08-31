@@ -5,6 +5,11 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
 import {  canActivate } from "@angular/fire/auth-guard";
 import { userAnonymousGuard } from './guards/user-anonymous.guard';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
+import { AdminBoxesComponent } from './components/admin/admin-boxes/admin-boxes.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import { AdminCountriesComponent } from './components/admin/admin-countries/admin-countries.component';
 
 const routes: Routes = [
   {
@@ -21,8 +26,18 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [userAnonymousGuard]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {path: '', pathMatch: 'full', redirectTo: 'orders'},
+      {path: 'orders', component: AdminOrdersComponent},
+      {path: 'boxes', component: AdminBoxesComponent},
+      {path: 'users', component: AdminUsersComponent},
+      {path: 'countries', component: AdminCountriesComponent}
+    ]
   }
-    
 ];
 
 @NgModule({
