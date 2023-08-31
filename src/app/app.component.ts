@@ -45,8 +45,11 @@ export class AppComponent {
   }
 
   onCartOpenChange(cartOpen: boolean) {
-    console.log("gets here2");
     this.cartOpen = cartOpen;
+  }
+
+  mouseOverCart(isHover: boolean){
+    this.cart.HoveredOverCartButton(isHover);
   }
 
   

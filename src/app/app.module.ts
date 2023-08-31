@@ -28,6 +28,8 @@ import {MatListModule} from '@angular/material/list';
 import { LoginPage } from './pages/login/login.page';
 import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LandingPage } from './pages/landing/landing.page';
+import { BoxListComponent } from './components/box-list/box-list.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { LandingPage } from './pages/landing/landing.page';
     LoginPage,
     SignUpPage,
     LandingPage,
+    BoxListComponent,
+    CartItemComponent,
     
   ],
   imports: [

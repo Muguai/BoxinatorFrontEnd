@@ -1,15 +1,13 @@
 .sidebar {
-    position: absolute;
+    position: fixed;
     top: 0;
     
-    right: -300px;
-    width: 300px; 
+    right: -350px;
+    width: 350px; 
     height: 100%;
-    background-color: #333;
-    color: #fff;
+    background-color: white;
     z-index: 2;
-    box-shadow: -0px 0 100px rgba(0, 0, 0, 0); 
-
+    box-shadow: 0px 0 0px rgba(0, 0, 0, 0); 
     transition: right 0.3s ease-in-out, box-shadow 0.4s ease-in-out;;
   }
 
@@ -17,17 +15,42 @@
     box-shadow: -50px 0 100px rgba(0, 0, 0, 0.3); 
     right: 0px; 
   }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    top: 0;
+    background-color: black;
+    height: 100px;
+  }
+  
+  .sidebar-header-text {
+    position: absolute;
+    left: 105px;
+    color: white;
+    height: 20px;
+
+  }
+  
+  .sidebar-header-close-btn {
+    position: absolute;
+    right: 20px;
+    height: 20px;
+    
+    
+  }
   
   .sidebar ul {
+    position: relative;
     list-style-type: none;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    max-height: 90%;
+    overflow-y: auto;
   }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar a {
-    text-decoration: none;
-    color: #fff;
+
+  .sidebar-checkout-btn{
+    display: flex;
+    justify-content: center;
   }

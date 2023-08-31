@@ -1,4 +1,4 @@
-<mat-toolbar class="content" [class.open]="cartOpen" color="primary">
+<mat-toolbar  class="content" [class.open]="cartOpen" color="primary">
   Boxinator
 
   <ng-container *ngIf="authService.currentUser$ | async as user; else noUser">
@@ -9,7 +9,7 @@
           <mat-icon>account_circle</mat-icon>
           <mat-icon>expand_more</mat-icon>
         </button>
-        <button mat-button (click)="toggleCart()">        
+        <button (mouseover)="mouseOverCart(true)" (mouseout)="mouseOverCart(false)" mat-button (click)="toggleCart()">        
           <mat-icon>shopping_cart</mat-icon>
         </button>
       </ng-container>
@@ -44,7 +44,7 @@
 <div class="cart-container">
   <app-cart (cartOpenChange)="onCartOpenChange($event)" *ngIf="isOnHomePage()" #cart></app-cart>
 </div>
-<div class="content"  [class.open]="cartOpen" >
+<div   class="content"  [class.open]="cartOpen" >
   <router-outlet></router-outlet>
 </div>
 

@@ -1,5 +1,6 @@
 mat-toolbar {
     justify-content: space-between;
+    height: 100px;
 }
 
 .content {
@@ -8,5 +9,5 @@ mat-toolbar {
   }
 
 .content.open {
-    width: calc(100% - 280px); 
+    width: calc(100% - 350px); 
   }
