@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { LoginComponent } from './components/login/login.component';
+import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,14 +25,21 @@ import { TestAuthenticationWeatherComponent } from './components/test-authentica
 import { CartComponent } from './components/cart/cart.component';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import { LoginPage } from './pages/login/login.page';
+import { SignUpPage } from './pages/sign-up/sign-up.page';
+import { LandingPage } from './pages/landing/landing.page';
+
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
-    LoginComponent,
+    SignUpFormComponent,
+    LoginFormComponent,
     HomeComponent,
     TestAuthenticationWeatherComponent,
     CartComponent,
+    LoginPage,
+    SignUpPage,
+    LandingPage,
     
   ],
   imports: [

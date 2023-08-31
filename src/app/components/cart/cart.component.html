@@ -1,4 +1,4 @@
-<div class="sidebar" [style.right]="cartOpen? '0' : '-300px'">
+<div class="sidebar" [class.open]="cartOpen">
     <ul>
       <li><button (click)="toggleSidebar()">X</button></li>
     </ul>

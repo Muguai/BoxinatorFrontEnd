@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input , EventEmitter, Output } from '@angular/core';
 
 
 @Component({
@@ -8,6 +8,8 @@ import { Component, Input} from '@angular/core';
 })
 export class CartComponent {
 
+  @Output() cartOpenChange = new EventEmitter<boolean>();
+
   constructor() {
   }
 
@@ -15,7 +17,7 @@ export class CartComponent {
 
   toggleSidebar() {
     this.cartOpen = !this.cartOpen;
-    
+    this.cartOpenChange.emit(this.cartOpen);
     console.log("gets here");
   }
 

@@ -12,6 +12,7 @@ import { CartComponent } from './components/cart/cart.component';
 export class AppComponent {
   title = 'LoginTest';
   items: any[] = []; 
+  cartOpen: boolean = false;
   @ViewChild('cart') cart!: CartComponent;
 
 
@@ -41,6 +42,11 @@ export class AppComponent {
 
   toggleCart() {
     this.cart.toggleSidebar();
+  }
+
+  onCartOpenChange(cartOpen: boolean) {
+    console.log("gets here2");
+    this.cartOpen = cartOpen;
   }
 
   
