@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss'],
 })
 
-export class LoginComponent {
+export class LoginFormComponent {
 
   isLoading:boolean = false;
   public loginErrorMessage:string = "";

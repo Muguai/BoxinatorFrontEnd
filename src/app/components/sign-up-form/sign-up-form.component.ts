@@ -5,11 +5,11 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
+  selector: 'app-sign-up-form',
+  templateUrl: './sign-up-form.component.html',
+  styleUrls: ['./sign-up-form.component.scss'],
 })
-export class SignUpComponent {
+export class SignUpFormComponent {
 
   isLoading:boolean = false;
   public signUpErrorMessage:string = "";

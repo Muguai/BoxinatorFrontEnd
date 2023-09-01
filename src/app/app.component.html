@@ -1,5 +1,5 @@
-<mat-toolbar color="primary">
-  Test Login Form with Firebase
+<mat-toolbar  class="content" [class.open]="cartOpen" color="primary">
+  Boxinator
 
   <ng-container *ngIf="authService.currentUser$ | async as user; else noUser">
     <div>
@@ -9,7 +9,9 @@
           <mat-icon>account_circle</mat-icon>
           <mat-icon>expand_more</mat-icon>
         </button>
-        <button mat-button (click)="toggleCart()">Open Cart</button>
+        <button (mouseover)="mouseOverCart(true)" (mouseout)="mouseOverCart(false)" mat-button (click)="toggleCart()">        
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
       </ng-container>
     </div>
   </ng-container>
@@ -30,7 +32,9 @@
           Sign up
         </button>
       </ng-container>
-      <button *ngIf="isOnHomePage()"  mat-button (click)="toggleCart()">Open Cart</button>
+      <button *ngIf="isOnHomePage()"  mat-button (click)="toggleCart()">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
     </div>
   </ng-template>
 
@@ -38,9 +42,9 @@
 
 
 <div class="cart-container">
-  <app-cart *ngIf="isOnHomePage()" #cart></app-cart>
+  <app-cart (cartOpenChange)="onCartOpenChange($event)" *ngIf="isOnHomePage()" #cart></app-cart>
 </div>
-<div class="content">
+<div   class="content"  [class.open]="cartOpen" >
   <router-outlet></router-outlet>
 </div>
 

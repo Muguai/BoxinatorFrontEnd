@@ -1,6 +1,14 @@
-<div class="sidebar" [style.right]="cartOpen? '0' : '-300px'">
-    <ul>
-      <li><button (click)="toggleSidebar()">X</button></li>
-    </ul>
+<div #cartSidebar class="sidebar" [class.open]="cartOpen">
+  <div class="sidebar-header">
+    <h1 class="sidebar-header-text">Your Cart</h1>
+    <button class="sidebar-header-close-btn" (click)="toggleSidebar()">
+      X
+    </button>
   </div>
-  
+  <ul>
+    <li><app-cart-item *ngFor="let box of boxes" [box]="box"></app-cart-item></li>
+  </ul>
+<div class="sidebar-checkout-btn">
+  <button>Checkout</button>
+</div>
+</div>

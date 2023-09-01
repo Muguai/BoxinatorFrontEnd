@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { LoginComponent } from './components/login/login.component';
+import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,11 +30,17 @@ import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orde
 import { AdminBoxesComponent } from './components/admin/admin-boxes/admin-boxes.component';
 import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 import { AdminCountriesComponent } from './components/admin/admin-countries/admin-countries.component';
+import { LoginPage } from './pages/login/login.page';
+import { SignUpPage } from './pages/sign-up/sign-up.page';
+import { LandingPage } from './pages/landing/landing.page';
+import { BoxListComponent } from './components/box-list/box-list.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
-    LoginComponent,
+    SignUpFormComponent,
+    LoginFormComponent,
     HomeComponent,
     TestAuthenticationWeatherComponent,
     CartComponent,
@@ -43,6 +49,11 @@ import { AdminCountriesComponent } from './components/admin/admin-countries/admi
     AdminBoxesComponent,
     AdminUsersComponent,
     AdminCountriesComponent,
+    LoginPage,
+    SignUpPage,
+    LandingPage,
+    BoxListComponent,
+    CartItemComponent,
     
   ],
   imports: [
