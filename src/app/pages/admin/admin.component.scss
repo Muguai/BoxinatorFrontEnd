@@ -1,3 +1,27 @@
+$blue: #34AFF7;
+$orange: #FE9D35;
+$dark_blue: #1A202C;
+
 #container {
     top: 64px; // height of nav
+}
+
+@media(max-width: 599px) {
+    #container {
+      top: 56px !important;
+    }
+}
+
+mat-nav-list {
+    padding: 0;
+}
+
+.active {
+    background-color: $blue;
+}
+
+.active {
+    .link-title {
+        color: white;
+    }
 }

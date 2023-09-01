@@ -1,7 +1,10 @@
 <mat-sidenav-container id="container" fullscreen>
     <mat-sidenav mode="side" opened="true">
         <mat-nav-list>
-            <a mat-list-item routerLink="{{ link.link }}" *ngFor="let link of links">{{ link.title }}</a>
+            <a mat-list-item *ngFor="let link of links" routerLink="{{ link.link }}"
+            routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <span class="link-title">{{ link.title }}</span>
+            </a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
