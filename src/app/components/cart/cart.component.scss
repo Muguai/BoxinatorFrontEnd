@@ -1,9 +1,8 @@
 .sidebar {
     position: fixed;
     top: 0;
-    
-    right: -350px;
-    width: 350px; 
+    right: -375px;
+    width: 375px; 
     height: 100%;
     background-color: white;
     z-index: 2;
@@ -36,8 +35,6 @@
     position: absolute;
     right: 20px;
     height: 20px;
-    
-    
   }
   
   .sidebar ul {
@@ -46,11 +43,16 @@
     padding: 0;
     display: flex;
     justify-content: center;
-    max-height: 90%;
+    max-height: 80%;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .sidebar-checkout-btn{
     display: flex;
     justify-content: center;
+  }
+
+  .cart-list{
+    transform: height 0.3s ease;
   }

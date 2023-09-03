@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'LoginTest';
   items: any[] = []; 
   cartOpen: boolean = false;
+  cartAmount: number = 0;
   @ViewChild('cart') cart!: CartComponent;
 
 
@@ -49,8 +50,15 @@ export class AppComponent {
   }
 
   mouseOverCart(isHover: boolean){
+    
     this.cart.HoveredOverCartButton(isHover);
   }
+
+  setCartAmount(cartAmount: number){
+    console.log("gets here");
+    this.cartAmount = cartAmount;
+  }
+
 
   
 }

@@ -30,6 +30,7 @@ import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LandingPage } from './pages/landing/landing.page';
 import { BoxListComponent } from './components/box-list/box-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
     MatMenuModule,
     HttpClientModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,13 +1,28 @@
-<div class="cart-item">
-    <img draggable="false" class="cart-item-image" [src]="box.imageUrl" alt="{{ box.boxType }}">
-    <div class="cart-item-name">
-        <h3>{{ box.boxType }}</h3>
+<div #cartItem [class.remove]="box.isRemoving" (animationend)="onAnimationEnd($event)" class="cart-item">
+    <div class="cart-item-info">
+        <img draggable="false" class="cart-item-image" [src]="box.imageUrl" alt="{{ box.boxType }}">
+        <div class="cart-item-name">
+            <h3>{{ box.boxType }}</h3>
+        </div>
+        <div class="cart-item-price">
+            <p>{{ box.price * box.amount | number:'1.1-1'}}$</p>
+        </div>
     </div>
-    <div class="cart-item-price" >
-        <p>{{ box.price }}$</p>
+
+    <div class="cart-item-counter">
+        <div class="counter-count">
+            <span>{{ box.amount  }}</span>
+        </div>
+        <div class="counter-buttons">
+            <button (click)="incrementCount()">
+                <mat-icon>keyboard_arrow_up</mat-icon>
+            </button>
+            <button (click)="decrementCount()">
+                <mat-icon class="down-arrow">keyboard_arrow_down</mat-icon>
+            </button>
+        </div>
     </div>
-    <select>
-        
-    </select>
-  </div>
-  
+    <button (click)="deleteItem()" class="cart-item-delete-button">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>

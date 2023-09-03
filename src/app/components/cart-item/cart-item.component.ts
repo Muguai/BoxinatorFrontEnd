@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, Renderer2  } from '@angular/core';
 import { Box } from 'src/app/models/mysteryBox';
 
 @Component({
@@ -9,7 +9,33 @@ import { Box } from 'src/app/models/mysteryBox';
 export class CartItemComponent {
 
   @Input() box!: Box;
-  @Input() count: number = 0;
+  @Output() deleteCartItem = new EventEmitter<{ box: Box, deleteFully: boolean }>();
+  @Output() addCartItem = new EventEmitter<Box>();
+  @ViewChild('cartItem', { static: false }) cartItemRef!: ElementRef;
+
+  constructor(private renderer: Renderer2) {}
+
+  incrementCount() {
+    if (this.box.amount < 99) {
+      this.addCartItem.emit(this.box)
+    }
+  }
+
+  decrementCount() {
+    this.deleteCartItem.emit({box: this.box, deleteFully: false});
+  }
+
+  deleteItem(){
+    this.deleteCartItem.emit({box: this.box, deleteFully: true});
+  }
+
+  onAnimationEnd(event: AnimationEvent) {
+    console.log(event.animationName);
+
+    if (event.animationName.includes('slide-out')) {
+      this.renderer.addClass(this.cartItemRef.nativeElement, 'remove2');
+    }
+  }
 
 
 }
