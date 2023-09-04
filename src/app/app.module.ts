@@ -25,11 +25,17 @@ import { TestAuthenticationWeatherComponent } from './components/test-authentica
 import { CartComponent } from './components/cart/cart.component';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
+import { AdminBoxesComponent } from './components/admin/admin-boxes/admin-boxes.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import { AdminCountriesComponent } from './components/admin/admin-countries/admin-countries.component';
 import { LoginPage } from './pages/login/login.page';
 import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LandingPage } from './pages/landing/landing.page';
 import { BoxListComponent } from './components/box-list/box-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -39,11 +45,17 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
     HomeComponent,
     TestAuthenticationWeatherComponent,
     CartComponent,
+    AdminComponent,
+    AdminOrdersComponent,
+    AdminBoxesComponent,
+    AdminUsersComponent,
+    AdminCountriesComponent,
     LoginPage,
     SignUpPage,
     LandingPage,
     BoxListComponent,
     CartItemComponent,
+    LogoComponent,
     
   ],
   imports: [
