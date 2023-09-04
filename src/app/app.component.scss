@@ -3,7 +3,7 @@ mat-toolbar {
     height: 100px;
 }
 
-mat-toolbar button {
+.smaller-mat-buttons {
   width: 40px!important;
   height: 40px!important;
   min-width: unset!important;
@@ -39,4 +39,5 @@ mat-toolbar button {
   .cart-amount p {
     margin-top: 12px;
   }
+
   

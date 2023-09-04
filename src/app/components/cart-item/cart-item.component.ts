@@ -9,6 +9,7 @@ import { Box } from 'src/app/models/mysteryBox';
 export class CartItemComponent {
 
   @Input() box!: Box;
+  @Input() isRemoving: boolean = false;
   @Output() deleteCartItem = new EventEmitter<{ box: Box, deleteFully: boolean }>();
   @Output() addCartItem = new EventEmitter<Box>();
   @ViewChild('cartItem', { static: false }) cartItemRef!: ElementRef;
@@ -16,17 +17,25 @@ export class CartItemComponent {
   constructor(private renderer: Renderer2) {}
 
   incrementCount() {
-    if (this.box.amount < 99) {
+    if (this.box.amount < 99 && !this.isRemoving) {
       this.addCartItem.emit(this.box)
     }
   }
 
   decrementCount() {
+    if(this.isRemoving)
+      return;
     this.deleteCartItem.emit({box: this.box, deleteFully: false});
+    if(this.box.amount < 1){
+      this.isRemoving = true;
+    }
   }
 
   deleteItem(){
+    if(this.isRemoving)
+      return;
     this.deleteCartItem.emit({box: this.box, deleteFully: true});
+    this.isRemoving = true;
   }
 
   onAnimationEnd(event: AnimationEvent) {

@@ -1,4 +1,4 @@
-<div #cartItem [class.remove]="box.isRemoving" (animationend)="onAnimationEnd($event)" class="cart-item">
+<div #cartItem [class.remove]="isRemoving" (animationend)="onAnimationEnd($event)" class="cart-item">
     <div class="cart-item-info">
         <img draggable="false" class="cart-item-image" [src]="box.imageUrl" alt="{{ box.boxType }}">
         <div class="cart-item-name">
@@ -14,15 +14,15 @@
             <span>{{ box.amount  }}</span>
         </div>
         <div class="counter-buttons">
-            <button (click)="incrementCount()">
+            <button  [disabled]="isRemoving" (click)="incrementCount()">
                 <mat-icon>keyboard_arrow_up</mat-icon>
             </button>
-            <button (click)="decrementCount()">
+            <button  [disabled]="isRemoving"  (click)="decrementCount()">
                 <mat-icon class="down-arrow">keyboard_arrow_down</mat-icon>
             </button>
         </div>
     </div>
-    <button (click)="deleteItem()" class="cart-item-delete-button">
+    <button [disabled]="isRemoving" (click)="deleteItem()" class="cart-item-delete-button">
         <mat-icon>delete</mat-icon>
     </button>
 </div>

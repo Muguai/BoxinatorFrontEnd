@@ -6,8 +6,8 @@
     <div>
       <ng-container *ngIf="!user.isAnonymous else noUser">
         <!--User Profile button menu-->
-        <button mat-button [matMenuTriggerFor]="userMenu">
-          {{ user.displayName }}
+        <button #userProfileMenu mat-button [matMenuTriggerFor]="userMenu">
+          <p>{{ user.displayName }}</p>
           <mat-icon>account_circle</mat-icon>
           <mat-icon>expand_more</mat-icon>
         </button>
@@ -23,13 +23,13 @@
       Guest
         <!--Login button-->
       <ng-container *ngIf="isOnSignUpPage() || isOnHomePage()">
-        <button mat-button routerLink="login">
+        <button mat-button class="smaller-mat-buttons" routerLink="login">
           <mat-icon>login</mat-icon>
         </button>
       </ng-container>
       <!--Sign up button-->
       <ng-container *ngIf="isOnLoginPage() || isOnHomePage()">
-        <button mat-button routerLink="signup">
+        <button mat-button class="smaller-mat-buttons" routerLink="signup">
           <mat-icon>follow_the_signs</mat-icon>
         </button>
       </ng-container>
@@ -59,7 +59,7 @@
 
   <!--Template for Cart button-->
 <ng-template #cartButtonTemplate>
-  <button mat-button  class="ignore-click" (click)="toggleCart()">        
+  <button mat-button  class="ignore-click smaller-mat-buttons" (click)="toggleCart()">        
     <mat-icon>shopping_cart</mat-icon>
     <div class="cart-amount" *ngIf="cartAmount > 0">
       <p  [style.font-size.em]="cartAmount > 99 ? 0.6 : 0.9" >{{ cartAmount > 99 ? '99+' : cartAmount }}</p>

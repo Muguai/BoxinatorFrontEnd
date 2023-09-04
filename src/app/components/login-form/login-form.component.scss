@@ -1,5 +1,16 @@
 .form-container{
     margin-top: 5%;
+    
+  width: 400px!important;
+  height: 400px!important;
+  
+  max-width: unset!important;
+
+  max-height: unset!important;
+}
+
+.form-container mat-form-field {
+    width: 100%;
 }
 
 

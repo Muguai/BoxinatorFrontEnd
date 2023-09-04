@@ -35,13 +35,18 @@ export class CartComponent implements OnInit, OnDestroy {
   @Output() cartOpenChange = new EventEmitter<boolean>();
   @Output() cartAmountChange = new EventEmitter<number>();
   cartAmount: number = 0;
+  isDeleting: boolean = false;
   @ViewChild('cartSidebar', { static: true }) cartSidebarRef!: ElementRef;
 
   boxes: Box[] = [];
 
   @Input() cartOpen: boolean = false;
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private cartService: CartService) {
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+    private cartService: CartService
+  ) {
     this.cartService.addItemEvent.subscribe((boxToAdd) => {
       this.addItem(boxToAdd);
     });
@@ -80,7 +85,7 @@ export class CartComponent implements OnInit, OnDestroy {
     }
 
     if (isIgnoreClick) {
-      console.log("ignore click");
+      console.log('ignore click');
       return;
     }
 
@@ -96,46 +101,62 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   deleteItem(box: Box, deleteFully: boolean) {
-    const index = this.boxes.indexOf(box);
+    const existingBox = this.boxes.find(
+      (existing) => existing.boxType === box.boxType
+    );
 
-    if (index !== -1) {
+    if (existingBox) {
       if (!deleteFully) {
         this.cartAmount--;
-        box.amount--;
+        existingBox.amount--;
       } else {
-        this.cartAmount -= box.amount;
+        this.cartAmount -= existingBox.amount;
+        existingBox.amount = 0;
+      }
+
+      if (existingBox.amount < 0) {
+        existingBox.amount = 0;
+      }
+
+      if (this.cartAmount < 0) {
+        this.cartAmount = 0;
       }
 
       this.cartAmountChange.emit(this.cartAmount);
-    }
-    if (box.amount < 1 || deleteFully) {
-      this.animateItemRemoval(index);
-    } else {
-      this.saveCartData();
-    }
-  }
 
-  private animateItemRemoval(index: number) {
-    this.boxes[index].isRemoving = true;
+      if (existingBox.amount === 0 || deleteFully) {
+        this.isDeleting = true;
+        this.saveCartData();
 
-    setTimeout(() => {
-      this.cartAmountChange.emit(this.cartAmount);
-      this.boxes.splice(index, 1);
-      this.saveCartData();
-    }, 500);
+        setTimeout(() => {
+          this.cartAmountChange.emit(this.cartAmount);
+          const index = this.boxes.indexOf(existingBox);
+          if (index !== -1) {
+            this.boxes.splice(index, 1);
+          }
+          this.isDeleting = false;
+          this.saveCartData();
+        }, 500);
+      } else {
+        this.saveCartData();
+      }
+    }
   }
 
   addItem(box: Box) {
-    const index = this.boxes.indexOf(box);
+    if (this.isDeleting) return;
 
-    if (index !== -1) {
-      this.boxes[index].amount += 1;
+    const existingBox = this.boxes.find(
+      (existing) => existing.boxType === box.boxType
+    );
+
+    if (existingBox) {
+      existingBox.amount += 1;
     } else {
-      this.boxes.push(box);
-      const index = this.boxes.indexOf(box);
-      this.boxes[index].amount = 1;
+      this.boxes.push({ ...box, amount: 1 });
     }
     this.cartAmount++;
+    console.log('addCart ' + this.cartAmount);
     this.saveCartData();
     this.cartAmountChange.emit(this.cartAmount);
   }
@@ -150,10 +171,10 @@ export class CartComponent implements OnInit, OnDestroy {
 
   loadCartData() {
     const savedCartData = sessionStorage.getItem('cartData');
-    if (savedCartData){
+    if (savedCartData) {
       const cartData = JSON.parse(savedCartData);
-      this.cartAmount = cartData.cartAmount;
       this.boxes = cartData.boxes;
+      this.cartAmount = cartData.cartAmount;
     }
     this.cartAmountChange.emit(this.cartAmount);
   }

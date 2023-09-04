@@ -32,6 +32,7 @@ import { BoxListComponent } from './components/box-list/box-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BoxItemComponent } from './components/box-item/box-item.component';
+import { LandingHeaderComponent } from './components/landing-header/landing-header.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { BoxItemComponent } from './components/box-item/box-item.component';
     BoxListComponent,
     CartItemComponent,
     BoxItemComponent,
+    LandingHeaderComponent,
     
   ],
   imports: [
