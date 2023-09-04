@@ -16,11 +16,25 @@ mat-nav-list {
     padding: 0;
 }
 
+.link {
+    .link-icon {
+        margin-right: 5px;
+    }
+    
+    .link-icon, .link-title {
+        vertical-align: middle;
+    }
+}
+
 .active {
     background-color: $blue;
 }
 
 .active {
+    .link-icon {
+        color: white;
+    }
+
     .link-title {
         color: white;
     }
