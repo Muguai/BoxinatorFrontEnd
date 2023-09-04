@@ -35,6 +35,9 @@ import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LandingPage } from './pages/landing/landing.page';
 import { BoxListComponent } from './components/box-list/box-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BoxItemComponent } from './components/box-item/box-item.component';
+import { LandingHeaderComponent } from './components/landing-header/landing-header.component';
 import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
@@ -55,8 +58,9 @@ import { LogoComponent } from './components/logo/logo.component';
     LandingPage,
     BoxListComponent,
     CartItemComponent,
+    LandingHeaderComponent,
     LogoComponent,
-    
+    BoxItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +81,8 @@ import { LogoComponent } from './components/logo/logo.component';
     MatMenuModule,
     HttpClientModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

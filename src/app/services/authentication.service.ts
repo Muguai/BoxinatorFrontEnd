@@ -63,9 +63,12 @@ export class AuthenticationService {
               console.log('Error signing in anonymously: ', error);
             },
           });  
+        }else{
+          console.log('User Exist');
         }
       })
     ).subscribe();
   }
+
  
 }

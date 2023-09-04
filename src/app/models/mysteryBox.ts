@@ -7,6 +7,7 @@ export interface Box {
     weight: number;
     content: string;
     dimensions: string;
+    amount: number;
   }
   
   const commonImageUrl = '/assets/img/QuestionBlock.png';
@@ -21,6 +22,7 @@ export interface Box {
       weight: 92.2,
       content: "Thermos, Pocket Knife, Compass, Warm Gloves, Guidebook",
       dimensions: "10x10x10",
+      amount: 0
     },
     {
       boxType: "Hygge Home Box",
@@ -30,6 +32,7 @@ export interface Box {
       weight: 95.2,
       content: "Scented Candle, Soft Blanket, Mugs, Journal",
       dimensions: "20x20x20",
+      amount: 0
     },
     {
       boxType: "Forest Forager Box",
@@ -39,6 +42,7 @@ export interface Box {
       weight: 55.2,
       content: "Field Guide, Harvest Tool, Dried Mushrooms, Herb Tea, Soap",
       dimensions: "30x30x30",
+      amount: 0
     },
     {
       boxType: "Viking Legends Box",
@@ -48,6 +52,8 @@ export interface Box {
       weight: 45.2,
       content: "Pendant, Rune Stone Coaster, Mead Maker, Novel",
       dimensions: "40x40x40",
+      amount: 0
+
     },
     {
       boxType: "Mystical Fjord Box",
@@ -57,6 +63,8 @@ export interface Box {
       weight: 25.2,
       content: "Jigsaw Puzzle, Bath Salt, Nordic Myths, Art Print",
       dimensions: "15x15x15",
+      amount: 0
+
     },
     {
       boxType: "Midsummer Magic Box",
@@ -66,6 +74,8 @@ export interface Box {
       weight: 44.2,
       content: "Flower Crown, Berry Tea, SkinCare Products, Dance Guide",
       dimensions: "25x25x25",
+      amount: 0
+
     },
     {
       boxType: "Nordic Delights Box",
@@ -75,6 +85,8 @@ export interface Box {
       weight: 88.2,
       content: "Lingonberry Preserve, Crispbread, Smoked Salmon, Cloudberry Jam, Artisan Chocolate",
       dimensions: "35x35x35",
+      amount: 0
+
     },
     {
       boxType: "Scandinavian Design Box",
@@ -84,5 +96,7 @@ export interface Box {
       weight: 77.2,
       content: "Geometric Planter, Wooden Utensils, Art Print",
       dimensions: "45x25x30",
+      amount: 0
+
     },
   ];

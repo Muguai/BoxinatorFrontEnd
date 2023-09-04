@@ -1,6 +1,24 @@
+
+$blue: #34AFF7;
+
 mat-toolbar {
     justify-content: space-between;
     height: 100px;
+}
+
+.mat-toolbar.mat-primary {
+  background: $blue;
+}
+
+.smaller-mat-buttons {
+  width: 40px!important;
+  height: 40px!important;
+  min-width: unset!important;
+}
+
+.title-text{
+  user-select: none;
+  cursor: pointer;
 }
 
 .content {
@@ -9,5 +27,24 @@ mat-toolbar {
   }
 
 .content.open {
-    width: calc(100% - 350px); 
+    width: calc(100% - 375px); 
   }
+
+  .cart-amount{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 20px;
+  }
+
+  .cart-amount p {
+    margin-top: 12px;
+  }
+
+  
