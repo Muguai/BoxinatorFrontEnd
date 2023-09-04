@@ -35,6 +35,7 @@ import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LandingPage } from './pages/landing/landing.page';
 import { BoxListComponent } from './components/box-list/box-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
     LandingPage,
     BoxListComponent,
     CartItemComponent,
+    LogoComponent,
     
   ],
   imports: [

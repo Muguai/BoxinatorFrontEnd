@@ -1,5 +1,6 @@
 <mat-sidenav-container id="container" fullscreen>
     <mat-sidenav mode="side" opened="true">
+        <app-logo />
         <mat-nav-list>
             <a mat-list-item *ngFor="let link of links" routerLink="{{ link.link }}"
             routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
