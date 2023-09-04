@@ -59,7 +59,7 @@
 
   <!--Template for Cart button-->
 <ng-template #cartButtonTemplate>
-  <button mat-button (mouseover)="mouseOverCart(true)" (mouseout)="mouseOverCart(false)" (click)="toggleCart()">        
+  <button mat-button  class="ignore-click" (click)="toggleCart()">        
     <mat-icon>shopping_cart</mat-icon>
     <div class="cart-amount" *ngIf="cartAmount > 0">
       <p  [style.font-size.em]="cartAmount > 99 ? 0.6 : 0.9" >{{ cartAmount > 99 ? '99+' : cartAmount }}</p>

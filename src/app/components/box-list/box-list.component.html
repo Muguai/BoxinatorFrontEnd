@@ -2,18 +2,7 @@
     <div class="">
 
         <div class="grid">
-            <div class="testCard"></div>
-            <div class="testCard"></div>
-            
-            <div class="testCard"></div>
-            <div class="testCard"></div>
-            
-            <div class="testCard"></div>
-            <div class="testCard"></div>
-            <div class="testCard"></div>
-
-
-
+            <app-box-item *ngFor="let box of boxes" [box]="box"></app-box-item>
         </div>
     </div>
 </div>

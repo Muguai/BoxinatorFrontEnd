@@ -49,13 +49,8 @@ export class AppComponent {
     this.cartOpen = cartOpen;
   }
 
-  mouseOverCart(isHover: boolean){
-    
-    this.cart.HoveredOverCartButton(isHover);
-  }
 
   setCartAmount(cartAmount: number){
-    console.log("gets here");
     this.cartAmount = cartAmount;
   }
 

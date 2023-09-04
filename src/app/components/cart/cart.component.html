@@ -6,7 +6,7 @@
     </button>
   </div>
   <ul class="cart-list">
-    <li><div style="margin-bottom: 10px;"> </div><app-cart-item (addCartItem)="addItem($event)" (mouseover)="HoveredOverCartButton(true)" (mouseout)="HoveredOverCartButton(false)" (deleteCartItem)="deleteItem($event.box, $event.deleteFully)" *ngFor="let box of boxes" [@itemAnimation]="'in'" [box]="box"></app-cart-item></li>
+    <li><div style="margin-bottom: 10px;"> </div><app-cart-item (addCartItem)="addItem($event)" (deleteCartItem)="deleteItem($event.box, $event.deleteFully)" *ngFor="let box of boxes" [@itemAnimation]="'in'" [box]="box"></app-cart-item></li>
   </ul>
 <div class="sidebar-checkout-btn">
   <button>Checkout</button>

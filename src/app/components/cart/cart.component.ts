@@ -1,7 +1,24 @@
-import { Component, Input, EventEmitter, Output, ViewChild, Renderer2, ElementRef, OnInit, OnDestroy, HostListener  } from '@angular/core';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+  ViewChild,
+  Renderer2,
+  ElementRef,
+  OnInit,
+  OnDestroy,
+  HostListener,
+} from '@angular/core';
 import { dummyBoxes, Box } from 'src/app/models/mysteryBox';
-import { trigger, state, transition, animate, style } from '@angular/animations';
-
+import {
+  trigger,
+  state,
+  transition,
+  animate,
+  style,
+} from '@angular/animations';
+import { CartService } from 'src/app/services/cart-service/cart-serivce.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,15 +27,11 @@ import { trigger, state, transition, animate, style } from '@angular/animations'
   animations: [
     trigger('itemAnimation', [
       state('in', style({ height: '*' })),
-      transition(':leave', [
-        animate('300ms ease-out', style({ height: '0' })),
-      ]),
+      transition(':leave', [animate('300ms ease-out', style({ height: '0' }))]),
     ]),
   ],
 })
-
 export class CartComponent implements OnInit, OnDestroy {
-
   @Output() cartOpenChange = new EventEmitter<boolean>();
   @Output() cartAmountChange = new EventEmitter<number>();
   cartAmount: number = 0;
@@ -26,34 +39,22 @@ export class CartComponent implements OnInit, OnDestroy {
 
   boxes: Box[] = [];
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {
-    
-   
+  @Input() cartOpen: boolean = false;
+
+  constructor(private renderer: Renderer2, private el: ElementRef, private cartService: CartService) {
+    this.cartService.addItemEvent.subscribe((boxToAdd) => {
+      this.addItem(boxToAdd);
+    });
   }
 
-  @Input() cartOpen: boolean = false;
-  isHovering: boolean = false;
-
   ngOnInit() {
-
-
-
-    
     this.renderer.listen('document', 'click', (event: MouseEvent) => {
       this.handleDocumentClick(event);
     });
 
     setTimeout(() => {
-        const savedCartData = sessionStorage.getItem('cartData');
-        if (savedCartData) {
-          console.log("hello");
-          const cartData = JSON.parse(savedCartData);
-          this.cartAmount = cartData.cartAmount;
-          this.boxes = cartData.boxes;
-          console.log(this.boxes);
-        }
-        this.cartAmountChange.emit(this.cartAmount);
-      }, 100);
+      this.loadCartData();
+    }, 100);
   }
 
   ngOnDestroy() {
@@ -65,14 +66,26 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartOpenChange.emit(this.cartOpen);
   }
 
-  HoveredOverCartButton(isHover: boolean) {
-    this.isHovering = isHover;
-  }
-
   handleDocumentClick(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
 
-    if (!this.el.nativeElement.contains(event.target) && !this.isHovering) {
-      console.log("close cart click");
+    let isIgnoreClick = false;
+    let currentElement = clickedElement;
+    while (currentElement) {
+      if (currentElement.classList.contains('ignore-click')) {
+        isIgnoreClick = true;
+        break;
+      }
+      currentElement = currentElement.parentElement!;
+    }
+
+    if (isIgnoreClick) {
+      console.log("ignore click");
+      return;
+    }
+
+    if (!this.el.nativeElement.contains(event.target)) {
+      console.log('close cart click');
       this.closeCart();
     }
   }
@@ -86,18 +99,18 @@ export class CartComponent implements OnInit, OnDestroy {
     const index = this.boxes.indexOf(box);
 
     if (index !== -1) {
-      if(!deleteFully){
+      if (!deleteFully) {
         this.cartAmount--;
         box.amount--;
-      }else{
+      } else {
         this.cartAmount -= box.amount;
-      }  
-        
+      }
+
       this.cartAmountChange.emit(this.cartAmount);
     }
-    if(box.amount < 1 || deleteFully){
+    if (box.amount < 1 || deleteFully) {
       this.animateItemRemoval(index);
-    }else{
+    } else {
       this.saveCartData();
     }
   }
@@ -109,20 +122,13 @@ export class CartComponent implements OnInit, OnDestroy {
       this.cartAmountChange.emit(this.cartAmount);
       this.boxes.splice(index, 1);
       this.saveCartData();
-      if (this.boxes.length == 0) {
-        this.isHovering = false;
-      }
     }, 500);
   }
 
   addItem(box: Box) {
-
     const index = this.boxes.indexOf(box);
 
-    console.log(index);
-
     if (index !== -1) {
-      console.log("gets here2");
       this.boxes[index].amount += 1;
     } else {
       this.boxes.push(box);
@@ -132,7 +138,6 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartAmount++;
     this.saveCartData();
     this.cartAmountChange.emit(this.cartAmount);
-
   }
 
   saveCartData() {
@@ -143,4 +148,13 @@ export class CartComponent implements OnInit, OnDestroy {
     sessionStorage.setItem('cartData', JSON.stringify(cartData));
   }
 
+  loadCartData() {
+    const savedCartData = sessionStorage.getItem('cartData');
+    if (savedCartData){
+      const cartData = JSON.parse(savedCartData);
+      this.cartAmount = cartData.cartAmount;
+      this.boxes = cartData.boxes;
+    }
+    this.cartAmountChange.emit(this.cartAmount);
+  }
 }

@@ -30,8 +30,6 @@ export class CartItemComponent {
   }
 
   onAnimationEnd(event: AnimationEvent) {
-    console.log(event.animationName);
-
     if (event.animationName.includes('slide-out')) {
       this.renderer.addClass(this.cartItemRef.nativeElement, 'remove2');
     }

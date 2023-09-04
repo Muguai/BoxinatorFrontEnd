@@ -31,6 +31,7 @@ import { LandingPage } from './pages/landing/landing.page';
 import { BoxListComponent } from './components/box-list/box-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BoxItemComponent } from './components/box-item/box-item.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LandingPage,
     BoxListComponent,
     CartItemComponent,
+    BoxItemComponent,
     
   ],
   imports: [
