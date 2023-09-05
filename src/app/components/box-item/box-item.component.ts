@@ -1,5 +1,5 @@
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2  } from '@angular/core';
 import { Box } from 'src/app/models/mysteryBox';
 import { CartService } from 'src/app/services/cart-service/cart-serivce.service';
 
@@ -12,12 +12,23 @@ export class BoxItemComponent {
 
   @Input() box!: Box;
 
-  constructor(private cartService: CartService) {}
+  constructor(public elementRef: ElementRef, private renderer: Renderer2, private cartService: CartService) {}
 
   addItemToCart() {
     if(!this.box)
       return;
 
     this.cartService.addItemEvent.emit(this.box);
+  }
+
+  freeze() {
+    this.renderer.addClass(this.elementRef.nativeElement, 'frozen');
+    setTimeout(() => {
+      this.unfreeze();
+    }, 3000); // 3000 milliseconds (3 seconds) to freeze the item
+  }
+
+  unfreeze() {
+    this.renderer.removeClass(this.elementRef.nativeElement, 'frozen');
   }
 }

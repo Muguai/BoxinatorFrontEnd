@@ -1,28 +1,32 @@
-<mat-toolbar  class="content toolbar" color="primary" [class.open]="cartOpen">
-  <app-logo routerLink="/"></app-logo>
-
+<mat-toolbar class="content toolbar" color="primary" [class.open]="cartOpen">
+  <app-logo class="toolbar-logo" routerLink="/"></app-logo>
 
   <!--Toolbar if actual user-->
   <ng-container *ngIf="authService.currentUser$ | async as user; else noUser">
     <div>
-      <ng-container *ngIf="!user.isAnonymous else noUser">
-        <!--User Profile button menu-->
-        <button #userProfileMenu mat-button [matMenuTriggerFor]="userMenu">
-          <p>{{ user.displayName }}</p>
-          <mat-icon>account_circle</mat-icon>
-          <mat-icon>expand_more</mat-icon>
-        </button>
-        <!--Cart button-->
-        <ng-container *ngIf="isOnHomePage()" [ngTemplateOutlet]="cartButtonTemplate"></ng-container>
+      <ng-container *ngIf="!user.isAnonymous; else noUser">
+        <div class="toolbar-user-buttons">
+          <!--User Profile button menu-->
+          <button #userProfileMenu mat-button [matMenuTriggerFor]="userMenu">
+            <p>{{ user.displayName }}</p>
+            <mat-icon>account_circle</mat-icon>
+            <mat-icon>expand_more</mat-icon>
+          </button>
+          <!--Cart button-->
+          <ng-container
+            *ngIf="isOnHomePage()"
+            [ngTemplateOutlet]="cartButtonTemplate"
+          ></ng-container>
+        </div>
       </ng-container>
     </div>
   </ng-container>
 
   <!--Toolbar if guest user-->
   <ng-template #noUser>
-    <div>
+    <div class="toolbar-guest-buttons">
       Guest
-        <!--Login button-->
+      <!--Login button-->
       <ng-container *ngIf="isOnSignUpPage() || isOnHomePage()">
         <button mat-button class="smaller-mat-buttons" routerLink="login">
           <mat-icon>login</mat-icon>
@@ -35,19 +39,26 @@
         </button>
       </ng-container>
       <!--Cart button-->
-      <ng-container *ngIf="isOnHomePage()" [ngTemplateOutlet]="cartButtonTemplate"></ng-container>
+      <ng-container
+        *ngIf="isOnHomePage()"
+        [ngTemplateOutlet]="cartButtonTemplate"
+      ></ng-container>
     </div>
   </ng-template>
-
 </mat-toolbar>
 
 <!--Cart-->
 <div class="cart-container">
-  <app-cart (cartAmountChange)="setCartAmount($event)" (cartOpenChange)="onCartOpenChange($event)" *ngIf="isOnHomePage()" #cart></app-cart>
+  <app-cart
+    (cartAmountChange)="setCartAmount($event)"
+    (cartOpenChange)="onCartOpenChange($event)"
+    *ngIf="isOnHomePage()"
+    #cart
+  ></app-cart>
 </div>
 
 <!--Main Content-->
-<div class="content" [class.open]="cartOpen" >
+<div class="content">
   <router-outlet></router-outlet>
 </div>
 
@@ -58,12 +69,18 @@
   <button mat-menu-item (click)="logout()">Logout</button>
 </mat-menu>
 
-  <!--Template for Cart button-->
+<!--Template for Cart button-->
 <ng-template #cartButtonTemplate>
-  <button mat-button  class="ignore-click smaller-mat-buttons" (click)="toggleCart()">        
+  <button
+    mat-button
+    class="ignore-click smaller-mat-buttons"
+    (click)="toggleCart()"
+  >
     <mat-icon>shopping_cart</mat-icon>
     <div class="cart-amount" *ngIf="cartAmount > 0">
-      <p  [style.font-size.em]="cartAmount > 99 ? 0.6 : 0.9" >{{ cartAmount > 99 ? '99+' : cartAmount }}</p>
+      <p [style.font-size.em]="cartAmount > 99 ? 0.6 : 0.9">
+        {{ cartAmount > 99 ? "99+" : cartAmount }}
+      </p>
     </div>
   </button>
 </ng-template>

@@ -4,15 +4,36 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100%;
 }
 .grid {
-  padding: 2%;
-  margin-bottom: 20px;
   width: 80%;
   display: grid;
+  height: 100%;
   grid-template-columns: repeat(auto-fit,450px);
   grid-gap: 50px;
   justify-content: center;
   align-items: center;
   align-content: center;
+  opacity: 1;
+
+  margin-top: 20px;
+}
+
+.grid.frozen {
+  opacity: 0;
+}
+
+.frozen-items-container {
+  height: 100%;
+  width: 80%;
+  display: none;
+  opacity: 0;
+}
+
+/* Show the frozen items container when isFrozen is true */
+.frozen-items-container.frozen {
+  display: block;
+  opacity: 1;
+  
 }
