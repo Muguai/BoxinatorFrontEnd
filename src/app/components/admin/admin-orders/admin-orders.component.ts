@@ -11,23 +11,8 @@ export class AdminOrdersComponent {
   'details', 'status'];
  
   public orders: Order[] = [
-    {order: 1001, date: '14/8 2023', user: 'john.doe@mail.com'},
-    {order: 987, date: '1/8 2023', user: 'jane.doe@mail.com'},
-    {order: 771, date: '29/7 2023', user: 'john.doe@mail.com'}
+    {order: 1001, date: '14/8 2023', user: 'john.doe@mail.com', status: Status.Placed},
+    {order: 987, date: '1/8 2023', user: 'jane.doe@mail.com', status: Status.InTransit},
+    {order: 771, date: '29/7 2023', user: 'john.doe@mail.com', status: Status.Delivered}
   ];
-
-  public statuses: Status[] = [
-    {title: 'Order Placed', value: 'Placed'},
-    {title: 'Order Processing', value: 'Processing'},
-    {title: 'Order Cancelled', value: 'Cancelled'},
-    {title: 'Packing', value: 'Packing'},
-    {title: 'Shipped', value: 'Shipped'},
-    {title: 'In Transit', value: 'In Transit'},
-    {title: 'Out For Delivery', value: 'Out For Delivery'},
-    {title: 'Delivered', value: 'Delivered'},
-    {title: 'Attempted Delivery', value: 'Attempted Delivery'},
-    {title: 'Lost in Transit', value: 'Lost in Transit'},
-    {title: 'Delayed', value: 'Delayed'},
-    {title: 'Exception', value: 'Exception'}
-  ]
 }

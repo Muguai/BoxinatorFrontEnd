@@ -38,6 +38,7 @@ import { LandingPage } from './pages/landing/landing.page';
 import { BoxListComponent } from './components/box-list/box-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { AdminOrdersStatusComponent } from './components/admin/admin-orders-status/admin-orders-status.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { LogoComponent } from './components/logo/logo.component';
     BoxListComponent,
     CartItemComponent,
     LogoComponent,
+    AdminOrdersStatusComponent,
     
   ],
   imports: [
