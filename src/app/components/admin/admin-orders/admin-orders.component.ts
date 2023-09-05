@@ -8,7 +8,7 @@ import { Order, Status } from 'src/app/models/adminOrders';
 })
 export class AdminOrdersComponent {
   public displayedColumns: string[] = ['order', 'date', 'user',
-  'edit', 'status'];
+  'details', 'status'];
  
   public orders: Order[] = [
     {order: 1001, date: '14/8 2023', user: 'john.doe@mail.com'},
