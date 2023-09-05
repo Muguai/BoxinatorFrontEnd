@@ -1,0 +1,18 @@
+
+.grid-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.grid {
+  padding: 2%;
+  margin-bottom: 20px;
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,450px);
+  grid-gap: 50px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
