@@ -7,7 +7,8 @@ import { Order, BoxType } from 'src/app/models/order';
   styleUrls: ['./order-review.component.scss']
 })
 export class OrderReviewComponent {
-  @Input() id!: number;
+  // order id
+  @Input() id!: number; // USE FOR FUTURE API CALL
 
   public order: Order = {
     name: 'John Doe',
