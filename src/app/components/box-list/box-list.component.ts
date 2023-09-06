@@ -2,17 +2,12 @@ import {
   Component,
   ElementRef,
   OnInit,
-  ViewChildren,
-  QueryList,
-  Renderer2,
   HostListener,
-  ContentChildren,
-  AfterContentInit,
   ViewChild,
 } from '@angular/core';
 import { dummyBoxes, Box } from 'src/app/models/mysteryBox';
 import { GridChangeService } from 'src/app/services/grid-change/grid-change.service';
-import { BoxItemComponent } from '../box-item/box-item.component';
+
 @Component({
   selector: 'app-box-list',
   templateUrl: './box-list.component.html',
@@ -34,10 +29,7 @@ export class BoxListComponent implements OnInit {
   isFrozen: boolean = false;
   animationCounter: number = 0;
 
-  constructor(
-    private renderer: Renderer2,
-    private gridChange: GridChangeService
-  ) {
+  constructor(private gridChange: GridChangeService) {
     this.boxes = dummyBoxes;
   }
 
@@ -53,21 +45,15 @@ export class BoxListComponent implements OnInit {
   gridPosSetup() {
     const grid = this.gridRef.nativeElement as HTMLElement;
     const gridComputedStyle = window.getComputedStyle(grid);
-    this.oldGridRowCount = gridComputedStyle
-      .getPropertyValue('grid-template-rows')
-      .split(' ').length;
-    this.oldGridColumnCount = gridComputedStyle
-      .getPropertyValue('grid-template-columns')
-      .split(' ').length;
+    this.updateOldGridRowCountAndColumnCount(gridComputedStyle);
     this.itemPositions = this.getItemPositions(grid);
     this.oldItemPosition = this.getItemPositions(grid);
   }
-  
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     const grid = this.gridRef.nativeElement as HTMLElement;
-    grid.style.opacity = "0";
+    grid.style.opacity = '0';
     this.updateGridSize();
   }
 
@@ -76,37 +62,21 @@ export class BoxListComponent implements OnInit {
     this.itemPositions = this.getItemPositions(grid);
 
     const gridComputedStyle = window.getComputedStyle(grid);
-    this.gridRowCount = gridComputedStyle
-      .getPropertyValue('grid-template-rows')
-      .split(' ').length;
-    this.gridColumnCount = gridComputedStyle
-      .getPropertyValue('grid-template-columns')
-      .split(' ').length;
+
+    this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
     this.gridGap = gridComputedStyle.getPropertyValue('grid-gap');
 
-    const firstItem = grid.querySelector('.testCard') as HTMLElement; // Adjust the selector to match your grid item's class or structure
+    const firstItem = grid.querySelector('.testCard') as HTMLElement; 
     if (firstItem) {
       const computedStyle = window.getComputedStyle(firstItem);
       this.gridItemWidth = computedStyle.getPropertyValue('width');
     }
 
-    if (
-      this.gridColumnCount !== this.oldGridColumnCount &&
-      this.gridRowCount !== this.oldGridRowCount
-    ) {
-      grid.style.opacity = "0";
-
-      const tempOldItemPosition: { id: number; top: number; left: number }[] = [
-        ...this.oldItemPosition,
-      ];
-      if (tempOldItemPosition !== undefined) {
-        console.log('not equal');
-        this.freezeItems(tempOldItemPosition);
-      }
-    }
-    
-    if(!this.isFrozen){
-      grid.style.opacity = '1';
+    const tempOldItemPosition: { id: number; top: number; left: number }[] = [
+      ...this.oldItemPosition,
+    ];
+    if (tempOldItemPosition !== undefined) {
+      this.freezeItems(tempOldItemPosition);
     }
 
     this.gridChange.gridChangeEvent.emit({
@@ -117,13 +87,6 @@ export class BoxListComponent implements OnInit {
     });
 
     this.oldItemPosition = this.getItemPositions(grid);
-
-    this.oldGridRowCount = gridComputedStyle
-      .getPropertyValue('grid-template-rows')
-      .split(' ').length;
-    this.oldGridColumnCount = gridComputedStyle
-      .getPropertyValue('grid-template-columns')
-      .split(' ').length;
   }
 
   getItemPositions(
@@ -148,16 +111,37 @@ export class BoxListComponent implements OnInit {
   }
 
   freezeItems(oldPos: { id: number; top: number; left: number }[]) {
+    const grid = this.gridRef.nativeElement as HTMLElement;
+
+    const gridComputedStyle = window.getComputedStyle(grid);
+
     if (this.isFrozen) {
-      this.animationCounter++;
+      this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
+      if (
+        this.gridColumnCount !== this.oldGridColumnCount &&
+        this.gridRowCount === this.oldGridColumnCount
+      ) {
+        console.log('add animation counter');
+        this.animationCounter++;
+        this.updateOldGridRowCountAndColumnCount(gridComputedStyle);
+      }
       return;
     }
 
-    const grid = this.gridRef.nativeElement as HTMLElement;
-    grid.style.opacity = '0';
+    this.updateOldGridRowCountAndColumnCount(gridComputedStyle);
 
     const frozenItemsContainer = this.frozenItemsRef
       .nativeElement as HTMLElement;
+
+    const updateFrozenContainer = () => {
+      const gridRect = grid.getBoundingClientRect();
+
+      frozenItemsContainer.style.position = 'absolute';
+      frozenItemsContainer.style.left = `${gridRect.left}px`;
+      frozenItemsContainer.style.top = `${gridRect.top}px`;
+    };
+    updateFrozenContainer;
+
     const items = frozenItemsContainer.querySelectorAll(
       '.testCard'
     ) as NodeListOf<HTMLElement>;
@@ -168,68 +152,107 @@ export class BoxListComponent implements OnInit {
       item.style.transform = initialTransform;
     });
 
-    const gridRect = grid.getBoundingClientRect();
-    frozenItemsContainer.style.position = 'absolute';
-    frozenItemsContainer.style.left = `${gridRect.left }px`;
-    frozenItemsContainer.style.top = `${gridRect.top }px`;
+    grid.style.opacity = '0';
 
     this.isFrozen = true;
 
+    const updateInterval = 20;
 
-    const updateInterval = 50;
-    const unfreezeDuration = 610;
-
-    const animationCountWhenWeGetHere = this.animationCounter;
-
-    const updateFrozenContainer = () => {
-      const gridRect = grid.getBoundingClientRect();
-
-      frozenItemsContainer.style.position = 'absolute';
-      frozenItemsContainer.style.left = `${gridRect.left }px`;
-      frozenItemsContainer.style.top = `${gridRect.top }px`;
-    };
-
-    let pos = this.getItemPositions(grid); 
+    let pos = this.getItemPositions(grid);
 
     const updateItemsPosition = () => {
       items.forEach((item, index) => {
-        if(this.animationCounter == animationCountWhenWeGetHere){
-          pos = this.getItemPositions(grid); 
-        }
+        pos = this.getItemPositions(grid);
         const targetTransform = `translate(${pos[index].left}px, ${pos[index].top}px)`;
         item.style.transform = targetTransform;
       });
     };
 
-    // Start the continuous updates
+    let TimeoutId: any;
+
     setTimeout(() => {
       const intervalId = setInterval(() => {
         updateFrozenContainer();
         updateItemsPosition();
+        console.log('update');
 
-        if (!this.isFrozen) {
+        if (!this.isFrozen || this.compareItemTransformations(items, pos)) {
+          console.log('positions match');
+          this.isFrozen = false;
           clearInterval(intervalId);
+          clearTimeout(TimeoutId);
+          this.checkAnimationCounter(grid, frozenItemsContainer);
         }
       }, updateInterval);
-      setTimeout(() => {
-        clearInterval(intervalId);
-        this.isFrozen = false;
-        this.gridPosSetup();
-
-
-        if (this.animationCounter > 0) {
-          this.animationCounter--;
-          grid.style.opacity = '0';
-          this.freezeItems(this.getItemPositions(frozenItemsContainer));
-
-        }else{
-          grid.style.opacity = '1';
-        }
-
-      }, unfreezeDuration);
-    }, 10);
+    }, 1);
   }
 
+  updateOldGridRowCountAndColumnCount(gridComputedStyle: CSSStyleDeclaration) {
+    this.gridRowCount = gridComputedStyle
+      .getPropertyValue('grid-template-rows')
+      .split(' ').length;
+    this.gridColumnCount = gridComputedStyle
+      .getPropertyValue('grid-template-columns')
+      .split(' ').length;
+  }
 
-  
+  updateCurrentGridRowCountAndColumnCount(
+    gridComputedStyle: CSSStyleDeclaration
+  ) {
+    this.gridRowCount = gridComputedStyle
+      .getPropertyValue('grid-template-rows')
+      .split(' ').length;
+    this.gridColumnCount = gridComputedStyle
+      .getPropertyValue('grid-template-columns')
+      .split(' ').length;
+  }
+
+  checkAnimationCounter(grid: HTMLElement, frozenItemsContainer: HTMLElement) {
+    if (this.animationCounter > 0) {
+      this.animationCounter--;
+      grid.style.opacity = '0';
+      this.freezeItems(this.getItemPositions(frozenItemsContainer));
+    } else {
+      grid.style.opacity = '1';
+    }
+  }
+
+  compareItemTransformations(
+    items: NodeListOf<HTMLElement>,
+    pos: { left: number; top: number }[]
+  ): boolean {
+    return Array.from(items).every((item, index) => {
+      const currentTransform =
+        getComputedStyle(item).getPropertyValue('transform');
+      const expectedTransform = `translate(${pos[index].left}px, ${pos[index].top}px)`;
+      return this.compareTransformations(currentTransform, expectedTransform);
+    });
+  }
+
+  compareTransformations(
+    currentTransform: string,
+    expectedTransform: string
+  ): boolean {
+    const currentTranslation = currentTransform.match(
+      /matrix\(.*,\s(.*),\s(.*),\s.*,\s(.*),\s(.*)\)/
+    );
+    const expectedTranslation = expectedTransform.match(
+      /translate\((.*)px,\s(.*)px\)/
+    );
+
+    if (currentTranslation && expectedTranslation) {
+      const currentX = parseFloat(currentTranslation[3]);
+      const currentY = parseFloat(currentTranslation[4]);
+      const expectedX = parseFloat(expectedTranslation[1]);
+      const expectedY = parseFloat(expectedTranslation[2]);
+
+      const tolerance = 0.1;
+      return (
+        Math.abs(currentX - expectedX) < tolerance &&
+        Math.abs(currentY - expectedY) < tolerance
+      );
+    }
+
+    return false;
+  }
 }
