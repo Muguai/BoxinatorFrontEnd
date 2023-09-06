@@ -49,25 +49,22 @@ mat-toolbar {
   $orange: #FE9D35;
 
   .toolbar-logo{
+
     margin-left: 15%;
   }
 
-  .toolbar-user-buttons{
+  .toolbar-buttons{
+    transition: margin-right 0.1s ease-in;
     margin-right: 15%;
     color: orange;
 
   }
 
-  .toolbar-guest-buttons{
-    margin-right: 15%;
+  .toolbar-buttons.open{
 
   }
 
-  .toolbar-user-buttons mat-icons{
-    color: orange;
 
-
-  }
 
 
   

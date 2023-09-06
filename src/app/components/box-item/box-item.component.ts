@@ -11,6 +11,7 @@ import { CartService } from 'src/app/services/cart-service/cart-serivce.service'
 export class BoxItemComponent {
 
   @Input() box!: Box;
+  @Input() disableGrid: boolean = true;
 
   constructor(public elementRef: ElementRef, private renderer: Renderer2, private cartService: CartService) {}
 

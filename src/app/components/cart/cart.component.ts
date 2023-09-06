@@ -178,4 +178,14 @@ export class CartComponent implements OnInit, OnDestroy {
     }
     this.cartAmountChange.emit(this.cartAmount);
   }
+
+  getTotalPrice(): number {
+    let totalPrice = 0;
+  
+    for (const box of this.boxes) {
+      totalPrice += box.amount * box.price;
+    }
+  
+    return totalPrice;
+  }
 }

@@ -13,7 +13,8 @@
   <ul class="cart-list">
     <li><div style="margin-bottom: 10px;"> </div><app-cart-item (addCartItem)="addItem($event)" (deleteCartItem)="deleteItem($event.box, $event.deleteFully)" *ngFor="let box of boxes" [@itemAnimation]="'in'" [box]="box"></app-cart-item></li>
   </ul>
-  <div class="sidebar-checkout-btn">
+  <div class="sidebar-checkout">
     <button>Checkout</button>
+    <p *ngIf="getTotalPrice() > 0">Total: {{ getTotalPrice() | number: '1.2-2' }}$</p>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { WeatherService } from 'src/app/services/weather.service';
 
 @Component({
   selector: 'app-login-form',
@@ -16,13 +17,16 @@ export class LoginFormComponent {
 
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private weatherService: WeatherService
   ) {}
 
   async formLogin(form: NgForm) {
     if (!form.valid) {
       return;
     }
+
+
 
     this.loginErrorMessage = "";
 
@@ -32,11 +36,31 @@ export class LoginFormComponent {
 
     this.isLoading = true;
 
+
     console.log("email " + email + " password " + password)
 
     this.authService.login(email, password).subscribe({
-        next: () => {
+        next: async () => {
+          const token = await this.authService.getToken();
+
           this.isLoading = false;
+          this.weatherService.addUser(token).subscribe({
+            next: async (data : any) => {
+              const token = await this.authService.getToken();
+
+              this.weatherService.addUser(token).subscribe({
+                next: (data : any) => {
+                    console.log(data);
+                },
+                error: (error: any) => {
+                  console.log(error);
+                },
+              });
+            },
+            error: (error: any) => {
+              console.log(error);
+            },
+          });
           this.router.navigate(['/'])
         },
         error: (error: any) => {

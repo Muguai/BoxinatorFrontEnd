@@ -1,9 +1,9 @@
 <mat-toolbar class="content toolbar" color="primary" [class.open]="cartOpen">
-  <app-logo class="toolbar-logo" routerLink="/"></app-logo>
+  <app-logo class="toolbar-logo" [class.open]="cartOpen" routerLink="/"></app-logo>
 
   <!--Toolbar if actual user-->
   <ng-container *ngIf="authService.currentUser$ | async as user; else noUser">
-    <div>
+    <div class="toolbar-buttons" [class.open]="cartOpen">
       <ng-container *ngIf="!user.isAnonymous; else noUser">
         <div class="toolbar-user-buttons">
           <!--User Profile button menu-->

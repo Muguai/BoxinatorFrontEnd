@@ -27,6 +27,7 @@ export class BoxListComponent implements OnInit {
   itemPositions: { id: number; top: number; left: number }[] = [];
   oldItemPosition: { id: number; top: number; left: number }[] = [];
   isFrozen: boolean = false;
+  disableGrid: boolean = false;
   animationCounter: number = 0;
 
   constructor(private gridChange: GridChangeService) {
@@ -72,19 +73,20 @@ export class BoxListComponent implements OnInit {
       this.gridItemWidth = computedStyle.getPropertyValue('width');
     }
 
-    const tempOldItemPosition: { id: number; top: number; left: number }[] = [
-      ...this.oldItemPosition,
-    ];
-    if (tempOldItemPosition !== undefined) {
-      this.freezeItems(tempOldItemPosition);
-    }
-
     this.gridChange.gridChangeEvent.emit({
       row: this.gridRowCount,
       column: this.gridColumnCount,
       gridItemWidth: this.gridItemWidth,
       gridGap: this.gridGap,
     });
+
+    //Freeze grid
+    const tempOldItemPosition: { id: number; top: number; left: number }[] = [
+      ...this.oldItemPosition,
+    ];
+    if (tempOldItemPosition !== undefined) {
+      this.freezeItems(tempOldItemPosition);
+    }
 
     this.oldItemPosition = this.getItemPositions(grid);
   }
@@ -115,6 +117,8 @@ export class BoxListComponent implements OnInit {
 
     const gridComputedStyle = window.getComputedStyle(grid);
 
+
+
     if (this.isFrozen) {
       this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
       if (
@@ -127,6 +131,9 @@ export class BoxListComponent implements OnInit {
       }
       return;
     }
+
+    this.disableGrid = true;
+
 
     this.updateOldGridRowCountAndColumnCount(gridComputedStyle);
 
@@ -146,10 +153,16 @@ export class BoxListComponent implements OnInit {
       '.testCard'
     ) as NodeListOf<HTMLElement>;
 
+    const pastPos: string[] = [];
+
+
     items.forEach((item, index) => {
       const initialTransform = `translate(${oldPos[index].left}px, ${oldPos[index].top}px)`;
       item.style.position = 'absolute';
+      item.style.pointerEvents = 'none';
+      item.style.userSelect = 'none';
       item.style.transform = initialTransform;
+      pastPos.push(initialTransform);
     });
 
     grid.style.opacity = '0';
@@ -164,7 +177,10 @@ export class BoxListComponent implements OnInit {
       items.forEach((item, index) => {
         pos = this.getItemPositions(grid);
         const targetTransform = `translate(${pos[index].left}px, ${pos[index].top}px)`;
-        item.style.transform = targetTransform;
+        if(pastPos[index] != targetTransform){
+          item.style.transform = targetTransform;
+          pastPos[index] = targetTransform;
+        }
       });
     };
 
@@ -178,7 +194,6 @@ export class BoxListComponent implements OnInit {
 
         if (!this.isFrozen || this.compareItemTransformations(items, pos)) {
           console.log('positions match');
-          this.isFrozen = false;
           clearInterval(intervalId);
           clearTimeout(TimeoutId);
           this.checkAnimationCounter(grid, frozenItemsContainer);
@@ -208,11 +223,13 @@ export class BoxListComponent implements OnInit {
   }
 
   checkAnimationCounter(grid: HTMLElement, frozenItemsContainer: HTMLElement) {
+    this.isFrozen = false;
     if (this.animationCounter > 0) {
       this.animationCounter--;
       grid.style.opacity = '0';
       this.freezeItems(this.getItemPositions(frozenItemsContainer));
     } else {
+      this.disableGrid = false;
       grid.style.opacity = '1';
     }
   }
@@ -246,7 +263,7 @@ export class BoxListComponent implements OnInit {
       const expectedX = parseFloat(expectedTranslation[1]);
       const expectedY = parseFloat(expectedTranslation[2]);
 
-      const tolerance = 0.1;
+      const tolerance = 1;
       return (
         Math.abs(currentX - expectedX) < tolerance &&
         Math.abs(currentY - expectedY) < tolerance

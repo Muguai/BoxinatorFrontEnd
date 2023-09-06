@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { WeatherService } from 'src/app/services/weather.service';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -18,7 +19,8 @@ export class SignUpFormComponent {
   constructor(
     private authService: AuthenticationService,
     private toast: HotToastService,
-    private router: Router
+    private router: Router, 
+    private weatherService: WeatherService
   ) {}
 
   signUpRoute() {}
@@ -35,13 +37,16 @@ export class SignUpFormComponent {
       return;
     }
 
+
+
     console.log("Name " + name, " email " + email + " password " + password + " valPassword " + passwordVal);
 
     this.authService
       .signup(name, email, password)
       .subscribe({
-        next: () => {
+        next: async () => {
           this.isLoading = false;
+         
           this.router.navigate(['/'])
         },
         error: (error: any) => {
