@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Order, Status } from 'src/app/models/adminOrders';
+import { Order } from 'src/app/models/adminOrders';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderReviewPopupComponent } from '../../order-review-popup/order-review-popup.component';
+import { Status } from 'src/app/models/status';
 
 @Component({
   selector: 'app-admin-orders',

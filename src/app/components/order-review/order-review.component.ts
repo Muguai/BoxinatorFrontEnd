@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Order, BoxType } from 'src/app/models/order';
+import { BoxType } from 'src/app/models/boxType';
+import { Order } from 'src/app/models/order';
 
 @Component({
   selector: 'app-order-review',
