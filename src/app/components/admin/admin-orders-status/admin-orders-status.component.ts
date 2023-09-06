@@ -7,6 +7,8 @@ import { Status } from 'src/app/models/adminOrders';
   styleUrls: ['./admin-orders-status.component.scss']
 })
 export class AdminOrdersStatusComponent {
-  @Input() selected: string = '';
+  // current shipping status
+  @Input() selected!: string;
+  // array with Status values
   public statuses = Object.values(Status);
 }

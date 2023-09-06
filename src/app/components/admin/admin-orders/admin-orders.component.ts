@@ -11,8 +11,8 @@ import { OrderReviewPopupComponent } from '../../order-review-popup/order-review
 export class AdminOrdersComponent {
   constructor(private dialog: MatDialog) {}
 
-  public displayedColumns: string[] = ['order', 'date', 'user',
-  'details', 'status'];
+  // controls which columns to render and in what order
+  public displayedColumns: string[] = ['order', 'date', 'user', 'details', 'status'];
  
   public orders: Order[] = [
     {id: 1001, date: '14/8 2023', user: 'john.doe@mail.com', status: Status.Placed},
