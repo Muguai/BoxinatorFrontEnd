@@ -1,5 +1,5 @@
 export type Order = {
-    order: number,
+    id: number,
     date: string,
     user: string,
     status: Status

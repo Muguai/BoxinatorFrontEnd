@@ -27,6 +27,7 @@ import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/mate
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
 import { AdminBoxesComponent } from './components/admin/admin-boxes/admin-boxes.component';
@@ -42,6 +43,8 @@ import { BoxItemComponent } from './components/box-item/box-item.component';
 import { LandingHeaderComponent } from './components/landing-header/landing-header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { AdminOrdersStatusComponent } from './components/admin/admin-orders-status/admin-orders-status.component';
+import { OrderReviewComponent } from './components/order-review/order-review.component';
+import { OrderReviewPopupComponent } from './components/order-review-popup/order-review-popup.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { AdminOrdersStatusComponent } from './components/admin/admin-orders-stat
     LogoComponent,
     AdminOrdersStatusComponent,
     BoxItemComponent,
+    OrderReviewComponent,
+    OrderReviewPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +93,8 @@ import { AdminOrdersStatusComponent } from './components/admin/admin-orders-stat
     MatListModule,
     MatTableModule,
     MatSelectModule,
-    NgbModule
+    NgbModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

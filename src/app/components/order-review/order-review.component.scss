@@ -1,0 +1,35 @@
+div {
+    font-weight: 200;
+    color: black;
+}
+
+#shipping-details, #messages {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+#cost-details .greyOutline {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.bold {
+    font-weight: 500;
+    color: black;
+}
+
+.greyOutline {
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+
+    p {
+        padding: 5px;
+    }
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
