@@ -24,7 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { TestAuthenticationWeatherComponent } from './components/test-authentication-weather/test-authentication-weather.component';
 import { CartComponent } from './components/cart/cart.component';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
 import { AdminBoxesComponent } from './components/admin/admin-boxes/admin-boxes.component';
@@ -39,6 +42,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BoxItemComponent } from './components/box-item/box-item.component';
 import { LandingHeaderComponent } from './components/landing-header/landing-header.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { AdminOrdersStatusComponent } from './components/admin/admin-orders-status/admin-orders-status.component';
+import { OrderReviewComponent } from './components/order-review/order-review.component';
+import { OrderReviewPopupComponent } from './components/order-review-popup/order-review-popup.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +66,10 @@ import { LogoComponent } from './components/logo/logo.component';
     CartItemComponent,
     LandingHeaderComponent,
     LogoComponent,
+    AdminOrdersStatusComponent,
     BoxItemComponent,
+    OrderReviewComponent,
+    OrderReviewPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +91,10 @@ import { LogoComponent } from './components/logo/logo.component';
     HttpClientModule,
     MatSidenavModule,
     MatListModule,
-    NgbModule
+    MatTableModule,
+    MatSelectModule,
+    NgbModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Link } from 'src/app/models/link';
+import { AdminLink } from 'src/app/models/adminLink';
 
 @Component({
   selector: 'app-admin',
@@ -8,14 +8,14 @@ import { Link } from 'src/app/models/link';
 })
 
 export class AdminComponent implements OnInit {
-  public links: Link[] = [];
+  public links: AdminLink[] = [];
 
   ngOnInit(): void {
     this.links = [
-      {title: 'Orders', link: '/admin/orders'},
-      {title: 'Boxes', link: '/admin/boxes'},
-      {title: 'Users', link: '/admin/users'},
-      {title: 'Countries', link: '/admin/countries'}
+      {title: 'Orders', link: '/admin/orders', icon: 'local_shipping'},
+      {title: 'Boxes', link: '/admin/boxes', icon: 'inventory'},
+      {title: 'Users', link: '/admin/users', icon: 'people_alt'},
+      {title: 'Countries', link: '/admin/countries', icon: 'place'}
     ]
   }
 }

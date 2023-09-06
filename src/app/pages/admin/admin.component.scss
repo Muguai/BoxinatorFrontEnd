@@ -2,18 +2,22 @@ $blue: #34AFF7;
 $orange: #FE9D35;
 $dark_blue: #1A202C;
 
-#container {
-    top: 64px; // height of nav
-}
-
-@media(max-width: 599px) {
-    #container {
-      top: 56px !important;
-    }
-}
+// #container {
+//     top: 100px; // height of nav
+// }
 
 mat-nav-list {
     padding: 0;
+}
+
+.link {
+    .link-icon {
+        margin-right: 5px;
+    }
+    
+    .link-icon, .link-title {
+        vertical-align: middle;
+    }
 }
 
 .active {
@@ -21,6 +25,10 @@ mat-nav-list {
 }
 
 .active {
+    .link-icon {
+        color: white;
+    }
+
     .link-title {
         color: white;
     }
