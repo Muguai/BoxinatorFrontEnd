@@ -41,26 +41,8 @@ export class LoginFormComponent {
 
     this.authService.login(email, password).subscribe({
         next: async () => {
-          const token = await this.authService.getToken();
 
           this.isLoading = false;
-          this.weatherService.addUser(token).subscribe({
-            next: async (data : any) => {
-              const token = await this.authService.getToken();
-
-              this.weatherService.addUser(token).subscribe({
-                next: (data : any) => {
-                    console.log(data);
-                },
-                error: (error: any) => {
-                  console.log(error);
-                },
-              });
-            },
-            error: (error: any) => {
-              console.log(error);
-            },
-          });
           this.router.navigate(['/'])
         },
         error: (error: any) => {

@@ -46,7 +46,6 @@ export class SignUpFormComponent {
       .subscribe({
         next: async () => {
           this.isLoading = false;
-         
           this.router.navigate(['/'])
         },
         error: (error: any) => {
