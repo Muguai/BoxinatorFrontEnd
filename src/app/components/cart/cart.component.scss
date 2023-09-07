@@ -5,7 +5,7 @@
     width: 375px; 
     height: 100%;
     background-color: white;
-    z-index: 2;
+    z-index: 3;
     box-shadow: 0px 0 0px rgba(0, 0, 0, 0); 
     transition: right 0.3s ease-in-out, box-shadow 0.4s ease-in-out;;
   }
@@ -69,9 +69,34 @@
     font-size: 20px;
   }
 
-  .sidebar-checkout-btn{
+  .sidebar-checkout{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+  }
+  .sidebar-checkout button{
+    margin-bottom: 5px;
+    color: white;
+    background-color: orange;
+    background-image: none;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    transition: scale 0.3s ease, color 0.4s ease;
+  }
+
+  .sidebar-checkout button:hover{
+    background-color: rgb(234, 164, 35);
+    scale: 1.05;
+
+  }
+  
+
+  .sidebar-checkout button:active{
+    background-color: rgb(233, 190, 109);
+
   }
 
   .cart-list{
