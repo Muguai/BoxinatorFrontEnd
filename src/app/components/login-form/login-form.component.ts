@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -16,7 +17,7 @@ export class LoginFormComponent {
 
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
   ) {}
 
   async formLogin(form: NgForm) {
