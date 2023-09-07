@@ -1,40 +1,41 @@
 <div mat-dialog-content>
-    <form>
-        <div class="split">
-            <mat-form-field>
+    <form #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
+        <div class="rowGap">
+            <mat-form-field class="fullWidth">
                 <mat-label>Name</mat-label>
-                <input matInput value="{{box.boxType}}">
+                <input matInput ngModel="{{box.boxType}}" name="name">
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field id="price">
                 <mat-label>Price</mat-label>
-                <input matInput value="{{box.price}}">
+                <input matInput ngModel="{{box.price}}" name="price">
             </mat-form-field>
         </div>
         <mat-form-field class="fullWidth">
             <mat-label>Image URL</mat-label>
-            <input matInput value="{{box.imageUrl}}">
+            <input matInput ngModel="{{box.imageUrl}}" name="url">
         </mat-form-field>
         <mat-form-field class="fullWidth">
             <mat-label>Description</mat-label>
-            <textarea matInput value="{{box.description}}"></textarea>
+            <textarea matInput ngModel="{{box.description}}" name="description"></textarea>
         </mat-form-field>
         <mat-form-field class="fullWidth">
             <mat-label>Content</mat-label>
-            <textarea matInput value="{{box.content}}"></textarea>
+            <textarea matInput ngModel="{{box.content}}" name="content"></textarea>
         </mat-form-field>
-        <div class="split">
-            <mat-form-field>
+        <div class="rowGap">
+            <mat-form-field class="fullWidth">
                 <mat-label>Surprise Element 1</mat-label>
-                <input matInput value="Something 1">
+                <input matInput ngModel="Something 1" name="s1">
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="fullWidth">
                 <mat-label>Surprise Element 2</mat-label>
-                <input matInput value="Something 2">
+                <input matInput ngModel="Something 2" name="s2">
             </mat-form-field>
         </div>
-        <div class="split btn-split">
+        <div class="rowGap btn-split">
             <button mat-stroked-button [mat-dialog-close]>Cancel</button>
-            <button mat-flat-button [mat-dialog-close] color="accent">Save</button>
+            <button mat-flat-button [mat-dialog-close] color="accent"
+            type="submit">Save</button>
         </div>
     </form>
 </div>
