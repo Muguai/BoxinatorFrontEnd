@@ -4,6 +4,7 @@ import {
   OnInit,
   HostListener,
   ViewChild,
+  ChangeDetectorRef
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -32,7 +33,7 @@ export class BoxListComponent implements OnInit {
   isResizing: boolean = false;
   private resizeSubject = new Subject<Event>();
   
-  constructor(private gridChange: GridChangeService) {
+  constructor(private gridChange: GridChangeService,   private cdRef: ChangeDetectorRef) {
     this.boxes = dummyBoxes;
     this.resizeSubject
     .pipe(
@@ -58,6 +59,17 @@ export class BoxListComponent implements OnInit {
     this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
     this.itemPositions = this.getItemPositions(grid);
     this.oldItemPosition = this.getItemPositions(grid);
+
+    
+    const gridRect = grid.getBoundingClientRect();
+
+    const frozenItemsContainer = this.frozenItemsRef
+    .nativeElement as HTMLElement;
+
+    frozenItemsContainer.style.position = 'absolute';
+    frozenItemsContainer.style.left = `${gridRect.left}px`;
+    frozenItemsContainer.style.top = `${gridRect.top}px`;
+    
   }
 
   @HostListener('window:resize', ['$event'])
@@ -73,9 +85,14 @@ export class BoxListComponent implements OnInit {
   }
   startResize() {
     this.isResizing = true;
+    this.cdRef.detectChanges();
 
     const grid = this.gridRef.nativeElement as HTMLElement;
+
+    
     grid.style.opacity = '0';
+
+    this.cdRef.detectChanges();
 
 
     const tempOldItemPosition: { id: number; top: number; left: number }[] = [
@@ -88,9 +105,12 @@ export class BoxListComponent implements OnInit {
   }
 
   stopResize(){
-    this.isResizing = false;
+    console.log("End");
+
     const grid = this.gridRef.nativeElement as HTMLElement;
     this.oldItemPosition = this.getItemPositions(grid);
+    this.isResizing = false;
+
   }
 
   updateGridSize() {
@@ -113,8 +133,6 @@ export class BoxListComponent implements OnInit {
       gridItemWidth: this.gridItemWidth,
       gridGap: this.gridGap,
     });
-
-    //this.oldItemPosition = this.getItemPositions(grid);
   }
 
   getItemPositions(
@@ -144,7 +162,6 @@ export class BoxListComponent implements OnInit {
       return;
     }
 
-    this.isFrozen = true;
 
     const grid = this.gridRef.nativeElement as HTMLElement;
 
@@ -159,6 +176,9 @@ export class BoxListComponent implements OnInit {
       frozenItemsContainer.style.top = `${gridRect.top}px`;
     };
     updateFrozenContainer;
+
+    this.isFrozen = true;
+
 
     const items = frozenItemsContainer.querySelectorAll(
       '.testCard'
@@ -175,8 +195,6 @@ export class BoxListComponent implements OnInit {
       item.style.transform = initialTransform;
       pastPos.push(initialTransform);
     });
-
-    grid.style.opacity = '0';
 
     const updateInterval = 10;
 
