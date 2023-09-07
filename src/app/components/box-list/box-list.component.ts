@@ -5,6 +5,8 @@ import {
   HostListener,
   ViewChild,
 } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { dummyBoxes, Box } from 'src/app/models/mysteryBox';
 import { GridChangeService } from 'src/app/services/grid-change/grid-change.service';
 
@@ -27,14 +29,21 @@ export class BoxListComponent implements OnInit {
   itemPositions: { id: number; top: number; left: number }[] = [];
   oldItemPosition: { id: number; top: number; left: number }[] = [];
   isFrozen: boolean = false;
-  disableGrid: boolean = false;
-  animationCounter: number = 0;
-
+  isResizing: boolean = false;
+  private resizeSubject = new Subject<Event>();
+  
   constructor(private gridChange: GridChangeService) {
     this.boxes = dummyBoxes;
+    this.resizeSubject
+    .pipe(
+      debounceTime(600) 
+    )
+    .subscribe(() => {
+      this.stopResize();
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngAfterContentInit() {
     setTimeout(() => {
@@ -46,28 +55,53 @@ export class BoxListComponent implements OnInit {
   gridPosSetup() {
     const grid = this.gridRef.nativeElement as HTMLElement;
     const gridComputedStyle = window.getComputedStyle(grid);
-    this.updateOldGridRowCountAndColumnCount(gridComputedStyle);
+    this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
     this.itemPositions = this.getItemPositions(grid);
     this.oldItemPosition = this.getItemPositions(grid);
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
+    if (!this.isResizing) {
+      this.startResize();
+    }else{
+      this.resizeSubject.next(event);  
+    }
+    this.updateGridSize();
+
+
+  }
+  startResize() {
+    this.isResizing = true;
+
     const grid = this.gridRef.nativeElement as HTMLElement;
     grid.style.opacity = '0';
-    this.updateGridSize();
+
+
+    const tempOldItemPosition: { id: number; top: number; left: number }[] = [
+      ...this.oldItemPosition,
+    ];
+    if(!this.isFrozen){
+      this.freezeItems(tempOldItemPosition);
+    }
+    this.oldItemPosition = this.getItemPositions(grid);
+  }
+
+  stopResize(){
+    this.isResizing = false;
+    const grid = this.gridRef.nativeElement as HTMLElement;
+    this.oldItemPosition = this.getItemPositions(grid);
   }
 
   updateGridSize() {
     const grid = this.gridRef.nativeElement as HTMLElement;
-    this.itemPositions = this.getItemPositions(grid);
-
     const gridComputedStyle = window.getComputedStyle(grid);
 
+    this.itemPositions = this.getItemPositions(grid);
     this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
     this.gridGap = gridComputedStyle.getPropertyValue('grid-gap');
 
-    const firstItem = grid.querySelector('.testCard') as HTMLElement; 
+    const firstItem = grid.querySelector('.testCard') as HTMLElement;
     if (firstItem) {
       const computedStyle = window.getComputedStyle(firstItem);
       this.gridItemWidth = computedStyle.getPropertyValue('width');
@@ -80,15 +114,7 @@ export class BoxListComponent implements OnInit {
       gridGap: this.gridGap,
     });
 
-    //Freeze grid
-    const tempOldItemPosition: { id: number; top: number; left: number }[] = [
-      ...this.oldItemPosition,
-    ];
-    if (tempOldItemPosition !== undefined) {
-      this.freezeItems(tempOldItemPosition);
-    }
-
-    this.oldItemPosition = this.getItemPositions(grid);
+    //this.oldItemPosition = this.getItemPositions(grid);
   }
 
   getItemPositions(
@@ -113,29 +139,14 @@ export class BoxListComponent implements OnInit {
   }
 
   freezeItems(oldPos: { id: number; top: number; left: number }[]) {
-    const grid = this.gridRef.nativeElement as HTMLElement;
 
-    const gridComputedStyle = window.getComputedStyle(grid);
-
-
-
-    if (this.isFrozen) {
-      this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
-      if (
-        this.gridColumnCount !== this.oldGridColumnCount &&
-        this.gridRowCount === this.oldGridColumnCount
-      ) {
-        console.log('add animation counter');
-        this.animationCounter++;
-        this.updateOldGridRowCountAndColumnCount(gridComputedStyle);
-      }
+    if(this.isFrozen){
       return;
     }
 
-    this.disableGrid = true;
+    this.isFrozen = true;
 
-
-    this.updateOldGridRowCountAndColumnCount(gridComputedStyle);
+    const grid = this.gridRef.nativeElement as HTMLElement;
 
     const frozenItemsContainer = this.frozenItemsRef
       .nativeElement as HTMLElement;
@@ -167,9 +178,7 @@ export class BoxListComponent implements OnInit {
 
     grid.style.opacity = '0';
 
-    this.isFrozen = true;
-
-    const updateInterval = 20;
+    const updateInterval = 10;
 
     let pos = this.getItemPositions(grid);
 
@@ -177,7 +186,7 @@ export class BoxListComponent implements OnInit {
       items.forEach((item, index) => {
         pos = this.getItemPositions(grid);
         const targetTransform = `translate(${pos[index].left}px, ${pos[index].top}px)`;
-        if(pastPos[index] != targetTransform){
+        if (pastPos[index] != targetTransform) {
           item.style.transform = targetTransform;
           pastPos[index] = targetTransform;
         }
@@ -190,25 +199,17 @@ export class BoxListComponent implements OnInit {
       const intervalId = setInterval(() => {
         updateFrozenContainer();
         updateItemsPosition();
-        console.log('update');
+        console.log('update ', !this.isResizing && this.compareItemTransformations(items, pos));
 
-        if (!this.isFrozen || this.compareItemTransformations(items, pos)) {
+        if (!this.isResizing && this.compareItemTransformations(items, pos) ) {
+          grid.style.opacity = '1';
           console.log('positions match');
           clearInterval(intervalId);
           clearTimeout(TimeoutId);
-          this.checkAnimationCounter(grid, frozenItemsContainer);
+          this.isFrozen = false;
         }
       }, updateInterval);
     }, 1);
-  }
-
-  updateOldGridRowCountAndColumnCount(gridComputedStyle: CSSStyleDeclaration) {
-    this.gridRowCount = gridComputedStyle
-      .getPropertyValue('grid-template-rows')
-      .split(' ').length;
-    this.gridColumnCount = gridComputedStyle
-      .getPropertyValue('grid-template-columns')
-      .split(' ').length;
   }
 
   updateCurrentGridRowCountAndColumnCount(
@@ -220,18 +221,6 @@ export class BoxListComponent implements OnInit {
     this.gridColumnCount = gridComputedStyle
       .getPropertyValue('grid-template-columns')
       .split(' ').length;
-  }
-
-  checkAnimationCounter(grid: HTMLElement, frozenItemsContainer: HTMLElement) {
-    this.isFrozen = false;
-    if (this.animationCounter > 0) {
-      this.animationCounter--;
-      grid.style.opacity = '0';
-      this.freezeItems(this.getItemPositions(frozenItemsContainer));
-    } else {
-      this.disableGrid = false;
-      grid.style.opacity = '1';
-    }
   }
 
   compareItemTransformations(

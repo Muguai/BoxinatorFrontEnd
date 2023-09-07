@@ -19,11 +19,13 @@
 
   margin-top: 20px;
   margin-bottom: 40px;
+
 }
 
-.grid.frozen {
+.grid.frozen{
   opacity: 0;
 }
+
 
 .frozen-items-container {
   height: 100%;
@@ -32,7 +34,6 @@
   opacity: 0;
 }
 
-/* Show the frozen items container when isFrozen is true */
 .frozen-items-container.frozen {
   display: block;
   opacity: 1;
