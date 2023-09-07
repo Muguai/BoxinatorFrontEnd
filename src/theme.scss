@@ -1,0 +1,116 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$blue: (
+    50 : #e7f5fe,
+    100 : #c2e7fd,
+    200 : #9ad7fb,
+    300 : #71c7f9,
+    400 : #52bbf8,
+    500 : #34aff7, // main pallet color
+    600 : #2fa8f6,
+    700 : #279ff5,
+    800 : #2196f3,
+    900 : #1586f1,
+    A100 : #ffffff,
+    A200 : #edf6ff,
+    A400 : #badbff,
+    A700 : #a1ceff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$orange: (
+    50 : #fff3e7,
+    100 : #ffe2c2,
+    200 : #ffce9a,
+    300 : #feba72,
+    400 : #feac53,
+    500 : #fe9d35, // main pallet color
+    600 : #fe9530,
+    700 : #fe8b28,
+    800 : #fe8122,
+    900 : #fd6f16,
+    A100 : #ffffff,
+    A200 : #fffcfa,
+    A400 : #ffdbc7,
+    A700 : #ffcaad,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$dark_blue: (
+    50 : #e4e4e6,
+    100 : #babcc0,
+    200 : #8d9096,
+    300 : #5f636b,
+    400 : #3c414c,
+    500 : #1a202c, // main pallet color
+    600 : #171c27,
+    700 : #131821,
+    800 : #0f131b,
+    900 : #080b10,
+    A100 : #5498ff,
+    A200 : #217aff,
+    A400 : #005fed,
+    A700 : #0055d4,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$my-primary: mat.define-palette($blue, 500);
+$my-accent: mat.define-palette($dark_blue, 500);
+$my-warn: mat.define-palette($orange, 500);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+   warn: $my-warn
+ ),
+ density: 0,
+));
+
+@include mat.all-component-themes($my-theme);

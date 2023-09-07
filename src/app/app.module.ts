@@ -44,7 +44,8 @@ import { LandingHeaderComponent } from './components/landing-header/landing-head
 import { LogoComponent } from './components/logo/logo.component';
 import { AdminOrdersStatusComponent } from './components/admin/admin-orders-status/admin-orders-status.component';
 import { OrderReviewComponent } from './components/order-review/order-review.component';
-import { OrderReviewPopupComponent } from './components/order-review-popup/order-review-popup.component';
+import { OrderReviewPopupComponent } from './components/admin/order-review-popup/order-review-popup.component';
+import { EditBoxPopupComponent } from './components/admin/edit-box-popup/edit-box-popup.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { OrderReviewPopupComponent } from './components/order-review-popup/order
     BoxItemComponent,
     OrderReviewComponent,
     OrderReviewPopupComponent,
+    EditBoxPopupComponent,
   ],
   imports: [
     BrowserModule,

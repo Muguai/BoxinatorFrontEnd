@@ -1,5 +1,6 @@
 
 export interface Box {
+    id: number,
     boxType: string;
     description: string;
     imageUrl: string;
@@ -15,6 +16,7 @@ export interface Box {
   //Dummy boxes for testing purposes without having to pull them from the database
   export const dummyBoxes: Box[] = [
     {
+      id: 1,
       boxType: "Arctic Adventure Box",
       description: "Exploration gear for the rugged adventurer",
       imageUrl: commonImageUrl,
@@ -25,6 +27,7 @@ export interface Box {
       amount: 0
     },
     {
+      id: 2,
       boxType: "Hygge Home Box",
       description: "Cozy essentials for creating a warm and inviting atmosphere",
       imageUrl: commonImageUrl, 
@@ -35,6 +38,7 @@ export interface Box {
       amount: 0
     },
     {
+      id: 3,
       boxType: "Forest Forager Box",
       description: "A foraging kit",
       imageUrl: commonImageUrl, 
@@ -45,6 +49,7 @@ export interface Box {
       amount: 0
     },
     {
+      id: 4,
       boxType: "Viking Legends Box",
       description: "Items inspired by Viking history and mythology",
       imageUrl: commonImageUrl, 
@@ -56,6 +61,7 @@ export interface Box {
 
     },
     {
+      id: 5,
       boxType: "Mystical Fjord Box",
       description: "Items inspired by the mystery of Scandinavian fjords",
       imageUrl: commonImageUrl,
@@ -67,6 +73,7 @@ export interface Box {
 
     },
     {
+      id: 6,
       boxType: "Midsummer Magic Box",
       description: "Celebrate the enchanting Swedish Midsummer festival with items like flower crowns",
       imageUrl: commonImageUrl, 
@@ -78,6 +85,7 @@ export interface Box {
 
     },
     {
+      id: 7,
       boxType: "Nordic Delights Box",
       description: "Gourmet Scandinavian treats",
       imageUrl: commonImageUrl, 
@@ -89,6 +97,7 @@ export interface Box {
 
     },
     {
+      id: 8,
       boxType: "Scandinavian Design Box",
       description: "Chic home decor items that showcase the minimalist elegance of Scandinavian design",
       imageUrl: commonImageUrl, 
