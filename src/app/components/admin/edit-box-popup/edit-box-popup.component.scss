@@ -1,0 +1,14 @@
+.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.btn-split {
+    margin-left: 20%;
+    margin-right: 20%;
+}

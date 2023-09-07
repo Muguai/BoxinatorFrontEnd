@@ -14,9 +14,7 @@ export class SignUpFormComponent {
 
   isLoading:boolean = false;
   public signUpErrorMessage:string = "";
-
-
-
+  
   constructor(
     private authService: AuthenticationService,
     private toast: HotToastService,
@@ -49,13 +47,13 @@ export class SignUpFormComponent {
       console.log('Password dont match');
       return;
     }
-
+    
     console.log("Name " + name, " email " + email + " password " + password + " valPassword " + passwordVal);
 
     this.authService
       .signup(name, email, password)
       .subscribe({
-        next: () => {
+        next: async () => {
           this.isLoading = false;
           this.router.navigate(['/'])
           this.addUser();

@@ -46,5 +46,25 @@ mat-toolbar {
   .cart-amount p {
     margin-top: 12px;
   }
+  $orange: #FE9D35;
+
+  .toolbar-logo{
+
+    margin-left: 15%;
+  }
+
+  .toolbar-buttons{
+    transition: margin-right 0.1s ease-in;
+    margin-right: 15%;
+    color: orange;
+
+  }
+
+  .toolbar-buttons.open{
+
+  }
+
+
+
 
   

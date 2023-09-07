@@ -1,1 +1,26 @@
-<p>admin-boxes works!</p>
+<table mat-table [dataSource]="boxes" class="mat-elevation-z8">
+    <ng-container matColumnDef="box">
+        <th mat-header-cell *matHeaderCellDef>Box</th>
+        <td mat-cell *matCellDef="let box">{{box.boxType}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef>Content</th>
+        <td mat-cell *matCellDef="let box">{{box.content}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let box">{{box.price}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let box">
+            <button mat-stroked-button (click)="openEdit(box.id)">Edit</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

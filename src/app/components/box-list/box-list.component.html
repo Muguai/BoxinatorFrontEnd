@@ -1,7 +1,11 @@
 <div id="cardContainer" class="">
     <div class="grid-container">
-        <div class="grid">
-            <app-box-item *ngFor="let box of boxes" [box]="box"></app-box-item>
+        <div #frozenItems [class.frozen]="isFrozen" class="frozen-items-container">
+            <app-box-item  [class.hover]="!isFrozen || isResizing" #boxItem *ngFor="let box of boxes" [box]="box"></app-box-item>
+         </div>
+        <div [class.frozen]="isFrozen || isResizing" #grid class="grid">
+            <app-box-item #boxItem *ngFor="let box of boxes" [box]="box" [disableGrid]="isFrozen"></app-box-item>
         </div>
+     
     </div>
 </div>
