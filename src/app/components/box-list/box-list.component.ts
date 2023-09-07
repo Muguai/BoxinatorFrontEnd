@@ -140,6 +140,13 @@ export class BoxListComponent implements OnInit {
   ): { id: number; top: number; left: number }[] {
     let itemPos: { id: number; top: number; left: number }[] = [];
     const gridRect = element.getBoundingClientRect();
+
+    
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const scrollLeft = window.scrollX || window.pageXOffset;
+
+  
+
     const items = element.querySelectorAll(
       '.testCard'
     ) as NodeListOf<HTMLElement>;
@@ -148,7 +155,7 @@ export class BoxListComponent implements OnInit {
       const rect = item.getBoundingClientRect();
       itemPos.push({
         id: index,
-        top: rect.top - gridRect.top + window.scrollY,
+        top: rect.top - gridRect.top +  window.scrollY,
         left: rect.left - gridRect.left + window.scrollX,
       });
     });
@@ -212,18 +219,22 @@ export class BoxListComponent implements OnInit {
     };
 
     let TimeoutId: any;
+    let updateCount = 0;
 
     setTimeout(() => {
       const intervalId = setInterval(() => {
         updateFrozenContainer();
         updateItemsPosition();
-        console.log('update ', !this.isResizing && this.compareItemTransformations(items, pos));
+        console.log('update ', this.compareItemTransformations(items, pos));
+        updateCount++;
 
-        if (!this.isResizing && this.compareItemTransformations(items, pos) ) {
+        if (this.compareItemTransformations(items, pos) || updateCount > 200) {
           grid.style.opacity = '1';
           console.log('positions match');
           clearInterval(intervalId);
           clearTimeout(TimeoutId);
+          this.isResizing = false
+
           this.isFrozen = false;
         }
       }, updateInterval);
@@ -270,7 +281,11 @@ export class BoxListComponent implements OnInit {
       const expectedX = parseFloat(expectedTranslation[1]);
       const expectedY = parseFloat(expectedTranslation[2]);
 
-      const tolerance = 1;
+      const tolerance = 5;
+
+      //console.log("X "+ Math.abs(currentX - expectedX) + " VS " + tolerance)
+      //console.log("Y" + Math.abs(currentY - expectedY) + " VS " + tolerance)
+ 
       return (
         Math.abs(currentX - expectedX) < tolerance &&
         Math.abs(currentY - expectedY) < tolerance

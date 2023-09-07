@@ -4,7 +4,7 @@
             <app-box-item  [class.hover]="!isFrozen || isResizing" #boxItem *ngFor="let box of boxes" [box]="box"></app-box-item>
          </div>
         <div [class.frozen]="isFrozen || isResizing" #grid class="grid">
-            <app-box-item #boxItem *ngFor="let box of boxes" [box]="box" [disableGrid]="isFrozen || isResizing"></app-box-item>
+            <app-box-item #boxItem *ngFor="let box of boxes" [box]="box" [disableGrid]="isFrozen"></app-box-item>
         </div>
      
     </div>
