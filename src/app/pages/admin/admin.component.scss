@@ -1,6 +1,4 @@
 $blue: #34AFF7;
-$orange: #FE9D35;
-$dark_blue: #1A202C;
 
 // #container {
 //     top: 100px; // height of nav
@@ -22,9 +20,7 @@ mat-nav-list {
 
 .active {
     background-color: $blue;
-}
 
-.active {
     .link-icon {
         color: white;
     }
