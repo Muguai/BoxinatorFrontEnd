@@ -1,0 +1,24 @@
+<div [class.hover]="!disableGrid" class="testCard">
+    <div class="image-container">
+        <img class="box-image" [src]="box.imageUrl">
+    </div>
+    <div class="break-line"></div>
+    <div class="box-title">
+        <h1>{{box.boxType}}</h1>
+    </div>
+    <div class="box-description">
+        <h2>{{box.description}}</h2>
+    </div>
+    <div class="box-content">
+        <p>Content: {{box.content}}</p>
+    </div>
+
+    <div class="box-additional-info">
+        <p>Weight: {{box.weight}} Dimensions: {{box.dimensions}} </p>
+        
+    </div>
+    <div class="box-buy">
+        <button (click)="addItemToCart()" class="ignore-click">Add To Cart </button>
+        <p>Price: {{box.price}}$</p>
+    </div>
+</div>

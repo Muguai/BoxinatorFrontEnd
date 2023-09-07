@@ -10,6 +10,7 @@ import { AdminCountriesComponent } from './components/admin/admin-countries/admi
 import { LandingPage } from './pages/landing/landing.page';
 import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LoginPage } from './pages/login/login.page';
+import { ProfilePage } from './pages/profile/profile.page';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginPage,
     canActivate: [userAnonymousGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfilePage
   },
   {
     path: 'admin',
