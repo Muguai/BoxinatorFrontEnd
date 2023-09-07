@@ -121,7 +121,7 @@ export class BoxListComponent implements OnInit {
     this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
     this.gridGap = gridComputedStyle.getPropertyValue('grid-gap');
 
-    const firstItem = grid.querySelector('.testCard') as HTMLElement;
+    const firstItem = grid.querySelector('.card') as HTMLElement;
     if (firstItem) {
       const computedStyle = window.getComputedStyle(firstItem);
       this.gridItemWidth = computedStyle.getPropertyValue('width');
@@ -148,7 +148,7 @@ export class BoxListComponent implements OnInit {
   
 
     const items = element.querySelectorAll(
-      '.testCard'
+      '.card'
     ) as NodeListOf<HTMLElement>;
 
     items.forEach((item, index) => {
@@ -188,7 +188,7 @@ export class BoxListComponent implements OnInit {
 
 
     const items = frozenItemsContainer.querySelectorAll(
-      '.testCard'
+      '.card'
     ) as NodeListOf<HTMLElement>;
 
     const pastPos: string[] = [];
