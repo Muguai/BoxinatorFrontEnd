@@ -50,7 +50,7 @@ export class BoxListComponent implements OnInit {
     setTimeout(() => {
       this.gridPosSetup();
       this.updateGridSize();
-    }, 10);
+    }, 1);
   }
 
   gridPosSetup() {
@@ -140,12 +140,6 @@ export class BoxListComponent implements OnInit {
   ): { id: number; top: number; left: number }[] {
     let itemPos: { id: number; top: number; left: number }[] = [];
     const gridRect = element.getBoundingClientRect();
-
-    
-    const scrollTop = window.scrollY || window.pageYOffset;
-    const scrollLeft = window.scrollX || window.pageXOffset;
-
-  
 
     const items = element.querySelectorAll(
       '.card'

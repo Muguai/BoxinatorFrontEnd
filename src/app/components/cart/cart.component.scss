@@ -107,6 +107,12 @@
 
   }
 
+  .empty-cart-text{
+    transition: opacity 0.3s ease;
+    text-align: center;
+    margin-bottom: 0px;
+  }
+
   .cart-list{
     transform: height 0.3s ease;
   }
