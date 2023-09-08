@@ -46,6 +46,10 @@ export class AppComponent {
     return this.router.url === '/';  
   }
 
+  isOnProfilePage() : boolean{
+    return this.router.url.includes('/profile');
+  }
+
   toggleCart() {
     this.cartService.toggleCart.emit();
     //this.cart.toggleSidebar();

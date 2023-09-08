@@ -8,13 +8,13 @@
         <div class="toolbar-user-buttons">
           <!--User Profile button menu-->
           <button #userProfileMenu mat-button [matMenuTriggerFor]="userMenu">
-            <p>{{ user.displayName }}</p>
+            <p class="username">{{ user.displayName }}</p>
             <mat-icon>account_circle</mat-icon>
             <mat-icon>expand_more</mat-icon>
           </button>
           <!--Cart button-->
           <ng-container
-            *ngIf="isOnHomePage()"
+            *ngIf="isOnHomePage() || isOnProfilePage()"
             [ngTemplateOutlet]="cartButtonTemplate"
           ></ng-container>
         </div>

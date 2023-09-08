@@ -1,0 +1,75 @@
+@import 'src/styles.scss';
+
+.shipment-item-container{
+    height: 100px;
+    width: 95%;
+    background-color: lightgrey;
+    border: thin solid gray;
+    padding: 0;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: height 0.3s ease;
+
+}
+
+.closed-height {
+    height: 100px;
+  }
+  
+  .open-height {
+    height: 500px; 
+  }
+
+.shipment-item-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+
+}
+
+.shipment-status{
+    width: 100px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: $dark_blue;
+    color: white;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shipment-status p {
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+}
+
+.details-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.details-button-container button {
+    background-color: lightgray;
+    background-image: none;
+    border: none;
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
+.details-button-container button:hover{
+    font-weight: bold;
+}
+
+.details-button-container button:active{
+    color: gray;
+}

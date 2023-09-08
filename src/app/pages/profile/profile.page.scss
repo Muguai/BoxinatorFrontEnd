@@ -1,0 +1,49 @@
+@import 'src/styles.scss';
+
+.profile-card{
+    border: thin solid black;
+    border-radius: 5px;
+    background-color: white;
+    z-index: 2;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: scale 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.profile-card:hover{
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.3);
+    scale: 1.05;
+}
+
+.blue-text{
+    color: $blue;
+}
+
+.upper-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    max-width: 1500px;
+    max-height: 700px;
+    margin: 0 auto; 
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.lower-container{
+    
+    max-width: 1500px;
+    max-height: 700px;
+    margin: 0 auto; 
+    
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+

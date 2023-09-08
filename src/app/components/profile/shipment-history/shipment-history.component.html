@@ -1,1 +1,7 @@
-<p>shipment-history works!</p>
+<div class="profile-card shipment-card">
+    <h1 class="shipment-header">Shipment History</h1>
+    <ul class="shipment-list">
+        <div></div>
+        <app-shipment-history-item *ngFor="let shipment of shipments" [shipment]="shipment"></app-shipment-history-item>
+    </ul>
+</div>
