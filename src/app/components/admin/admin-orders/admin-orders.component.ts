@@ -17,6 +17,8 @@ export class AdminOrdersComponent {
     {id: 987, date: '1/8 2023', user: 'jane.doe@mail.com', status: Status.InTransit},
     {id: 771, date: '29/7 2023', user: 'john.doe@mail.com', status: Status.Delivered}
   ];
+  // array with Status values
+  public statuses = Object.values(Status);
 
   constructor(private dialog: MatDialog) {}
 
@@ -25,5 +27,9 @@ export class AdminOrdersComponent {
       width: '570px',
       data: {id: value}
     });
+  }
+
+  public statusChange(value: string): void {
+    console.log(value)
   }
 }
