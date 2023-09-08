@@ -20,7 +20,9 @@
     transition: width 0.2s ease;
 }
 .landing-header-background h1{
-    font-size: 3.0vmin;
+    transition: font-size 0.2s ease;
     font-weight: bold;
+    white-space: nowrap; 
     color: white;
+    font-size: var(--font-size, 1px); 
 }

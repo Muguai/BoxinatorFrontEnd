@@ -22,7 +22,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { MatMenuItem, MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { TestAuthenticationWeatherComponent } from './components/test-authentication-weather/test-authentication-weather.component';
-import { CartComponent } from './components/cart/cart.component';
+import { CartComponent } from './components/landing/cart/cart.component';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
@@ -36,17 +36,20 @@ import { AdminCountriesComponent } from './components/admin/admin-countries/admi
 import { LoginPage } from './pages/login/login.page';
 import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LandingPage } from './pages/landing/landing.page';
-import { BoxListComponent } from './components/box-list/box-list.component';
-import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { BoxListComponent } from './components/landing/box-list/box-list.component';
+import { CartItemComponent } from './components/landing/cart-item/cart-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BoxItemComponent } from './components/box-item/box-item.component';
-import { LandingHeaderComponent } from './components/landing-header/landing-header.component';
+import { BoxItemComponent } from './components/landing/box-item/box-item.component';
+import { LandingHeaderComponent } from './components/landing/landing-header/landing-header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { AdminOrdersStatusComponent } from './components/admin/admin-orders-status/admin-orders-status.component';
 import { OrderReviewComponent } from './components/order-review/order-review.component';
 import { OrderReviewPopupComponent } from './components/admin/order-review-popup/order-review-popup.component';
 import { EditBoxPopupComponent } from './components/admin/edit-box-popup/edit-box-popup.component';
 import { ProfilePage } from './pages/profile/profile.page';
+import { ShipmentHistoryComponent } from './components/profile/shipment-history/shipment-history.component';
+import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
+import { ClaimPackageComponent } from './components/profile/claim-package/claim-package.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,9 @@ import { ProfilePage } from './pages/profile/profile.page';
     OrderReviewPopupComponent,
     EditBoxPopupComponent,
     ProfilePage,
+    ShipmentHistoryComponent,
+    ProfileInfoComponent,
+    ClaimPackageComponent,
   ],
   imports: [
     BrowserModule,

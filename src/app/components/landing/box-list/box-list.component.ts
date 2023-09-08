@@ -50,7 +50,7 @@ export class BoxListComponent implements OnInit {
     setTimeout(() => {
       this.gridPosSetup();
       this.updateGridSize();
-    }, 10);
+    }, 1);
   }
 
   gridPosSetup() {
@@ -121,7 +121,7 @@ export class BoxListComponent implements OnInit {
     this.updateCurrentGridRowCountAndColumnCount(gridComputedStyle);
     this.gridGap = gridComputedStyle.getPropertyValue('grid-gap');
 
-    const firstItem = grid.querySelector('.testCard') as HTMLElement;
+    const firstItem = grid.querySelector('.card') as HTMLElement;
     if (firstItem) {
       const computedStyle = window.getComputedStyle(firstItem);
       this.gridItemWidth = computedStyle.getPropertyValue('width');
@@ -141,14 +141,8 @@ export class BoxListComponent implements OnInit {
     let itemPos: { id: number; top: number; left: number }[] = [];
     const gridRect = element.getBoundingClientRect();
 
-    
-    const scrollTop = window.scrollY || window.pageYOffset;
-    const scrollLeft = window.scrollX || window.pageXOffset;
-
-  
-
     const items = element.querySelectorAll(
-      '.testCard'
+      '.card'
     ) as NodeListOf<HTMLElement>;
 
     items.forEach((item, index) => {
@@ -188,7 +182,7 @@ export class BoxListComponent implements OnInit {
 
 
     const items = frozenItemsContainer.querySelectorAll(
-      '.testCard'
+      '.card'
     ) as NodeListOf<HTMLElement>;
 
     const pastPos: string[] = [];

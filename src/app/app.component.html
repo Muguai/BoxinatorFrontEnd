@@ -47,15 +47,6 @@
   </ng-template>
 </mat-toolbar>
 
-<!--Cart-->
-<div class="cart-container">
-  <app-cart
-    (cartAmountChange)="setCartAmount($event)"
-    (cartOpenChange)="onCartOpenChange($event)"
-    *ngIf="isOnHomePage()"
-    #cart
-  ></app-cart>
-</div>
 
 <!--Main Content-->
 <div class="content">

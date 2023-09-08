@@ -1,4 +1,4 @@
-.testCard {
+.card {
   width: 450px;
   height: 550px;
   border: thin solid black;
@@ -17,6 +17,7 @@
 
 
 .hover{
+    /*empty class to simply add/remove hover*/
 }
 
 
@@ -27,7 +28,6 @@
   
 
 .no-hover:hover {
-    
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     scale: 1;
   }
@@ -58,6 +58,10 @@
     margin-top: 10px;
 }
 
+.box-title h1{
+    font-size: 25px;
+}
+
 .box-description{
     width: 90%;
     display: flex;
@@ -67,6 +71,7 @@
 
 .box-description h2{
     font-size: 15px;
+    font-weight: bold;
 }
 
 .box-content{

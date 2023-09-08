@@ -32,8 +32,6 @@ import { CartService } from 'src/app/services/cart-service/cart-serivce.service'
   ],
 })
 export class CartComponent implements OnInit, OnDestroy {
-  @Output() cartOpenChange = new EventEmitter<boolean>();
-  @Output() cartAmountChange = new EventEmitter<number>();
   cartAmount: number = 0;
   isDeleting: boolean = false;
   @ViewChild('cartSidebar', { static: true }) cartSidebarRef!: ElementRef;
@@ -50,6 +48,9 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.addItemEvent.subscribe((boxToAdd) => {
       this.addItem(boxToAdd);
     });
+    this.cartService.toggleCart.subscribe(() => {
+      this.toggleSidebar();
+    })
   }
 
   ngOnInit() {
@@ -68,7 +69,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   toggleSidebar() {
     this.cartOpen = !this.cartOpen;
-    this.cartOpenChange.emit(this.cartOpen);
+    this.cartService.cartOpenChange.emit(this.cartOpen);
   }
 
   handleDocumentClick(event: MouseEvent) {
@@ -97,7 +98,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   closeCart() {
     this.cartOpen = false;
-    this.cartOpenChange.emit(this.cartOpen);
+    this.cartService.cartOpenChange.emit(this.cartOpen);
   }
 
   deleteItem(box: Box, deleteFully: boolean) {
@@ -122,14 +123,14 @@ export class CartComponent implements OnInit, OnDestroy {
         this.cartAmount = 0;
       }
 
-      this.cartAmountChange.emit(this.cartAmount);
+      this.cartService.cartAmountChange.emit(this.cartAmount);
 
       if (existingBox.amount === 0 || deleteFully) {
         this.isDeleting = true;
         this.saveCartData();
 
         setTimeout(() => {
-          this.cartAmountChange.emit(this.cartAmount);
+          this.cartService.cartAmountChange.emit(this.cartAmount);
           const index = this.boxes.indexOf(existingBox);
           if (index !== -1) {
             this.boxes.splice(index, 1);
@@ -158,7 +159,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartAmount++;
     console.log('addCart ' + this.cartAmount);
     this.saveCartData();
-    this.cartAmountChange.emit(this.cartAmount);
+    this.cartService.cartAmountChange.emit(this.cartAmount);
   }
 
   saveCartData() {
@@ -176,7 +177,7 @@ export class CartComponent implements OnInit, OnDestroy {
       this.boxes = cartData.boxes;
       this.cartAmount = cartData.cartAmount;
     }
-    this.cartAmountChange.emit(this.cartAmount);
+    this.cartService.cartAmountChange.emit(this.cartAmount);
   }
 
   getTotalPrice(): number {

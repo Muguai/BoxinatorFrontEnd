@@ -1,8 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { CartComponent } from './components/cart/cart.component';
+import { CartService } from './services/cart-service/cart-serivce.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +13,18 @@ export class AppComponent {
   items: any[] = []; 
   cartOpen: boolean = false;
   cartAmount: number = 0;
-  @ViewChild('cart') cart!: CartComponent;
 
 
   
 
-  constructor(public authService: AuthenticationService, private router: Router, private activatedRoute: ActivatedRoute){
+  constructor(public authService: AuthenticationService, private router: Router, private cartService: CartService){
+    this.cartService.cartAmountChange.subscribe((amount) => {
+      this.setCartAmount(amount);
+    });
+
+    this.cartService.cartOpenChange.subscribe((change) => {
+      this.onCartOpenChange(change);
+    });
 
   }
 
@@ -42,7 +47,8 @@ export class AppComponent {
   }
 
   toggleCart() {
-    this.cart.toggleSidebar();
+    this.cartService.toggleCart.emit();
+    //this.cart.toggleSidebar();
   }
 
   onCartOpenChange(cartOpen: boolean) {
