@@ -1,18 +1,76 @@
 <div class="shipment-item-container" [class.open]="!closed">
-    <div class="shipment-item-header">
-        <h2>Order: {{shipment.id}}</h2>
-        <div class="shipment-status">
-            <p>{{shipment.status}}</p>
+  <div class="shipment-item-header">
+    <h2>Order: {{ shipment.id }}</h2>
+    <div class="shipment-status">
+      <p>{{ shipment.status }}</p>
+    </div>
+  </div>
+  <div class="shipment-details-container" [class.open]="!closed">
+    <div class="shipment-details">
+      <div [ngStyle]="{ 'margin-top': '20px' }"></div>
+      <p><strong>To:</strong> {{ shipment.name }}</p>
+      <p><strong>Shipping Address:</strong> {{ shipment.shippingAddress }}</p>
+      <p><strong>Billing Address:</strong> {{ shipment.billingAddress }}</p>
+      <p><strong>Mail:</strong> {{ shipment.mail }}</p>
+      <p><strong>Zipcode:</strong> {{ shipment.zipCode }}</p>
+      <p><strong>Country:</strong> {{ shipment.country }}</p>
+      <hr *ngIf="(shipment.giftMessage !== null || shipment.instructions !== null)" />
+      <div *ngIf="shipment.instructions!== null">
+        <p><strong>Delivery Instructions</strong></p>
+        <div class="shipment-details-highlight">
+          <p>
+            {{ shipment.instructions === null ? "N/A" : shipment.instructions }}
+          </p>
         </div>
-    </div>
-    <div class="shipment-details-container" [class.open]="!closed">
-        <div class="shipment-details">
-
+      </div>
+      <div *ngIf="shipment.giftMessage !== null">
+        <p><strong>Gift Message</strong></p>
+        <div class="shipment-details-highlight">
+          <p>
+            {{ shipment.giftMessage === null ? "N/A" : shipment.giftMessage }}
+          </p>
         </div>
+      </div>
+      <hr />
+      <div class="order-header">
+        <p>Order</p>
+        <p>
+          {{ shipment.content === null ? "N/A" : getShipmentTotalCost() }}
+        </p>
+      </div>
+      <div class="shipment-details-highlight">
+        <ul>
+          <div [ngStyle]="{ 'margin-top': '2%' }"></div>
+          <li *ngFor="let box of shipment.content">
+            {{ box.Box.boxType }} - x {{ box.Box.amount }} - Price:
+            {{ box.Box.price * box.Box.amount }}
+          </li>
+          <div [ngStyle]="{ 'margin-bottom': '2%' }"></div>
+        </ul>
+      </div>
+      <div class="order-header">
+        <p>Shipping</p>
+        <p>
+          {{ shipment.rate === null ? "N/A" : shipment.rate }}
+        </p>
+      </div>
+      <div class="order-header">
+        <p><strong>Total</strong></p>
+        <p>
+          <strong>
+            {{
+              shipment.content === null
+                ? "N/A"
+                : getShipmentTotalCost() + shipment.rate
+            }}
+          </strong>
+        </p>
+      </div>
     </div>
-    <div class="details-button-container" >
-        <button (click)="toggleDetails()">
-            <p>{{ closed ? 'Details' : 'Hide Details' }}</p>
-        </button>
-    </div>
+  </div>
+  <div class="details-button-container">
+    <button (click)="toggleDetails()">
+      <p>{{ closed ? "Details" : "Hide Details" }}</p>
+    </button>
+  </div>
 </div>

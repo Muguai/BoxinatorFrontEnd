@@ -1,5 +1,5 @@
+@import 'src/styles.scss';
 
-$blue: #34AFF7;
 
 mat-toolbar {
     justify-content: space-between;
@@ -44,9 +44,9 @@ mat-toolbar {
   }
 
   .cart-amount p {
-    margin-top: 12px;
+    margin: 0;
+    padding: 0;
   }
-  $orange: #FE9D35;
 
   .toolbar-logo{
 
@@ -56,7 +56,7 @@ mat-toolbar {
   .toolbar-buttons{
     transition: margin-right 0.1s ease-in;
     margin-right: 15%;
-    color: orange;
+    color: white;
 
   }
 

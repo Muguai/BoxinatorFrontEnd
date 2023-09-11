@@ -1,0 +1,36 @@
+<div class="dialog-content" mat-dialog-content>
+    <form class="form" #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
+        <h1 class="dialog-header">Edit Profile</h1>
+        <mat-form-field class="fullWidth">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput ngModel="N/A" name="name">
+        </mat-form-field>
+        <mat-form-field class="fullWidth">
+            <mat-label>Mail</mat-label>
+            <input type="text" matInput ngModel="N/A" name="mail">
+        </mat-form-field>
+        <mat-form-field class="fullWidth">
+            <mat-label>Shipping Adress</mat-label>
+            <input type="text" matInput ngModel="N/A" name="shippingAdress">
+        </mat-form-field>
+        <mat-form-field class="fullWidth">
+            <mat-label>Billing Adress</mat-label>
+            <input type="text" matInput ngModel="N/A" name="billingAdress">
+        </mat-form-field>
+        <mat-form-field class="halfWidth">
+            <mat-label>Zip Code</mat-label>
+            <input type="text" matInput ngModel="N/A" name="zipCode">
+        </mat-form-field>
+        <mat-form-field class="fullWidth">
+            <mat-label>Country</mat-label>
+            <mat-select [(ngModel)]="selectedCountry" ngModel="N/A" name="country">
+              <mat-option *ngFor="let country of countries" [value]="country">{{ country }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        <div class="rowGap btn-split">
+            <button class="cancel-btn dialog-btn" mat-stroked-button [mat-dialog-close]>Cancel</button>
+            <button class="save-btn dialog-btn" m mat-flat-button [mat-dialog-close] color="accent"
+            type="submit">Save</button>
+        </div>
+    </form>
+</div>

@@ -2,6 +2,7 @@
 $blue: #34AFF7;
 $orange: #FE9D35;
 $dark_blue: #1A202C;
+$dialogBorderRadius: '20px';
 
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -65,5 +66,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: rgb(159, 159, 159);
 }
 
+
+.cdk-overlay-pane{
+    background-color: transparent !important;
+    border-radius: 20px !important;
+}
+
+.mat-mdc-dialog-surface{
+    background-color: transparent !important;
+    border-radius: 20px !important;
+}
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';

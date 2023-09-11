@@ -70,7 +70,7 @@
   >
     <mat-icon>shopping_cart</mat-icon>
     <div class="cart-amount" *ngIf="cartAmount > 0">
-      <p [style.font-size.em]="cartAmount > 99 ? 0.6 : 0.9">
+      <p [style.font-size.em]="cartAmount > 99 ? 0.5 : 0.8">
         {{ cartAmount > 99 ? "99+" : cartAmount }}
       </p>
     </div>

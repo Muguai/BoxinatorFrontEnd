@@ -7,8 +7,8 @@
     padding: 20px;
     width: 100%;
     max-width: 1000px;
-
-
+    max-height: 800px;
+    overflow-y: auto;
     
 
 
@@ -23,8 +23,6 @@
 }
 
 
-.test{
-}
 
 .shipment-list{
    width: 100%;

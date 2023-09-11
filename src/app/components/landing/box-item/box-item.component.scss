@@ -79,13 +79,13 @@
 
     width: 90%;
     display: flex;
-    text-align:center;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .box-content p{
-    font-size: 11px;
+    font-size: 20px;
 }
 
 .box-buy{
@@ -96,4 +96,8 @@
     width: 200px;
     height: 70px;
 
+}
+.content-image{
+    height: 20px;
+    width: 20px;
 }

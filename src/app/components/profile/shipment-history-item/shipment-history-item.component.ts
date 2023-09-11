@@ -15,4 +15,16 @@ export class ShipmentHistoryItemComponent {
     this.closed = !this.closed;
   }
 
+  getShipmentTotalCost(){
+  
+
+    let total = 0;
+
+    this.shipment.content.forEach(element => {
+        total += (element.Box.price * element.Box.amount);
+    });
+
+    return total;
+  }
+
 }

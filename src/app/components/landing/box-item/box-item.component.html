@@ -1,24 +1,46 @@
 <div [class.hover]="!disableGrid" class="card">
-    <div class="image-container">
-        <img class="box-image" [src]="box.imageUrl">
-    </div>
-    <div class="break-line"></div>
-    <div class="box-title">
-        <h1>{{box.boxType}}</h1>
-    </div>
-    <div class="box-description">
-        <h2>{{box.description}}</h2>
-    </div>
-    <div class="box-content">
-        <p>Content: {{box.content}}</p>
-    </div>
+  <div class="image-container">
+    <img class="box-image" [src]="box.imageUrl" />
+  </div>
+  <div class="break-line"></div>
+  <div class="box-title">
+    <h1>{{ box.boxType }}</h1>
+  </div>
+  <div class="box-description">
+    <h2>{{ box.description }}</h2>
+  </div>
+  <div class="box-content">
+    <p>
+      Content:
+      <ng-container *ngFor="let contentItem of contentArray">
+        <ng-container
+          *ngIf="getContentImage(contentItem).startsWith('/assets/img')"
+        >
+          <img
+            [ngbTooltip]="addSpacesToPascalCase(contentItem)"
+            class="content-image d-inline-block "
+            [src]="getContentImage(contentItem)"
+            alt="{{ contentItem }}"
+          />
+        </ng-container>
+        <ng-container
+          *ngIf="!getContentImage(contentItem).startsWith('/assets/img')"
+        >
+          <span [ngbTooltip]="addSpacesToPascalCase(contentItem)" class="emoji text-center">{{
+            getContentImage(contentItem)
+          }}</span>
+        </ng-container>
+      </ng-container>
+    </p>
+  </div>
 
-    <div class="box-additional-info">
-        <p>Weight: {{box.weight}} Dimensions: {{box.dimensions}} </p>
-        
-    </div>
-    <div class="box-buy">
-        <button (click)="addItemToCart()" class="ignore-click card-button">Add To Cart </button>
-        <p>Price: {{box.price}}$</p>
-    </div>
+  <div class="box-additional-info">
+    <p>Weight: {{ box.weight }} Dimensions: {{ box.dimensions }}</p>
+  </div>
+  <div class="box-buy">
+    <button (click)="addItemToCart()" class="ignore-click card-button">
+      Add To Cart
+    </button>
+    <p>Price: {{ box.price }}$</p>
+  </div>
 </div>
