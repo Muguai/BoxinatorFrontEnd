@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-profile-info',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile-info.component.scss']
 })
 export class ProfileInfoComponent {
+
+  constructor(public authService: AuthenticationService){}
 
 }
