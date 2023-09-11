@@ -18,7 +18,7 @@
         >
           <img
             [ngbTooltip]="addSpacesToPascalCase(contentItem)"
-            class="content-image d-inline-block "
+            class="content-image d-inline-block"
             [src]="getContentImage(contentItem)"
             alt="{{ contentItem }}"
           />
@@ -26,7 +26,7 @@
         <ng-container
           *ngIf="!getContentImage(contentItem).startsWith('/assets/img')"
         >
-          <span [ngbTooltip]="addSpacesToPascalCase(contentItem)" class="emoji text-center">{{
+          <span [ngbTooltip]="addSpacesToPascalCase(contentItem)" class="emoji d-inline-block">{{
             getContentImage(contentItem)
           }}</span>
         </ng-container>
