@@ -1,1 +1,47 @@
-<p>admin-countries works!</p>
+<div id="cardContainer">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Scandinavian Countries</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form #editRateScandinavia="ngForm" (ngSubmit)="onSubmitScandinavia(editRateScandinavia)">
+                <div class="split">
+                    <mat-form-field>
+                        <mat-label>Rate</mat-label>
+                        <input matInput ngModel="{{scandinavia.rate}}" name="rate"
+                        #scandinavianRate type="number">
+                    </mat-form-field>
+                    <button mat-flat-button color="accent"
+                    type="submit" [disabled]="(scandinavia.rate === this.scandinavianRate.valueAsNumber)">Save</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+    
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Other Countries</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form #editRate="ngForm" (ngSubmit)="onSubmit(editRate)">
+                <mat-form-field class="fullWidth">
+                    <mat-label>Select country</mat-label>
+                    <mat-select #country>
+                        <mat-option *ngFor="let country of countries"
+                            [value]="country.id">{{country.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="split">
+                    <mat-form-field>
+                        <mat-label>Rate</mat-label>
+                        <input matInput ngModel="{{country.value}}" name="rate"
+                        #rate type="number" [disabled]="!country.value">
+                    </mat-form-field>
+                    <button mat-flat-button color="accent" type="submit"
+                    [disabled]="(country.value === this.rate.valueAsNumber || !this.rate.value)"
+                    >Save</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,27 @@
+#cardContainer {
+    height: 100%;
+}
+
+#cardContainer, mat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+mat-card {
+    width: 700px;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}

@@ -28,6 +28,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
 import { AdminBoxesComponent } from './components/admin/admin-boxes/admin-boxes.component';
@@ -42,7 +43,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BoxItemComponent } from './components/landing/box-item/box-item.component';
 import { LandingHeaderComponent } from './components/landing/landing-header/landing-header.component';
 import { LogoComponent } from './components/logo/logo.component';
-import { AdminOrdersStatusComponent } from './components/admin/admin-orders-status/admin-orders-status.component';
 import { OrderReviewComponent } from './components/order-review/order-review.component';
 import { OrderReviewPopupComponent } from './components/admin/order-review-popup/order-review-popup.component';
 import { EditBoxPopupComponent } from './components/admin/edit-box-popup/edit-box-popup.component';
@@ -71,7 +71,6 @@ import { ClaimPackageComponent } from './components/profile/claim-package/claim-
     CartItemComponent,
     LandingHeaderComponent,
     LogoComponent,
-    AdminOrdersStatusComponent,
     BoxItemComponent,
     OrderReviewComponent,
     OrderReviewPopupComponent,
@@ -104,7 +103,8 @@ import { ClaimPackageComponent } from './components/profile/claim-package/claim-
     MatTableModule,
     MatSelectModule,
     NgbModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

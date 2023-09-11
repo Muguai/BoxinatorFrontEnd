@@ -17,7 +17,9 @@ export class AdminBoxesComponent {
 
   public openEdit(value: number): void {
     this.dialog.open(EditBoxPopupComponent, {
-      data: {id: value}
+      width: '600px',
+      data: {id: value},
+      autoFocus: false
     });
   }
 }
