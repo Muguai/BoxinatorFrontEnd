@@ -29,7 +29,7 @@ export class AdminOrdersComponent {
     });
   }
 
-  public statusChange(value: string): void {
-    console.log(value)
+  public statusChange(status: string): void {
+    console.log(status); // VALUE FOR PUT REQUEST
   }
 }

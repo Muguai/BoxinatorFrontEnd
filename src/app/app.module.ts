@@ -28,6 +28,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
 import { AdminBoxesComponent } from './components/admin/admin-boxes/admin-boxes.component';
@@ -94,7 +95,8 @@ import { EditBoxPopupComponent } from './components/admin/edit-box-popup/edit-bo
     MatTableModule,
     MatSelectModule,
     NgbModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

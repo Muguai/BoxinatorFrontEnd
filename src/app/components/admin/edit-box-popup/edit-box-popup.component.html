@@ -3,16 +3,16 @@
         <div class="rowGap">
             <mat-form-field class="fullWidth">
                 <mat-label>Name</mat-label>
-                <input matInput ngModel="{{box.boxType}}" name="name">
+                <input type="text" matInput ngModel="{{box.boxType}}" name="name">
             </mat-form-field>
             <mat-form-field id="price">
                 <mat-label>Price</mat-label>
-                <input matInput ngModel="{{box.price}}" name="price">
+                <input type="number" matInput ngModel="{{box.price}}" name="price">
             </mat-form-field>
         </div>
         <mat-form-field class="fullWidth">
             <mat-label>Image URL</mat-label>
-            <input matInput ngModel="{{box.imageUrl}}" name="url">
+            <input type="text" matInput ngModel="{{box.imageUrl}}" name="url">
         </mat-form-field>
         <mat-form-field class="fullWidth">
             <mat-label>Description</mat-label>
@@ -25,11 +25,11 @@
         <div class="rowGap">
             <mat-form-field class="fullWidth">
                 <mat-label>Surprise Element 1</mat-label>
-                <input matInput ngModel="Something 1" name="s1">
+                <input type="text" matInput ngModel="Something 1" name="s1">
             </mat-form-field>
             <mat-form-field class="fullWidth">
                 <mat-label>Surprise Element 2</mat-label>
-                <input matInput ngModel="Something 2" name="s2">
+                <input type="text" matInput ngModel="Something 2" name="s2">
             </mat-form-field>
         </div>
         <div class="rowGap btn-split">
