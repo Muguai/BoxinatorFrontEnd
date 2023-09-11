@@ -54,6 +54,7 @@ import { ClaimPackageComponent } from './components/profile/claim-package/claim-
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { SummaryComponent } from './components/checkout/summary/summary.component';
 import { SummaryItemComponent } from './components/checkout/summary-item/summary-item.component';
+import { PaymentComponent } from './components/checkout/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { SummaryItemComponent } from './components/checkout/summary-item/summary
     ClaimPackageComponent,
     CheckoutComponent,
     SummaryComponent,
-    SummaryItemComponent
+    SummaryItemComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

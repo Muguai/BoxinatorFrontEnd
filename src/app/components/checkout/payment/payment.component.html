@@ -1,0 +1,37 @@
+<mat-form-field class="fullWidth">
+    <mat-label>Name on Card</mat-label>
+    <input matInput type="text" required>
+</mat-form-field>
+<div class="fullWidth split">
+    <mat-form-field id="card">
+        <mat-label>Card Number</mat-label>
+        <input matInput type="number" required>
+    </mat-form-field>
+    <mat-form-field id="cvc">
+        <mat-label>CVC</mat-label>
+        <input matInput type="number" required>
+    </mat-form-field>
+</div>
+<div class="fullWidth split">
+    <mat-form-field id="month">
+        <mat-label>Expiration Month</mat-label>
+        <mat-select required>
+            <mat-option value="0">January</mat-option>
+            <mat-option value="1">February</mat-option>
+            <mat-option value="2">March</mat-option>
+            <mat-option value="3">April</mat-option>
+            <mat-option value="4">May</mat-option>
+            <mat-option value="5">June</mat-option>
+            <mat-option value="6">July</mat-option>
+            <mat-option value="7">August</mat-option>
+            <mat-option value="8">September</mat-option>
+            <mat-option value="9">October</mat-option>
+            <mat-option value="10">November</mat-option>
+            <mat-option value="11">December</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field id="year">
+        <mat-label>Expiration Year</mat-label>
+        <input matInput type="number" required>
+    </mat-form-field>
+</div>

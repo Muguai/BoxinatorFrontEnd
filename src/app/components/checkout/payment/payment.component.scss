@@ -1,0 +1,21 @@
+.fullWidth {
+    width: 100%;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#card, #month {
+    flex-grow: 1;
+}
+
+#cvc {
+    width: 90px;
+}
+
+#year {
+    width: 180px;
+}
