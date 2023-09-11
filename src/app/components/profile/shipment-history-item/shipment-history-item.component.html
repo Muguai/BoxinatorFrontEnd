@@ -1,11 +1,16 @@
-<div class="shipment-item-container" [ngClass]="{'closed-height': closed, 'open-height': !closed}">
+<div class="shipment-item-container" [class.open]="!closed">
     <div class="shipment-item-header">
         <h2>Order: {{shipment.id}}</h2>
         <div class="shipment-status">
             <p>{{shipment.status}}</p>
         </div>
     </div>
-    <div class="details-button-container" [@detailsButtonAnimation]="closed">
+    <div class="shipment-details-container" [class.open]="!closed">
+        <div class="shipment-details">
+
+        </div>
+    </div>
+    <div class="details-button-container" >
         <button (click)="toggleDetails()">
             <p>{{ closed ? 'Details' : 'Hide Details' }}</p>
         </button>

@@ -91,7 +91,6 @@ export class CartComponent implements OnInit, OnDestroy {
     }
 
     if (!this.el.nativeElement.contains(event.target)) {
-      console.log('close cart click');
       this.closeCart();
     }
   }

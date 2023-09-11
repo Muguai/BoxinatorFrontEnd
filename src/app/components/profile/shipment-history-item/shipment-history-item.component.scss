@@ -1,75 +1,112 @@
-@import 'src/styles.scss';
+@import "src/styles.scss";
 
-.shipment-item-container{
-    height: 100px;
-    width: 95%;
-    background-color: lightgrey;
-    border: thin solid gray;
-    padding: 0;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: height 0.3s ease;
+$shipment-container-height: 100px;
 
+.shipment-item-container {
+  height: $shipment-container-height;
+  width: 95%;
+  background-color: lightgrey;
+  border: thin solid gray;
+  padding: 0;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  overflow: hidden;
+
+  transition: height 0.3s ease;
 }
 
-.closed-height {
-    height: 100px;
-  }
-  
-  .open-height {
-    height: 500px; 
-  }
-
-.shipment-item-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-
+.shipment-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.shipment-status{
-    width: 100px;
-    height: 35px;
-    border-radius: 20px;
-    background-color: $dark_blue;
-    color: white;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.shipment-status {
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: $dark_blue;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .shipment-status p {
-    font-size: 13px;
-    padding: 0;
-    margin: 0;
+  font-size: 13px;
+  padding: 0;
+  margin: 0;
 }
 
-.details-button-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.details-button-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
 .details-button-container button {
-    background-color: lightgray;
-    background-image: none;
-    border: none;
-    cursor: pointer;
-    text-decoration-line: underline;
+  margin: 0;
+  padding: 0;
+  background-color: lightgray;
+  background-image: none;
+  border: none;
+  cursor: pointer;
+  text-decoration-line: underline;
 }
 
-.details-button-container button:hover{
-    font-weight: bold;
+.details-button-container button:hover {
+  font-weight: bold;
 }
 
-.details-button-container button:active{
-    color: gray;
+.details-button-container button:active {
+  color: gray;
+}
+
+.details-button-container p {
+  margin: 0;
+  padding: 0;
+}
+
+$shipment-details-height: 700px;
+
+.shipment-details-container {
+  width: 100%;
+  height: 0px;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+  transition: height 0.3s ease;
+  transition: opacity 0.05s linear;
+
+
+}
+
+.shipment-item-container.open {
+  height: $shipment-details-height + $shipment-container-height;
+}
+
+.shipment-details-container.open {
+    transition: opacity 0s linear;
+
+  opacity: 1;
+  height: $shipment-details-height;
+}
+
+.shipment-details {
+  height: 600px;
+  width: 60%;
+  background-color: white;
+  border: thin solid black;
+  border-radius: 5px;
 }

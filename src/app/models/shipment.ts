@@ -1,7 +1,6 @@
-import { Box,dummyBoxes } from "./mysteryBox"; // Import the Box interface from your module
+import { Box,dummyBoxes } from "./mysteryBox"; 
 import { Status } from "./status"
 
-// Define the Shipment and ShipmentContent types
 export type Shipment = {
   id: number,
   name: string;
