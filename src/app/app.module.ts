@@ -52,6 +52,8 @@ import { ShipmentHistoryComponent } from './components/profile/shipment-history/
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 import { ClaimPackageComponent } from './components/profile/claim-package/claim-package.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { SummaryComponent } from './components/checkout/summary/summary.component';
+import { SummaryItemComponent } from './components/checkout/summary-item/summary-item.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     ShipmentHistoryComponent,
     ProfileInfoComponent,
     ClaimPackageComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    SummaryComponent,
+    SummaryItemComponent
   ],
   imports: [
     BrowserModule,
