@@ -28,6 +28,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
@@ -80,7 +81,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     ShipmentHistoryComponent,
     ProfileInfoComponent,
     ClaimPackageComponent,
-    CheckoutComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +107,8 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     MatSelectModule,
     NgbModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

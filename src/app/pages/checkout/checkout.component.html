@@ -1,1 +1,70 @@
-<p>checkout works!</p>
+<mat-tab-group #tabGroup>
+    <mat-tab label="Summary">
+        <div class="content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Order Summary</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>content</p>
+                </mat-card-content>
+            </mat-card>
+            <div class="btn-container" id="right">
+                <button mat-flat-button color="primary"
+            (click)="tabGroup.selectedIndex = 1">Next</button>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Shipping">
+        <div class="content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Shipping</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>content</p>
+                </mat-card-content>
+            </mat-card>
+            <div class="btn-container split">
+                <button mat-stroked-button
+                (click)="tabGroup.selectedIndex = 0">Previous</button>
+                <button mat-flat-button color="primary"
+                (click)="tabGroup.selectedIndex = 2">Next</button>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Review">
+        <div class="content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Review</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>content</p>
+                </mat-card-content>
+            </mat-card>
+            <div class="btn-container split">
+                <button mat-stroked-button
+                (click)="tabGroup.selectedIndex = 1">Previous</button>
+                <button mat-flat-button color="primary"
+                (click)="tabGroup.selectedIndex = 3">Next</button>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Payment">
+        <div class="content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Payment</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>content</p>
+                </mat-card-content>
+            </mat-card>
+            <div class="btn-container" id="left">
+                <button mat-stroked-button
+                (click)="tabGroup.selectedIndex = 2">Previous</button>
+            </div>
+        </div>
+    </mat-tab>
+  </mat-tab-group>

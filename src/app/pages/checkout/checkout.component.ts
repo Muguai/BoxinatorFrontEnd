@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-checkout',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent {
-
+  public savedCartData = sessionStorage.getItem('cartData');
 }
