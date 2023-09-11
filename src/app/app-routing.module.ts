@@ -11,6 +11,7 @@ import { LandingPage } from './pages/landing/landing.page';
 import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LoginPage } from './pages/login/login.page';
 import { ProfilePage } from './pages/profile/profile.page';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
       {path: 'users', component: AdminUsersComponent},
       {path: 'countries', component: AdminCountriesComponent}
     ]
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
   }
 ];
 
