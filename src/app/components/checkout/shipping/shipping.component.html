@@ -1,36 +1,38 @@
 <mat-form-field class="fullWidth">
     <mat-label>Name</mat-label>
-    <input matInput type="text" required [ngModel]="user?.name">
+    <input matInput type="text" required [(ngModel)]="name" (change)="save()">
 </mat-form-field>
 <mat-form-field class="fullWidth">
     <mat-label>Mail</mat-label>
-    <input matInput type="text" required [ngModel]="user?.mail">
+    <input matInput type="text" required [(ngModel)]="mail" (change)="save()">
 </mat-form-field>
 <mat-form-field class="fullWidth">
     <mat-label>Shipping Address</mat-label>
-    <input matInput type="text" required [ngModel]="user?.shippingAddress">
+    <input matInput type="text" required [(ngModel)]="shippingAddress" (change)="save()">
 </mat-form-field>
 <mat-form-field class="fullWidth">
     <mat-label>Billing Address</mat-label>
-    <input matInput type="text" required [ngModel]="user?.billingAddress">
+    <input matInput type="text" [(ngModel)]="billingAddress" (change)="save()">
+    <mat-hint>If billing address is left empty, shipping address will be used</mat-hint>
 </mat-form-field>
 <div class="split">
     <mat-form-field id="zip">
         <mat-label>Zip Code</mat-label>
-        <input matInput type="number" required [ngModel]="user?.zipCode">
+        <input matInput type="number" required [(ngModel)]="zipCode" (change)="save()">
     </mat-form-field>
     <mat-form-field id="country">
         <mat-label>Country</mat-label>
-        <mat-select required [(ngModel)]="selectedCountry">
-            <mat-option *ngFor="let country of countries" ngModel [value]="country.id">{{country.name}}</mat-option>
+        <mat-select required [(ngModel)]="selectedCountryId"
+        (selectionChange)="save($event.value)">
+            <mat-option *ngFor="let country of countries" [value]="country">{{country.name}}</mat-option>
         </mat-select>
     </mat-form-field>
 </div>
 <mat-form-field class="fullWidth">
     <mat-label>Delivery Instructions</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput [(ngModel)]="instructions" (change)="save()"></textarea>
 </mat-form-field>
 <mat-form-field class="fullWidth">
     <mat-label>Gift Message</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput [(ngModel)]="giftMessage" (change)="save()"></textarea>
 </mat-form-field>

@@ -2,9 +2,9 @@ import { BoxType } from "./boxType";
 
 export type Order = {
     name: string,
+    mail: string,
     shippingAddress: string,
     billingAddress: string,
-    mail: string,
     zipCode: string,
     country: string
     instructions: string | null,
