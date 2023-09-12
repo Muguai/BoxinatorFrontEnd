@@ -1,7 +1,7 @@
 
 import { Component, Input, ElementRef, Renderer2  } from '@angular/core';
 import { contentSrc } from 'src/app/models/contentSrc';
-import { Box } from 'src/app/models/mysteryBox';
+import { Box, commonImageUrl } from 'src/app/models/mysteryBox';
 import { CartService } from 'src/app/services/cart-service/cart-serivce.service';
 
 
@@ -49,6 +49,10 @@ export class BoxItemComponent {
       return;
 
     this.cartService.addItemEvent.emit(this.box);
+  }
+
+  getCommonImage(){
+    return commonImageUrl;
   }
 
   freeze() {
