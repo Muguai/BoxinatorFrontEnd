@@ -75,22 +75,20 @@
     font-weight: bold;
 }
 
-.box-content{
+.box-content-header{
 
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.box-content p{
+    margin-bottom: 0px;
     font-size: 20px;
+    text-align: center;
+    text-decoration: underline;
 }
+
 .emoji{
-    cursor: pointer;
+    cursor: help;
     height: 30px;
     width: 30px;
+    font-size: 20px;
+    text-align: center;
 }
 
 .box-buy{
@@ -103,8 +101,41 @@
 
 }
 .content-image{
-    cursor: pointer;
+    cursor: help;
 
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
 }
+.box-content-images{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.custom-tooltip {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    max-width: 150px;
+    max-height: 30px;
+    font-size: 1vmin;
+    z-index: 4;
+  }
+  
+  .content-image-container:hover .custom-tooltip,
+  .emoji-container:hover .custom-tooltip {
+    display: block;
+    transform: translate(-25%, -225%);
+  }
+
+  .box-additional-info{
+    text-align: center;
+  }
+
