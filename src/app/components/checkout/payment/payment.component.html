@@ -1,21 +1,21 @@
 <mat-form-field class="fullWidth">
     <mat-label>Name on Card</mat-label>
-    <input matInput type="text" required>
+    <input matInput type="text" required ngModel>
 </mat-form-field>
 <div class="fullWidth split">
     <mat-form-field id="card">
         <mat-label>Card Number</mat-label>
-        <input matInput type="number" required>
+        <input matInput type="number" required ngModel>
     </mat-form-field>
     <mat-form-field id="cvc">
         <mat-label>CVC</mat-label>
-        <input matInput type="number" required>
+        <input matInput type="number" required ngModel>
     </mat-form-field>
 </div>
 <div class="fullWidth split">
     <mat-form-field id="month">
         <mat-label>Expiration Month</mat-label>
-        <mat-select required>
+        <mat-select required ngModel>
             <mat-option value="0">January</mat-option>
             <mat-option value="1">February</mat-option>
             <mat-option value="2">March</mat-option>
@@ -32,6 +32,6 @@
     </mat-form-field>
     <mat-form-field id="year">
         <mat-label>Expiration Year</mat-label>
-        <input matInput type="number" required>
+        <input matInput type="number" required ngModel>
     </mat-form-field>
 </div>
