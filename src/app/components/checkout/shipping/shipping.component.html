@@ -1,0 +1,36 @@
+<mat-form-field class="fullWidth">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" required [ngModel]="user?.name">
+</mat-form-field>
+<mat-form-field class="fullWidth">
+    <mat-label>Mail</mat-label>
+    <input matInput type="text" required [ngModel]="user?.mail">
+</mat-form-field>
+<mat-form-field class="fullWidth">
+    <mat-label>Shipping Address</mat-label>
+    <input matInput type="text" required [ngModel]="user?.shippingAddress">
+</mat-form-field>
+<mat-form-field class="fullWidth">
+    <mat-label>Billing Address</mat-label>
+    <input matInput type="text" required [ngModel]="user?.billingAddress">
+</mat-form-field>
+<div class="split">
+    <mat-form-field id="zip">
+        <mat-label>Zip Code</mat-label>
+        <input matInput type="number" required [ngModel]="user?.zipCode">
+    </mat-form-field>
+    <mat-form-field id="country">
+        <mat-label>Country</mat-label>
+        <mat-select required [(ngModel)]="selectedCountry">
+            <mat-option *ngFor="let country of countries" ngModel [value]="country.id">{{country.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<mat-form-field class="fullWidth">
+    <mat-label>Delivery Instructions</mat-label>
+    <textarea matInput></textarea>
+</mat-form-field>
+<mat-form-field class="fullWidth">
+    <mat-label>Gift Message</mat-label>
+    <textarea matInput></textarea>
+</mat-form-field>

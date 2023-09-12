@@ -1,0 +1,17 @@
+.fullWidth {
+    width: 100%;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#zip {
+    width: 160px;
+}
+
+#country {
+    flex-grow: 1;
+}

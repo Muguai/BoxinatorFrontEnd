@@ -55,6 +55,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { SummaryComponent } from './components/checkout/summary/summary.component';
 import { SummaryItemComponent } from './components/checkout/summary-item/summary-item.component';
 import { PaymentComponent } from './components/checkout/payment/payment.component';
+import { ShippingComponent } from './components/checkout/shipping/shipping.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { PaymentComponent } from './components/checkout/payment/payment.componen
     CheckoutComponent,
     SummaryComponent,
     SummaryItemComponent,
-    PaymentComponent
+    PaymentComponent,
+    ShippingComponent
   ],
   imports: [
     BrowserModule,
