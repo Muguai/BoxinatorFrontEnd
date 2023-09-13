@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Country } from 'src/app/models/country';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { CheckoutService } from 'src/app/services/checkout/checkout.service';
 
 @Component({
   selector: 'app-shipping',
@@ -27,7 +28,8 @@ export class ShippingComponent {
   instructions: string | null = null;
   giftMessage: string | null = null;
 
-  constructor(private readonly authService: AuthenticationService) {
+  constructor(private readonly authService: AuthenticationService,
+    private readonly checkoutService: CheckoutService) {
     authService.currentUser$.subscribe((user) => {
       // ADD API CALL TO GET THE DATA BELOW
       if (!user.isAnonymous) {
@@ -60,6 +62,7 @@ export class ShippingComponent {
       instructions: instructionsValue,
       giftMessage: messageValue
     };
-    sessionStorage.setItem('shippingDetails', JSON.stringify(shippingDetails));
+    
+    this.checkoutService.shippingDetailsChange.emit(shippingDetails);
   }
 }

@@ -14,7 +14,7 @@ export type Order = {
     content: OrderContent[]
 };
 
-type OrderContent = {
+export type OrderContent = {
     boxType: BoxType,
     quantity: number
 }

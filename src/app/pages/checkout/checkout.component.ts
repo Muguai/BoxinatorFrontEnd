@@ -10,10 +10,10 @@ export class CheckoutComponent implements OnInit {
   public boxes: Box[] = [];
 
   ngOnInit(): void {
-    const savedCartData = sessionStorage.getItem('cartData');
-    if (savedCartData) {
-      const cartData = JSON.parse(savedCartData);
-      this.boxes = cartData.boxes;
+    const savedCart = sessionStorage.getItem('cartData');
+    if (savedCart) {
+      const savedCartData = JSON.parse(savedCart);
+      this.boxes = savedCartData.boxes;
     }
   }
 }
