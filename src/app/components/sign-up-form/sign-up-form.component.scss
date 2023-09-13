@@ -1,16 +1,25 @@
-$blue: #34AFF7;
+@import "src/styles.scss";
 
-.form-container{
-    margin-top: 5%;
-    
-    width: 400px!important;
-    height: 550px!important;
-    max-width: unset!important;
-    max-height: unset!important;
-    background-color: $blue;
+.form-container {
+  margin-top: 5%;
+
+  width: 400px !important;
+  height: 550px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+  background-color: $blue;
 }
 
-.login-link{
-    font-size: 16px;
-    margin-left: 2%;
+.login-link {
+  color: black;
+  font-size: 16px;
+  margin-left: 2%;
+}
+
+.login-link:hover {
+  color: lightgrey;
+}
+.sign-up-title{
+    text-align: center;
+    margin-bottom: 20px;
 }

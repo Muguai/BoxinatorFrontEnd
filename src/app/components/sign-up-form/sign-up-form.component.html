@@ -1,91 +1,98 @@
 <div class="form-container mat-elevation-z5">
-    <form
-      #createSignUpForm="ngForm"
-      (ngSubmit)="formSignUp(createSignUpForm)"
+  <h3 class="sign-up-title">Sign up</h3>
+
+  <form #createSignUpForm="ngForm" (ngSubmit)="formSignUp(createSignUpForm)">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        ngModel
+        name="name"
+        #name="ngModel"
+        required
+        minlength="4"
+        maxlength="20"
+        placeholder="Name"
+      />
+      <mat-error *ngIf="name.errors?.['minlength']">
+        Name needs to be at least 4 characters
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        ngModel
+        email
+        name="email"
+        #email="ngModel"
+        required
+        minlength="3"
+        maxlength="50"
+        placeholder="Email"
+      />
+      <mat-error *ngIf="email.errors?.['email']">
+        please enter a correct email format
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        ngModel
+        password
+        name="password"
+        #password="ngModel"
+        required
+        minlength="6"
+        maxlength="20"
+        placeholder="Password"
+      />
+
+      <mat-error *ngIf="password.errors?.['minlength']">
+        password needs to be at least 6 characters
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        ngModel
+        password
+        name="passwordVal"
+        #passwordVal="ngModel"
+        required
+        minlength="6"
+        maxlength="20"
+        placeholder="Confirm password"
+      />
+      <mat-error *ngIf="passwordVal !== password">
+        password dont match
+      </mat-error>
+    </mat-form-field>
+
+    <div class="center margin-top">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="createSignUpForm.form.invalid"
+        class="signup-form-button"
+      >
+        Sign Up
+      </button>
+    </div>
+
+    <span
+      class="center margin-top error-message"
+      *ngIf="signUpErrorMessage.length > 0"
     >
-      <h3>Sign up</h3>  <mat-form-field>
-        <input
-          matInput
-          type="text"
-          ngModel
-          name="name"
-          #name="ngModel"
-          required
-          minlength="4"
-          maxlength="20"
-          placeholder="Name"
-        />
-        <mat-error *ngIf="name.errors?.['minlength']">
-            Name needs to be at least 4 characters
-          </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          type="email"
-          ngModel email
-          name="email"
-          #email="ngModel"
-          required
-          minlength="3"
-          maxlength="50"
-          placeholder="Email"
-        />
-        <mat-error *ngIf="email.errors?.['email']">
-          please enter a correct email format
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          type="password"
-          ngModel password
-          name="password"
-          #password="ngModel"
-          required
-          minlength="6"
-          maxlength="20"
-          placeholder="Password"
-        />
-        
-        <mat-error *ngIf="password.errors?.['minlength']">
-          password needs to be at least 6 characters
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          type="password"
-          ngModel password
-          name="passwordVal"
-          #passwordVal="ngModel"
-          required
-          minlength="6"
-          maxlength="20"
-          placeholder="Confirm password"
-        />
-        <mat-error *ngIf="passwordVal !== password">
-          password dont match
-        </mat-error>
-      </mat-form-field>
-  
-      <div class="center margin-top">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          [disabled]="createSignUpForm.form.invalid"
-          class="signup-form-button"
-        >
-          Sign Up
-        </button>
-      </div>
+      {{ signUpErrorMessage }}
+    </span>
 
-      <span class="center margin-top error-message" *ngIf="signUpErrorMessage.length > 0">
-        {{signUpErrorMessage}}
-      </span>
-
-      <span class="center margin-top"> Already got an account? <a routerLink="/login" class="login-link">Login!</a> </span>
-
-    </form>
-  </div>
+    <span class="center margin-top">
+      Already got an account?
+      <a routerLink="/login" class="login-link">Login!</a>
+    </span>
+  </form>
+</div>
