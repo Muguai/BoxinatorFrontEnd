@@ -15,6 +15,8 @@ export class BoxItemComponent {
   @Input() box!: Box;
   @Input() disableGrid: boolean = true;
   contentArray: string[] = []; 
+  hovered:boolean = false; 
+
   
 
 
@@ -55,14 +57,11 @@ export class BoxItemComponent {
     return commonImageUrl;
   }
 
-  freeze() {
-    this.renderer.addClass(this.elementRef.nativeElement, 'frozen');
-    setTimeout(() => {
-      this.unfreeze();
-    }, 3000); 
+  onCardMouseEnter() {
+    this.hovered = true;
   }
 
-  unfreeze() {
-    this.renderer.removeClass(this.elementRef.nativeElement, 'frozen');
+  onCardMouseLeave() {
+    this.hovered = false;
   }
 }
