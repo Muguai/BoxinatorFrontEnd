@@ -52,6 +52,9 @@ import { ProfileInfoComponent } from './components/profile/profile-info/profile-
 import { ClaimPackageComponent } from './components/profile/claim-package/claim-package.component';
 import { ShipmentHistoryItemComponent } from './components/profile/shipment-history-item/shipment-history-item.component';
 import { EditProfilePopupComponent } from './components/profile/edit-profile-popup/edit-profile-popup.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -108,7 +111,9 @@ import { EditProfilePopupComponent } from './components/profile/edit-profile-pop
     MatSelectModule,
     NgbModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

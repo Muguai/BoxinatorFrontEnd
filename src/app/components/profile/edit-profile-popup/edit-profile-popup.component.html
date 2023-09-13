@@ -3,28 +3,39 @@
         <h1 class="dialog-header">Edit Profile</h1>
         <mat-form-field class="fullWidth">
             <mat-label>Name</mat-label>
-            <input type="text" matInput ngModel="N/A" name="name">
+            <input type="text" matInput [(ngModel)] = "currentUser!.name" name="name">
         </mat-form-field>
         <mat-form-field class="fullWidth">
             <mat-label>Mail</mat-label>
-            <input type="text" matInput ngModel="N/A" name="mail">
+            <input type="text" matInput [(ngModel)] = "currentUser!.email" name="email">
         </mat-form-field>
         <mat-form-field class="fullWidth">
             <mat-label>Shipping Adress</mat-label>
-            <input type="text" matInput ngModel="N/A" name="shippingAdress">
+            <input type="text" matInput [(ngModel)] = "currentUser!.shippingAddress" name="shippingAddress">
         </mat-form-field>
         <mat-form-field class="fullWidth">
             <mat-label>Billing Adress</mat-label>
-            <input type="text" matInput ngModel="N/A" name="billingAdress">
+            <input type="text" matInput [(ngModel)]= "currentUser!.billingAddress" name="billingAddress">
         </mat-form-field>
         <mat-form-field class="halfWidth">
             <mat-label>Zip Code</mat-label>
-            <input type="text" matInput ngModel="N/A" name="zipCode">
+            <input type="text" matInput [(ngModel)] = "currentUser!.zipCode" name="zipCode">
         </mat-form-field>
+        <mat-form-field class="halfWidth m-left">
+            <mat-label>Phone number</mat-label>
+            <input type="text" matInput [(ngModel)] = "currentUser!.phoneNumber" name="phoneNumber">
+        </mat-form-field>
+        <mat-form-field class="halfWidth m-left">
+            <mat-label>What's your birthday?</mat-label>
+            <input matInput [(ngModel)] = "currentUser!.birthDate" name="birthDate" [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         <mat-form-field class="fullWidth">
             <mat-label>Country</mat-label>
-            <mat-select [(ngModel)]="selectedCountry" ngModel="N/A" name="country">
-              <mat-option *ngFor="let country of countries" [value]="country">{{ country }}</mat-option>
+            <mat-select [(ngModel)]="selectedCountryId" [ngModel] = "currentUser?.countryId" name="countryId">
+              <mat-option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         <div class="rowGap btn-split">
