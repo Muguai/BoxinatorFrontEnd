@@ -67,6 +67,8 @@
 }
 
 .box-title{
+    cursor: help;
+    user-select: none;
     margin-top: 10px;
     top: 0;
     margin-bottom: 10px;
@@ -145,6 +147,13 @@
   .emoji-container:hover .custom-tooltip {
     display: block;
     transform: translate(-25%, -225%);
+  }
+
+  .box-title:hover .custom-tooltip {
+    display: block;
+    transform: translate(0%, -250%);
+    max-width: 300px;
+    max-height: 60px;
   }
 
   .box-additional-info{
