@@ -1,21 +1,5 @@
 @import 'src/styles.scss';
 
-
-mat-toolbar {
-    justify-content: space-between;
-    height: 100px;
-}
-
-.mat-toolbar.mat-primary {
-  background: $blue;
-}
-
-.smaller-mat-buttons {
-  width: 40px!important;
-  height: 40px!important;
-  min-width: unset!important;
-}
-
 .title-text{
   user-select: none;
   cursor: pointer;
@@ -28,45 +12,6 @@ mat-toolbar {
 
 .content.open {
     width: calc(100% - 375px); 
-  }
-
-  .cart-amount{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    border-radius: 20px;
-  }
-
-  .cart-amount p {
-    margin: 0;
-    padding: 0;
-  }
-
-  .toolbar-logo{
-
-    margin-left: 15%;
-  }
-
-  .toolbar-buttons{
-    transition: margin-right 0.1s ease-in;
-    margin-right: 15%;
-    color: white;
-
-  }
-
-  .toolbar-buttons.open{
-
-  }
-
-  .username{
-    padding: 0;
-    margin: 0;
   }
 
 
