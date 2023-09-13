@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Country } from 'src/app/models/country';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CheckoutService } from 'src/app/services/checkout/checkout.service';
@@ -17,10 +18,12 @@ export class ShippingComponent {
     {id: 5, name: 'Sweden', rate: 5}
   ];
 
+  @ViewChild('shippingForm') shippingForm!: NgForm;
+
   // binding properties
   name: string = '';
   mail: string = '';
-  selectedCountryId?: number;
+  selectedCountry?: Country;
   shippingAddress: string = '';
   billingAddress: string = '';
   zipCode: string = '';
@@ -38,14 +41,24 @@ export class ShippingComponent {
         this.shippingAddress = 'Some address',
         this.billingAddress = 'Some address',
         this.zipCode = '12345',
-        this.countryId = 5
-        
-        this.selectedCountryId = this.countryId;
+        // find matching country object
+        this.selectedCountry = this.countries.find(c => c.id === 5);
+
+        this.save();
+        // auto populated form counts as invalid, so manually set
+        this.checkoutService.activateReviewPaymentTabs = true;
       }
     });
   }
 
-  save(country?: any): void {
+  inputChange(): void {
+    this.save();
+    // toggle Review and Payment tabs activation
+    this.checkoutService.activateReviewPaymentTabs = this.shippingForm.valid!;
+  }
+
+  // save input values
+  private save(): void {
     const messageValue = this.giftMessage === '' ? null : this.giftMessage;
     const instructionsValue = this.instructions === '' ? null : this.instructions;
     const billingAddressValue = this.billingAddress === '' ? this.shippingAddress : this.billingAddress;
@@ -56,13 +69,14 @@ export class ShippingComponent {
       shippingAddress: this.shippingAddress,
       billingAddress: billingAddressValue,
       zipCode: this.zipCode,
-      countryId: country?.id || 0,
-      countryName: country?.name || '',
-      countryRate: country?.rate || 0,
+      countryId: this.selectedCountry?.id || 0,
+      countryName: this.selectedCountry?.name || '',
+      countryRate: this.selectedCountry?.rate || 0,
       instructions: instructionsValue,
       giftMessage: messageValue
     };
     
-    this.checkoutService.shippingDetailsChange.emit(shippingDetails);
+    this.checkoutService.shippingDetails = shippingDetails;
+    this.checkoutService.shippingDetailsChange.emit();
   }
 }

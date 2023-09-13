@@ -1,37 +1,44 @@
-<mat-form-field class="fullWidth">
-    <mat-label>Name on Card</mat-label>
-    <input matInput type="text" required ngModel>
-</mat-form-field>
-<div class="fullWidth split">
-    <mat-form-field id="card">
-        <mat-label>Card Number</mat-label>
-        <input matInput type="number" required ngModel>
+<form #paymentForm="ngForm">
+    <mat-form-field class="fullWidth">
+        <mat-label>Name on Card</mat-label>
+        <input matInput type="text" required ngModel (change)="checkValid()"
+        minlength="5" name="name">
     </mat-form-field>
-    <mat-form-field id="cvc">
-        <mat-label>CVC</mat-label>
-        <input matInput type="number" required ngModel>
-    </mat-form-field>
-</div>
-<div class="fullWidth split">
-    <mat-form-field id="month">
-        <mat-label>Expiration Month</mat-label>
-        <mat-select required ngModel>
-            <mat-option value="0">January</mat-option>
-            <mat-option value="1">February</mat-option>
-            <mat-option value="2">March</mat-option>
-            <mat-option value="3">April</mat-option>
-            <mat-option value="4">May</mat-option>
-            <mat-option value="5">June</mat-option>
-            <mat-option value="6">July</mat-option>
-            <mat-option value="7">August</mat-option>
-            <mat-option value="8">September</mat-option>
-            <mat-option value="9">October</mat-option>
-            <mat-option value="10">November</mat-option>
-            <mat-option value="11">December</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field id="year">
-        <mat-label>Expiration Year</mat-label>
-        <input matInput type="number" required ngModel>
-    </mat-form-field>
-</div>
+    <div class="fullWidth split">
+        <mat-form-field id="card">
+            <mat-label>Card Number</mat-label>
+            <input matInput type="number" required ngModel (change)="checkValid()"
+            pattern="\d{8}|\d{19}" name="card">
+        </mat-form-field>
+        <mat-form-field id="cvc">
+            <mat-label>CVC</mat-label>
+            <input matInput type="number" required ngModel (change)="checkValid()"
+            pattern="\d{3}" name="cvc">
+        </mat-form-field>
+    </div>
+    <div class="fullWidth split">
+        <mat-form-field id="month">
+            <mat-label>Expiration Month</mat-label>
+            <mat-select required ngModel (selectionChange)="checkValid()"
+            name="month">
+                <mat-option value="0">January</mat-option>
+                <mat-option value="1">February</mat-option>
+                <mat-option value="2">March</mat-option>
+                <mat-option value="3">April</mat-option>
+                <mat-option value="4">May</mat-option>
+                <mat-option value="5">June</mat-option>
+                <mat-option value="6">July</mat-option>
+                <mat-option value="7">August</mat-option>
+                <mat-option value="8">September</mat-option>
+                <mat-option value="9">October</mat-option>
+                <mat-option value="10">November</mat-option>
+                <mat-option value="11">December</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field id="year">
+            <mat-label>Expiration Year</mat-label>
+            <input matInput type="number" required ngModel (change)="checkValid()"
+            min="2023" max="2033" name="year">
+        </mat-form-field>
+    </div>
+</form>

@@ -11,7 +11,7 @@
             </mat-card>
             <div class="btn-container" id="right">
                 <button mat-flat-button color="primary"
-            (click)="tabGroup.selectedIndex = 1">Next</button>
+            (click)="tabGroup.selectedIndex=1">Next</button>
             </div>
         </div>
     </mat-tab>
@@ -27,13 +27,13 @@
             </mat-card>
             <div class="btn-container split">
                 <button mat-stroked-button
-                (click)="tabGroup.selectedIndex = 0">Previous</button>
-                <button mat-flat-button color="primary"
-                (click)="tabGroup.selectedIndex = 2">Next</button>
+                (click)="tabGroup.selectedIndex=0">Previous</button>
+                <button mat-flat-button color="primary" [disabled]="!checkoutService.activateReviewPaymentTabs"
+                (click)="tabGroup.selectedIndex=2">Next</button>
             </div>
         </div>
     </mat-tab>
-    <mat-tab label="Review">
+    <mat-tab label="Review" [disabled]="!checkoutService.activateReviewPaymentTabs">
         <div class="content">
             <mat-card>
                 <mat-card-header>
@@ -45,13 +45,13 @@
             </mat-card>
             <div class="btn-container split">
                 <button mat-stroked-button
-                (click)="tabGroup.selectedIndex = 1">Previous</button>
-                <button mat-flat-button color="primary"
-                (click)="tabGroup.selectedIndex = 3">Next</button>
+                (click)="tabGroup.selectedIndex=1">Previous</button>
+                <button mat-flat-button color="primary" [disabled]="!checkoutService.activateReviewPaymentTabs"
+                (click)="tabGroup.selectedIndex=3">Next</button>
             </div>
         </div>
     </mat-tab>
-    <mat-tab label="Payment">
+    <mat-tab label="Payment" [disabled]="!checkoutService.activateReviewPaymentTabs">
         <div class="content">
             <mat-card>
                 <mat-card-header>
@@ -61,9 +61,11 @@
                     <app-payment />
                 </mat-card-content>
             </mat-card>
-            <div class="btn-container" id="left">
+            <div class="btn-container split">
                 <button mat-stroked-button
-                (click)="tabGroup.selectedIndex = 2">Previous</button>
+                (click)="tabGroup.selectedIndex=2">Previous</button>
+                <button mat-flat-button color="primary" [disabled]="!checkoutService.activatePlaceOrderBtn"
+                (click)="placeOrder()">Place Order</button>
             </div>
         </div>
     </mat-tab>

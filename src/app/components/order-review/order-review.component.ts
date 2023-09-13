@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { BoxType } from 'src/app/models/boxType';
 import { Box } from 'src/app/models/mysteryBox';
 import { Order, OrderContent } from 'src/app/models/order';
@@ -17,8 +16,7 @@ export class OrderReviewComponent implements OnInit {
   order?: Order;
   totalCost?: number;
 
-  constructor(private readonly router: Router,
-    private readonly checkoutService: CheckoutService) {}
+  constructor(private readonly checkoutService: CheckoutService) {}
 
   ngOnInit(): void {
     if (this.id) {
@@ -42,7 +40,7 @@ export class OrderReviewComponent implements OnInit {
       rate: 10,
       cost: 159,
       content: [
-        {boxType: BoxType.ArcticAdventureBox, quantity: 2},
+        {boxType: BoxType.ArcticAdventureBox, quantity: 1},
         {boxType: BoxType.ForestForagerBox, quantity: 1}
       ]
     };
@@ -50,8 +48,8 @@ export class OrderReviewComponent implements OnInit {
   }
 
   private populateByOrderDetails() {
-    this.checkoutService.shippingDetailsChange.subscribe((res: any) => {
-      const shippingDetailsData = res;
+    this.checkoutService.shippingDetailsChange.subscribe(() => {
+      const shippingDetailsData = this.checkoutService?.shippingDetails;
 
       // calc total price for order
       let orderSum: number = 0;
@@ -73,15 +71,15 @@ export class OrderReviewComponent implements OnInit {
       
       this.totalCost = orderSum + shippingDetailsData?.countryRate;
       this.order = {
-        name: shippingDetailsData.name,
-        mail: shippingDetailsData.mail,
-        shippingAddress: shippingDetailsData.shippingAddress,
-        billingAddress: shippingDetailsData.billingAddress,
-        zipCode: shippingDetailsData.zipCode,
-        country: shippingDetailsData.countryName,
-        instructions: shippingDetailsData.instructions,
-        giftMessage: shippingDetailsData.giftMessage,
-        rate: shippingDetailsData.countryRate,
+        name: shippingDetailsData?.name,
+        mail: shippingDetailsData?.mail,
+        shippingAddress: shippingDetailsData?.shippingAddress,
+        billingAddress: shippingDetailsData?.billingAddress,
+        zipCode: shippingDetailsData?.zipCode,
+        country: shippingDetailsData?.countryName,
+        instructions: shippingDetailsData?.instructions,
+        giftMessage: shippingDetailsData?.giftMessage,
+        rate: shippingDetailsData?.countryRate,
         cost: orderSum,
         content: orderContent
       };
