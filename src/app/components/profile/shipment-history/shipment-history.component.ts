@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import dummyShipments, { Shipment } from 'src/app/models/shipment';
 
 @Component({
   selector: 'app-shipment-history',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class ShipmentHistoryComponent {
 
+    shipments!: Shipment[]; 
+    constructor() {
+      this.shipments = dummyShipments;
+    }
 }

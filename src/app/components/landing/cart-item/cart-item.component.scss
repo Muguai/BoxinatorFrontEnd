@@ -1,18 +1,18 @@
-.cart-item{
-    background-color: lightgray;
-    width: 325px;
-    height: 80px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;  
-    transition-property: scale, height, margin-bottom;
-    transition-duration: 0.3s;
-    transition-timing-function: ease;
+.cart-item {
+  background-color: lightgray;
+  width: 325px;
+  height: 80px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transition-property: scale, height, margin-bottom;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
-.cart-item.remove{
+.cart-item.remove {
   animation: slide-out 0.3s ease;
   transform: translateX(400px);
 }
@@ -26,107 +26,118 @@
 @keyframes slide-out {
   0% {
     transform: translateX(0px);
-
   }
   100% {
     transform: translateX(400px);
   }
 }
-.cart-item:hover{
-    scale: 1.1;
+.cart-item:hover {
+  scale: 1.1;
 }
 
-.cart-item-image{
-    max-width: 50px;
-    max-height: 50px;
-    user-select: none;
+.cart-item-image {
+  max-width: 50px;
+  max-height: 50px;
+  user-select: none;
+  border: thin solid black;
+  border-radius: 7px;
 }
 
-.cart-item-name{
-    width: 120px;
-    height: 30px;
-    text-align: center;
+.cart-item-name {
+  width: 120px;
+  height: 30px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
-.cart-item-price{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 30px;
+.cart-item-price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 30px;
 }
-.cart-item-price p{
-    margin-top: 10px;
-    font-size: 0.7em;
-}
-
-.cart-item-name h3{
-    font-size: 0.65em;
+.cart-item-price p {
+  padding: 0;
+  margin: 0;
+  font-size: 0.7em;
 }
 
-.cart-item-info{
-    display: flex;
-    align-items: center;
-    width: 210px;
+.cart-item-name h3 {
+  padding: 0;
+  margin: 0;
+  font-size: 0.7em;
+}
+
+.cart-item-info {
+  display: flex;
+  align-items: center;
+  width: 210px;
 }
 
 .cart-item-counter {
-    display: flex;
-    align-items: center;
-    padding-right: 5px; 
-    background-color: white;
-    height: 35px;
-    width: 50px;
-    border: thin solid black;
-    border-radius: 5px;
-  }
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+  background-color: white;
+  height: 35px;
+  width: 50px;
+  border: thin solid black;
+  border-radius: 5px;
+}
 
-  .counter-buttons button {
-    width: 15px; 
-    height: 15px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0; 
-    margin: 0; 
-    right: 0;
-    background-color: transparent; 
-    border: none; 
-    cursor: pointer; 
-  }
-  
-  .counter-buttons button mat-icon {
-    font-size: 18px; 
-  }
+.counter-buttons button {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 
-  .counter-buttons button:hover mat-icon {
-    color: blue;
-  }
+.counter-buttons button mat-icon {
+  font-size: 18px;
+}
 
-  .counter-buttons button .down-arrow {
-    margin-top: 8px;
-  }
+.counter-buttons button:hover mat-icon {
+  color: blue;
+}
 
-  .counter-count{
-    width: 40px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-  }
+.counter-buttons button .down-arrow {
+  margin-top: 8px;
+}
 
-  .cart-item-delete-button{
-    margin-left: 5px;
-    background-color: transparent; 
-    border: none; 
-    cursor: pointer; 
-  }
+.counter-count {
+  width: 40px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .cart-item-delete-button mat-icon {
-    transition: color 0.3s ease;
+.counter-count span {
+  padding: 0;
+  margin: 0;
+}
 
-  }
+.cart-item-delete-button {
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 
-  .cart-item-delete-button:hover mat-icon {
-    color: red;
-  }
+.cart-item-delete-button mat-icon {
+  transition: color 0.3s ease;
+}
 
+.cart-item-delete-button:hover mat-icon {
+  color: red;
+}

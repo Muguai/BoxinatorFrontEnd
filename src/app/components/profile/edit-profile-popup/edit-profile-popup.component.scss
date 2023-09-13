@@ -1,0 +1,57 @@
+@import 'src/styles.scss';
+
+.rowGap {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.fullWidth {
+    width: 100%;
+    
+}
+
+.halfWidth{
+    width: 50%;
+}
+
+.btn-split {
+    gap: 100px;
+    justify-content: center;
+}
+
+.dialog-header{
+    text-align: center;
+    font-size: 30px;
+    color: $dark_blue;
+    margin-bottom: 20px;
+}
+
+.cancel-btn{
+    border: medium solid $dark_blue !important;
+}
+
+.save-btn{
+    background-color: $dark_blue !important;
+
+}
+
+.save-btn:hover{
+    background-color: rgb(30, 62, 110);
+}
+
+.dialog-btn{
+    width: 100px;
+    height: 55px;
+    border-radius: 10px;
+    color: white;
+}
+
+.dialog-content{
+    background-color:$blue !important;
+    border-radius: 20px !important;    
+}
+
+.m-left {
+    margin-left: 1px;
+}

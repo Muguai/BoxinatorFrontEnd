@@ -56,6 +56,11 @@ import { SummaryComponent } from './components/checkout/summary/summary.componen
 import { SummaryItemComponent } from './components/checkout/summary-item/summary-item.component';
 import { PaymentComponent } from './components/checkout/payment/payment.component';
 import { ShippingComponent } from './components/checkout/shipping/shipping.component';
+import { ShipmentHistoryItemComponent } from './components/profile/shipment-history-item/shipment-history-item.component';
+import { EditProfilePopupComponent } from './components/profile/edit-profile-popup/edit-profile-popup.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +95,9 @@ import { ShippingComponent } from './components/checkout/shipping/shipping.compo
     SummaryItemComponent,
     PaymentComponent,
     ShippingComponent
+    ShipmentHistoryItemComponent,
+    EditProfilePopupComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,6 +125,8 @@ import { ShippingComponent } from './components/checkout/shipping/shipping.compo
     MatDialogModule,
     MatCardModule,
     MatTabsModule
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

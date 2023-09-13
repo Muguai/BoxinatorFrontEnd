@@ -13,11 +13,10 @@ export class AppComponent {
   items: any[] = []; 
   cartOpen: boolean = false;
   cartAmount: number = 0;
-
-
   
 
   constructor(public authService: AuthenticationService, private router: Router, private cartService: CartService){
+
     this.cartService.cartAmountChange.subscribe((amount) => {
       this.setCartAmount(amount);
     });
@@ -44,6 +43,10 @@ export class AppComponent {
 
   isOnHomePage(): boolean {
     return this.router.url === '/';  
+  }
+
+  isOnProfilePage() : boolean{
+    return this.router.url.includes('/profile');
   }
 
   toggleCart() {

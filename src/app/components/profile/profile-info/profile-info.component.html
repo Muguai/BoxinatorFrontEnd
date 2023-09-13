@@ -1,1 +1,5 @@
-<p>profile-info works!</p>
+<div *ngIf="authService.currentUser$ | async as user;" class="profile-card info-card">
+    <h1 class="blue-text">Welcome!</h1>
+    <h1>{{ user.displayName }}</h1>
+    <button (click)="openEdit(1)" class="card-button"><p>Edit</p><mat-icon>edit</mat-icon></button>
+</div>

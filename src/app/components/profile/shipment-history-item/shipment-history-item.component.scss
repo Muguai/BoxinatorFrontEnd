@@ -1,0 +1,150 @@
+@import "src/styles.scss";
+
+$shipment-container-height: 100px;
+
+.shipment-item-container {
+  max-height: $shipment-container-height;
+  width: 95%;
+  background-color: lightgrey;
+  border: thin solid gray;
+  padding: 0;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  transition: height 0.3s ease, max-height 0.3s ease;
+}
+
+.shipment-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.shipment-status {
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: $dark_blue;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shipment-status p {
+  font-size: 13px;
+  padding: 0;
+  margin: 0;
+}
+
+.details-button-container {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.details-button-container button {
+  margin: 0;
+  padding: 0;
+  background-color: lightgray;
+  background-image: none;
+  border: none;
+  cursor: pointer;
+  text-decoration-line: underline;
+}
+
+.details-button-container button:hover {
+  font-weight: bold;
+}
+
+.details-button-container button:active {
+  color: gray;
+}
+
+.details-button-container p {
+  margin: 0;
+  padding: 0;
+}
+
+$shipment-details-height: 800px;
+
+.shipment-details-container {
+  max-height: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  overflow-y: hidden;
+  transition: height 0.3s ease, max-height 0.3s ease;
+}
+
+.shipment-item-container.open {
+  max-height: $shipment-details-height + $shipment-container-height;
+}
+
+.shipment-details-container.open {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  max-height: $shipment-details-height;
+}
+
+.shipment-details {
+  max-height: $shipment-details-height - 50px;
+  width: 60%;
+  background-color: white;
+  border: thin solid black;
+  border-radius: 5px;
+}
+
+.shipment-details p {
+  margin-left: 5%;
+}
+
+.shipment-details hr {
+  width: 90%;
+  margin-left: 5%;
+  border: none;
+  height: 3px;
+  background-color: black;
+}
+
+.shipment-details-highlight {
+  border: thin solid black;
+  border-radius: 5px;
+  overflow-y: auto;
+  height: 10%;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 2%;
+  display: flex;
+  justify-content: center;
+  text-align: justify;
+}
+
+.shipment-details-highlight p {
+  margin: 0;
+  padding: 0;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-header p {
+  margin: 0;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-bottom: 2%;
+}
