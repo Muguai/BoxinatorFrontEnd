@@ -94,10 +94,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SummaryComponent,
     SummaryItemComponent,
     PaymentComponent,
-    ShippingComponent
+    ShippingComponent,
     ShipmentHistoryItemComponent,
     EditProfilePopupComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +124,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NgbModule,
     MatDialogModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule
   ],
