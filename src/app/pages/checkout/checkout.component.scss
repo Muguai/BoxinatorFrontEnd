@@ -1,0 +1,29 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+    gap: 10px;
+}
+
+mat-card, .btn-container {
+    max-width: 500px;
+    width: 100%;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.split {
+    justify-content: space-between;
+}
+
+button[mat-flat-button] {
+    color: white;
+}
+
+#right {
+    justify-content: flex-end;
+}

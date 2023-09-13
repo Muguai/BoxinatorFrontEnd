@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+
+<mat-tab-group #tabGroup>
+    <mat-tab label="Summary">
+        <div class="content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Order Summary</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-summary [boxes]="boxes" />
+                </mat-card-content>
+            </mat-card>
+            <div class="btn-container" id="right">
+                <button mat-flat-button color="primary"
+            (click)="tabGroup.selectedIndex=1">Next</button>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Shipping">
+        <div class="content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Shipping</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-shipping />
+                </mat-card-content>
+            </mat-card>
+            <div class="btn-container split">
+                <button mat-stroked-button
+                (click)="tabGroup.selectedIndex=0">Previous</button>
+                <button mat-flat-button color="primary" [disabled]="!checkoutService.activateReviewPaymentTabs"
+                (click)="tabGroup.selectedIndex=2">Next</button>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Review" [disabled]="!checkoutService.activateReviewPaymentTabs">
+        <div class="content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Review</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-order-review [boxes]="boxes" />
+                </mat-card-content>
+            </mat-card>
+            <div class="btn-container split">
+                <button mat-stroked-button
+                (click)="tabGroup.selectedIndex=1">Previous</button>
+                <button mat-flat-button color="primary" [disabled]="!checkoutService.activateReviewPaymentTabs"
+                (click)="tabGroup.selectedIndex=3">Next</button>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Payment" [disabled]="!checkoutService.activateReviewPaymentTabs">
+        <div class="content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Payment</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-payment />
+                </mat-card-content>
+            </mat-card>
+            <div class="btn-container split">
+                <button mat-stroked-button
+                (click)="tabGroup.selectedIndex=2">Previous</button>
+                <button mat-flat-button color="primary" [disabled]="!checkoutService.activatePlaceOrderBtn"
+                (click)="placeOrder()">Place Order</button>
+            </div>
+        </div>
+    </mat-tab>
+  </mat-tab-group>

@@ -1,61 +1,61 @@
 <div id="shipping-details">
     <div>
         <span class="bold">To </span>
-        {{order.name}}
-    </div>
-    <div>
-        <span class="bold">Shipping Address </span>
-        {{order.shippingAddress}}
-    </div>
-    <div>
-        <span class="bold">Billing Address </span>
-        {{order.billingAddress}}
+        {{order?.name}}
     </div>
     <div>
         <span class="bold">Mail </span>
-        {{order.mail}}
+        {{order?.mail}}
+    </div>
+    <div>
+        <span class="bold">Shipping Address </span>
+        {{order?.shippingAddress}}
+    </div>
+    <div>
+        <span class="bold">Billing Address </span>
+        {{order?.billingAddress}}
     </div>
     <div>
         <span class="bold">Zip Code </span>
-        {{order.zipCode}}
+        {{order?.zipCode}}
     </div>
     <div>
         <span class="bold">Country </span>
-        {{order.country}}
+        {{order?.country}}
     </div>
 </div>
 <div id="messages">
-    <div *ngIf="order.instructions !== null">
+    <div *ngIf="order?.instructions !== null">
         <span class="bold">Delivery Instructions</span>
         <div class="greyOutline">
-            <p>{{order.instructions}}</p>
+            <p>{{order?.instructions}}</p>
         </div>
     </div>
-    <div *ngIf="order.giftMessage !== null">
+    <div *ngIf="order?.giftMessage !== null">
         <span class="bold">Gift Message</span>
         <div class="greyOutline">
-            <p>{{order.giftMessage}}</p>
+            <p>{{order?.giftMessage}}</p>
         </div>
     </div>
 </div>
 <div id="cost-details">
     <div class="split">
         <span>Order</span>
-        <span>{{order.cost - order.rate}}</span>
+        <span>{{order?.cost}}</span>
     </div>
     <div class="greyOutline">
         <mat-list role="list">
-            <mat-list-item *ngFor="let box of order.content">
+            <mat-list-item *ngFor="let box of order?.content">
                 <span class="bold">{{box.boxType}}</span> x {{box.quantity}}
             </mat-list-item>
         </mat-list>
     </div>
     <div class="split">
         <span>Shipping</span>
-        <span>{{order.rate}}</span>
+        <span>{{order?.rate}}</span>
     </div>
     <div class="split">
         <span class="bold">Total</span>
-        <span class="bold">{{order.cost}}</span>
+        <span class="bold">{{totalCost}}</span>
     </div>
 </div>

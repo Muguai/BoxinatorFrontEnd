@@ -28,6 +28,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
@@ -50,12 +51,16 @@ import { ProfilePage } from './pages/profile/profile.page';
 import { ShipmentHistoryComponent } from './components/profile/shipment-history/shipment-history.component';
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 import { ClaimPackageComponent } from './components/profile/claim-package/claim-package.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { SummaryComponent } from './components/checkout/summary/summary.component';
+import { SummaryItemComponent } from './components/checkout/summary-item/summary-item.component';
+import { PaymentComponent } from './components/checkout/payment/payment.component';
+import { ShippingComponent } from './components/checkout/shipping/shipping.component';
 import { ShipmentHistoryItemComponent } from './components/profile/shipment-history-item/shipment-history-item.component';
 import { EditProfilePopupComponent } from './components/profile/edit-profile-popup/edit-profile-popup.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
 
 @NgModule({
   declarations: [
@@ -85,9 +90,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ShipmentHistoryComponent,
     ProfileInfoComponent,
     ClaimPackageComponent,
+    CheckoutComponent,
+    SummaryComponent,
+    SummaryItemComponent,
+    PaymentComponent,
+    ShippingComponent,
     ShipmentHistoryItemComponent,
     EditProfilePopupComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +124,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NgbModule,
     MatDialogModule,
     MatCardModule,
+    MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule
   ],

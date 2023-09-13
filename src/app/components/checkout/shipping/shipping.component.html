@@ -1,0 +1,44 @@
+<form #shippingForm="ngForm">
+    <mat-form-field class="fullWidth">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" required [(ngModel)]="name" (change)="inputChange()"
+        minlength="5" name="name">
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+        <mat-label>Mail</mat-label>
+        <input matInput type="text" required [(ngModel)]="mail" (change)="inputChange()"
+        minlength="5" name="mail">
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+        <mat-label>Shipping Address</mat-label>
+        <input matInput type="text" required [(ngModel)]="shippingAddress" (change)="inputChange()"
+        minlength="8" name="shippingAddress">
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+        <mat-label>Billing Address</mat-label>
+        <input matInput type="text" [(ngModel)]="billingAddress" (change)="inputChange()" name="billingAddress">
+        <mat-hint>If billing address is left empty, shipping address will be used</mat-hint>
+    </mat-form-field>
+    <div class="split">
+        <mat-form-field id="zip">
+            <mat-label>Zip Code</mat-label>
+            <input matInput type="number" required [(ngModel)]="zipCode" (change)="inputChange()"
+            pattern="\d{5}" name="zipCode">
+        </mat-form-field>
+        <mat-form-field id="country">
+            <mat-label>Country</mat-label>
+            <mat-select required [(ngModel)]="selectedCountry"
+            (selectionChange)="inputChange()" name="country">
+                <mat-option *ngFor="let country of countries" [value]="country">{{country.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <mat-form-field class="fullWidth">
+        <mat-label>Delivery Instructions</mat-label>
+        <textarea matInput [(ngModel)]="instructions" (change)="inputChange()" name="instructions"></textarea>
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+        <mat-label>Gift Message</mat-label>
+        <textarea matInput [(ngModel)]="giftMessage" (change)="inputChange()" name="giftMessage"></textarea>
+    </mat-form-field>
+</form>
