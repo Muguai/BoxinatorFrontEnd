@@ -1,7 +1,7 @@
 
 import { Component, Input, ElementRef, Renderer2  } from '@angular/core';
 import { contentSrc } from 'src/app/models/contentSrc';
-import { Box } from 'src/app/models/mysteryBox';
+import { Box, commonImageUrl } from 'src/app/models/mysteryBox';
 import { CartService } from 'src/app/services/cart-service/cart-serivce.service';
 
 
@@ -15,6 +15,8 @@ export class BoxItemComponent {
   @Input() box!: Box;
   @Input() disableGrid: boolean = true;
   contentArray: string[] = []; 
+  hovered:boolean = false; 
+
   
 
 
@@ -51,14 +53,15 @@ export class BoxItemComponent {
     this.cartService.addItemEvent.emit(this.box);
   }
 
-  freeze() {
-    this.renderer.addClass(this.elementRef.nativeElement, 'frozen');
-    setTimeout(() => {
-      this.unfreeze();
-    }, 3000); 
+  getCommonImage(){
+    return commonImageUrl;
   }
 
-  unfreeze() {
-    this.renderer.removeClass(this.elementRef.nativeElement, 'frozen');
+  onCardMouseEnter() {
+    this.hovered = true;
+  }
+
+  onCardMouseLeave() {
+    this.hovered = false;
   }
 }

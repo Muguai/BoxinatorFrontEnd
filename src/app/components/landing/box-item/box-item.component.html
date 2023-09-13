@@ -1,16 +1,25 @@
-<div [class.hover]="!disableGrid" class="card">
-  <div class="image-container">
-    <img class="box-image" [src]="box.imageUrl" />
+<div [class.hover]="!disableGrid" class="card" [class.not-hovered]="!hovered"  [class.hovered]="hovered" (mouseenter)="onCardMouseEnter()" (mouseleave)="onCardMouseLeave()">
+  <div
+    class="image-container"
+    [style.background-image]="'url(' + box.imageUrl + ')'"
+  >
+    <img class="box-image" [src]="getCommonImage()" />
   </div>
   <div class="break-line"></div>
   <div class="box-title">
     <h1>{{ box.boxType }}</h1>
+    <div class="custom-tooltip">
+      {{ box.description }}
+    </div>
   </div>
-  <div class="front-face box-description">
-    <h2>{{ box.description }}</h2>
-  </div>
-  <div class="back-face">
-    <p class="box-content-header">Content</p>
+  <div class="box-info">
+    <div class="front-face">
+      <div class="box-description">
+        <h2>{{ box.description }}</h2>
+      </div>
+    </div>
+    <div class="back-face">
+      <p class="box-content-header">Content</p>
 
       <div class="box-content-images">
         <ng-container *ngFor="let contentItem of contentArray">
@@ -41,9 +50,10 @@
         </ng-container>
       </div>
 
-    <div class="box-additional-info">
-      <p [style.margin-bottom]="'5px'">Weight: {{ box.weight }}</p>
-      <p>Dimensions: {{ box.dimensions }}</p>
+      <div class="box-additional-info">
+        <p [style.margin-bottom]="'5px'">Weight: {{ box.weight }}</p>
+        <p>Dimensions: {{ box.dimensions }}</p>
+      </div>
     </div>
   </div>
   <div class="box-buy">

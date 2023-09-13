@@ -1,0 +1,76 @@
+<mat-toolbar class="content toolbar" color="primary" [class.open]="cartOpen">
+    <app-logo class="toolbar-logo" [class.open]="cartOpen" routerLink="/"></app-logo>
+  
+    <!--Toolbar if actual user-->
+    <ng-container *ngIf="authService.currentUser$ | async as user; else noUser">
+      <div class="toolbar-buttons" [class.open]="cartOpen">
+        <ng-container *ngIf="!user.isAnonymous; else noUser">
+          <div class="toolbar-user-buttons">
+            <!--User Profile button menu-->
+            <button #userProfileMenu mat-button [matMenuTriggerFor]="userMenu">
+              <p class="username">{{ user.displayName }}</p>
+              <mat-icon>account_circle</mat-icon>
+              <mat-icon>expand_more</mat-icon>
+            </button>
+            <!--Cart button-->
+            <ng-container
+              *ngIf="isOnHomePage() || isOnProfilePage()"
+              [ngTemplateOutlet]="cartButtonTemplate"
+            ></ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  
+    <!--Toolbar if guest user-->
+    <ng-template #noUser>
+      <div class="toolbar-guest-buttons">
+        Guest
+        <!--Login button-->
+        <ng-container *ngIf="isOnSignUpPage() || isOnHomePage()">
+          <button mat-button class="smaller-mat-buttons" routerLink="/login">
+            <mat-icon>login</mat-icon>
+          </button>
+        </ng-container>
+        <!--Sign up button-->
+        <ng-container *ngIf="isOnLoginPage() || isOnHomePage()">
+          <button mat-button class="smaller-mat-buttons" routerLink="/signup">
+            <mat-icon>follow_the_signs</mat-icon>
+          </button>
+        </ng-container>
+        <!--Cart button-->
+        <ng-container
+          *ngIf="isOnHomePage()"
+          [ngTemplateOutlet]="cartButtonTemplate"
+        ></ng-container>
+      </div>
+    </ng-template>
+  </mat-toolbar>
+  
+  
+ <div class="navbar-margin"></div>
+
+
+<!--Options in user profile menu-->
+<mat-menu #userMenu="matMenu">
+    <button mat-menu-item routerLink="/profile">Profile</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
+  
+  <!--Template for Cart button-->
+  <ng-template #cartButtonTemplate>
+    <button
+      mat-button
+      class="ignore-click smaller-mat-buttons"
+      (click)="toggleCart()"
+    >
+      <mat-icon>shopping_cart</mat-icon>
+      <div class="cart-amount" *ngIf="cartAmount > 0">
+        <p [style.font-size.em]="cartAmount > 99 ? 0.5 : 0.8">
+          {{ cartAmount > 99 ? "99+" : cartAmount }}
+        </p>
+      </div>
+    </button>
+  </ng-template>
+  
+  

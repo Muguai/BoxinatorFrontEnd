@@ -54,6 +54,7 @@ import { ShipmentHistoryItemComponent } from './components/profile/shipment-hist
 import { EditProfilePopupComponent } from './components/profile/edit-profile-popup/edit-profile-popup.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ClaimPackageComponent,
     ShipmentHistoryItemComponent,
     EditProfilePopupComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

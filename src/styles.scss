@@ -68,13 +68,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 .cdk-overlay-pane{
-    background-color: transparent !important;
     border-radius: 20px !important;
 }
 
 .mat-mdc-dialog-surface{
-    background-color: transparent !important;
     border-radius: 20px !important;
 }
+
+.content {
+    transition: width 0.3s ease-in-out; 
+
+  }
+
+.content.open {
+    width: calc(100% - 375px); 
+  }
+
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
