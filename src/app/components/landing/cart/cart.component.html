@@ -18,7 +18,7 @@
     </li>
   </ul>
   <div [class.disabled]="!(getTotalPrice() > 0)" class="sidebar-checkout">
-    <button >Checkout</button>
+    <button routerLink="/checkout">Checkout</button>
     <p [ngStyle]="{ 'opacity': boxes.length > 0 ? 1 : 0}">Total: {{ getTotalPrice() | number: '1.2-2' }}$</p>
   </div>
 </div>
