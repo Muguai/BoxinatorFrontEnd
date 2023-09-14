@@ -11,11 +11,20 @@ export class TestAuthenticationWeatherComponent {
   public apiData: any[] = [];
   public error: string | null = null;
 
-  constructor(private weatherService: WeatherService, private auth: AuthenticationService) {}
+  constructor(private weatherService: WeatherService, private auth: AuthenticationService) {
+    
+    this.start2();
+  }
+
+  async start2(){
+    const token = await this.auth.getToken();
+    console.log("THIS IS THE TOKEN ", token);
+  }
 
   async start() {
       this.error = null; 
       const token = await this.auth.getToken();
+      console.log("THIS IS THE TOKEN ", token);
       this.weatherService.getWeatherData(token).subscribe({
         next: (weatherData : any) => {
             this.apiData = weatherData;

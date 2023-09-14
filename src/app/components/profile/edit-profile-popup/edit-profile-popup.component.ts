@@ -14,10 +14,24 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditProfilePopupComponent implements OnInit {
 
-  currentUser?: ReadUserDTO;
+  currentUser: ReadUserDTO  = {
+    id: -1,
+    uId: "Loading...",
+    name: "Loading...",
+    email: "Loading...",
+    shippingAddress: "Loading...",
+    billingAddress: "Loading...",
+    zipCode: "Loading...",
+    phoneNumber: "Loading...",
+    birthDate: new Date("1990-01-01"),
+    countryId: null,
+    isActive: "Loading...",
+    shipment: null,
+  };
   currentUserUid?: string;
   countries?: ReadCountryDTO[];
   selectedCountryId: number | null = null;
+  isLoading: boolean = true;
 
   constructor(
     private authService: AuthenticationService,
@@ -25,12 +39,13 @@ export class EditProfilePopupComponent implements OnInit {
     private countryService: CountryService
   ) {
     
+    
   }
-
   async ngOnInit(): Promise<void> {
+    this.isLoading = true;
     const token = await this.authService.getToken();
     this.countryService.getCountries(token).subscribe({
-      next: (countries : any) => {
+      next: (countries: any) => {
         console.log(countries);
         this.countries = countries;
       },
@@ -40,13 +55,14 @@ export class EditProfilePopupComponent implements OnInit {
     });
 
     this.authService.currentUser$.subscribe({
-      next: (user : any) => {
+      next: (user: any) => {
         console.log(user);
         this.userService.getUserData(token, user.uid).subscribe({
-          next: (userData : any) => {
-            console.log(userData);
+          next: (userData: any) => {
+            console.log(userData.id);
             this.currentUser = userData;
             this.currentUserUid = user.uid;
+            this.isLoading = false;
           },
           error: (error: any) => {
             console.log(error);
@@ -66,27 +82,27 @@ export class EditProfilePopupComponent implements OnInit {
         console.log("Token not available");
         return;
       }
-  
+
       console.log("Selected country id:", this.selectedCountryId);
-  
+
       const updatedUser: UpdateUserDTO = {
         id: this.currentUser!.id,
-        uId: this.currentUserUid!, 
+        uId: this.currentUserUid!,
         name: this.currentUser!.name,
-        email:  this.currentUser!.email,
+        email: this.currentUser!.email,
         shippingAddress: this.currentUser!.shippingAddress,
-        billingAddress:  this.currentUser!.billingAddress,
-        zipCode:  this.currentUser!.zipCode,
-        phoneNumber:  this.currentUser!.phoneNumber,
+        billingAddress: this.currentUser!.billingAddress,
+        zipCode: this.currentUser!.zipCode,
+        phoneNumber: this.currentUser!.phoneNumber,
         birthDate: this.currentUser!.birthDate,
         userType: UserType.User,
         isActive: this.currentUser!.isActive,
         countryId: this.selectedCountryId || null,
       };
-  
+
       console.log('Form Values:', form.value); // Log form values for debugging
       console.log('Updated User:', updatedUser); // Log the updated user object
-  
+
       this.userService.putUser(token, updatedUser.id, updatedUser).subscribe({
         next: (response: any) => {
           console.log('Update Response:', response);

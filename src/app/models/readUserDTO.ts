@@ -12,3 +12,18 @@ export interface ReadUserDTO {
     isActive: string;
     shipment: number[] | null;
 }
+
+const mockUser: ReadUserDTO = {
+    id: -1, 
+    uId: "Loading...", 
+    name: "Loading...", 
+    email: "Loading...", 
+    shippingAddress: "Loading...",
+    billingAddress: "Loading...", 
+    zipCode: "Loading...", 
+    phoneNumber: "Loading...", 
+    birthDate: null, 
+    countryId: null, 
+    isActive: "Loading...", 
+    shipment: null, 
+  };
