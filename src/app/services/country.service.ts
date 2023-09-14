@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CountryService {
 
-  private apiBaseUrl = 'http://boxinator-backend.azurewebsites.net';
+  private apiBaseUrl = 'https://boxinator-backend.azurewebsites.net';
 
   constructor(private http: HttpClient) { }
 
