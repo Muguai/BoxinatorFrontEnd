@@ -10,15 +10,15 @@ import { EditBoxPopupComponent } from '../edit-box-popup/edit-box-popup.componen
 })
 export class AdminBoxesComponent {
   // controls which columns to render and in what order
-  public displayedColumns = ['box', 'content', 'price', 'edit'];
-  public boxes = dummyBoxes;
+  displayedColumns = ['box', 'content', 'price', 'edit'];
+  boxes = dummyBoxes;
 
   constructor(private dialog: MatDialog) {}
 
-  public openEdit(value: number): void {
+  openEdit(id: number): void {
     this.dialog.open(EditBoxPopupComponent, {
       width: '600px',
-      data: {id: value},
+      data: {id: id},
       autoFocus: false
     });
   }

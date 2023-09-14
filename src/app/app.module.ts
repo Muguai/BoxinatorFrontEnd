@@ -61,6 +61,9 @@ import { EditProfilePopupComponent } from './components/profile/edit-profile-pop
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DeleteUserPopupComponent } from './components/admin/delete-user-popup/delete-user-popup.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DeleteUserSnackbarComponent } from './components/admin/delete-user-snackbar/delete-user-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +100,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ShippingComponent,
     ShipmentHistoryItemComponent,
     EditProfilePopupComponent,
-    NavbarComponent
+    NavbarComponent,
+    DeleteUserPopupComponent,
+    DeleteUserSnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -126,7 +131,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MatCardModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,15 +9,15 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-box-popup.component.scss']
 })
 export class EditBoxPopupComponent {
-  public id: number; // USE FOR FUTURE API CALL
-  public box: Box;
+  id: number; // USE FOR FUTURE API CALL
+  box: Box;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: any) {
     this.id = data.id;
     this.box = dummyBoxes[data.id - 1];
   }
 
-  public onSubmit(form: NgForm): void {
+  onSubmit(form: NgForm): void {
     console.log(form.value); // VALUES FOR PUT REQUEST
   }
 }

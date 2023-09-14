@@ -8,7 +8,7 @@ import { AdminLink } from 'src/app/models/adminLink';
 })
 
 export class AdminComponent {
-  public links: AdminLink[] = [
+  links: AdminLink[] = [
     {title: 'Orders', link: '/admin/orders', icon: 'local_shipping'},
     {title: 'Boxes', link: '/admin/boxes', icon: 'inventory'},
     {title: 'Users', link: '/admin/users', icon: 'people_alt'},

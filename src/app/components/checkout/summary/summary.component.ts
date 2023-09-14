@@ -8,7 +8,7 @@ import { Box } from 'src/app/models/mysteryBox';
 })
 export class SummaryComponent implements OnInit {
   @Input() boxes!: Box[];
-  public orderSum: number = 0;
+  orderSum: number = 0;
 
   ngOnInit(): void {
     // calc total price for order
