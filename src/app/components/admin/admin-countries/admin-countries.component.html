@@ -4,15 +4,17 @@
             <mat-card-title>Scandinavian Countries</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <form #editRateScandinavia="ngForm" (ngSubmit)="onSubmitScandinavia(editRateScandinavia)">
+            <form #editRateScandinaviaForm="ngForm" (ngSubmit)="onSubmitScandinavia(editRateScandinaviaForm)">
                 <div class="split">
                     <mat-form-field>
                         <mat-label>Rate</mat-label>
-                        <input matInput ngModel="{{scandinavia.rate}}" name="rate"
-                        #scandinavianRate type="number">
+                        <input matInput required [ngModel]="scandinavia.rate" name="rate"
+                        #scandinavianRate type="number" [placeholder]="'Current: ' + scandinavia.rate.toString()">
                     </mat-form-field>
+                    <!-- disabled if value is the original value or no value is given -->
                     <button mat-flat-button color="accent"
-                    type="submit" [disabled]="(scandinavia.rate === this.scandinavianRate.valueAsNumber)">Save</button>
+                    type="submit" [disabled]="(scandinavia.rate === scandinavianRate.valueAsNumber
+                    || editRateScandinaviaForm.invalid)">Save</button>
                 </div>
             </form>
         </mat-card-content>
@@ -23,22 +25,24 @@
             <mat-card-title>Other Countries</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <form #editRate="ngForm" (ngSubmit)="onSubmit(editRate)">
+            <form #editRateForm="ngForm" (ngSubmit)="onSubmit(editRateForm)">
                 <mat-form-field class="fullWidth">
                     <mat-label>Select country</mat-label>
-                    <mat-select #country>
+                    <mat-select #country name="country" ngModel>
                         <mat-option *ngFor="let country of countries"
-                            [value]="country.id">{{country.name}}</mat-option>
+                        [value]="country">{{country.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <div class="split">
                     <mat-form-field>
                         <mat-label>Rate</mat-label>
-                        <input matInput ngModel="{{country.value}}" name="rate"
-                        #rate type="number" [disabled]="!country.value">
+                        <input matInput required [ngModel]="country.value?.rate" name="rate"
+                        #rate type="number" [disabled]="!country.value" [placeholder]="'Current: ' + country.value?.rate">
                     </mat-form-field>
+                    <!-- disabled if value is the original value, no value is given or value is lower than the scandinavian rate -->
                     <button mat-flat-button color="accent" type="submit"
-                    [disabled]="(country.value === this.rate.valueAsNumber || !this.rate.value)"
+                    [disabled]="(country.value?.rate === rate.valueAsNumber || editRateForm.invalid ||
+                    rate.valueAsNumber <= scandinavia.rate)"
                     >Save</button>
                 </div>
             </form>
