@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private apiBaseUrl = 'http://localhost:5177';
+  private apiBaseUrl = 'http://boxinator-backend.azurewebsites.net';
   
   constructor(private http: HttpClient) { }
 
