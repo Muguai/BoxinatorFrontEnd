@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Delete <span>{{data.user.name}}?</span></h2>
+<p mat-dialog-content>User {{data.user.name}} ({{data.user.mail}}) will be deleted.</p>
+<div mat-dialog-actions align="center">
+    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="primary" id="confirmBtn" mat-dialog-close (click)="deleteUser(data.user)">Confirm</button>
+</div>
