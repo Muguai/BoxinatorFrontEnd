@@ -1,3 +1,9 @@
+$blue: #34AFF7;
+
+div[mat-dialog-content] {
+    background-color:$blue !important; 
+}
+
 #price {
     width: 140px;
 }
@@ -15,4 +21,8 @@
 .btn-split {
     gap: 100px;
     justify-content: center;
+}
+
+#cancel {
+    color: white;
 }
