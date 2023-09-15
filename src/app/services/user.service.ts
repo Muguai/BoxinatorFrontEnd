@@ -1,13 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { apiBaseUrl } from 'src/app/consts/urls';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private apiBaseUrl = 'https://boxinator-backend.azurewebsites.net';
+  private apiBaseUrl = apiBaseUrl;
   
   constructor(private http: HttpClient) { }
 
