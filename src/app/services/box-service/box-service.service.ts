@@ -13,6 +13,8 @@ export class BoxServiceService {
   constructor(private http: HttpClient) { }
 
   getBoxData(token: string): Observable<any> {
+    console.log("THIS IS THE TOKEN " + token);
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

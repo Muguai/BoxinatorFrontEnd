@@ -9,6 +9,8 @@ import {
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { dummyBoxes, Box } from 'src/app/models/mysteryBox';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { BoxServiceService } from 'src/app/services/box-service/box-service.service';
 import { GridChangeService } from 'src/app/services/grid-change/grid-change.service';
 
 @Component({
@@ -31,26 +33,57 @@ export class BoxListComponent implements OnInit {
   oldItemPosition: { id: number; top: number; left: number }[] = [];
   isFrozen: boolean = false;
   isResizing: boolean = false;
+  isLoading: boolean = false;
+  isError: boolean = false;
   private resizeSubject = new Subject<Event>();
-  
-  constructor(private gridChange: GridChangeService,   private cdRef: ChangeDetectorRef) {
-    this.boxes = dummyBoxes;
+
+  constructor(private gridChange: GridChangeService, private authService: AuthenticationService, private cdRef: ChangeDetectorRef, private boxService: BoxServiceService) {
+
     this.resizeSubject
-    .pipe(
-      debounceTime(600) 
-    )
-    .subscribe(() => {
-      this.stopResize();
-    });
+      .pipe(
+        debounceTime(600)
+      )
+      .subscribe(() => {
+        this.stopResize();
+      });
+
   }
 
-  ngOnInit(): void { }
+  async setupBoxes() {
+    this.isLoading = true;
+    const token = await this.authService.getToken();
+
+    this.boxService.getBoxData(token).subscribe({
+      next: (value) => {
+        this.boxes = value;
+        this.isLoading = false;
+        console.log("boxes are loaded");
+
+        setTimeout(() => {
+          this.gridPosSetup();
+          this.updateGridSize();
+        }, 1);
+
+      },
+      error: (err) => {
+        console.log(err);
+        this.isLoading = false;
+        this.isError = true;
+      },
+    })
+
+  }
+
+  ngOnInit(): void {
+
+
+  }
 
   ngAfterContentInit() {
-    setTimeout(() => {
-      this.gridPosSetup();
-      this.updateGridSize();
-    }, 1);
+    
+    this.isLoading = false;
+    this.isError = false;
+    this.setupBoxes()
   }
 
   gridPosSetup() {
@@ -60,24 +93,23 @@ export class BoxListComponent implements OnInit {
     this.itemPositions = this.getItemPositions(grid);
     this.oldItemPosition = this.getItemPositions(grid);
 
-    
     const gridRect = grid.getBoundingClientRect();
 
     const frozenItemsContainer = this.frozenItemsRef
-    .nativeElement as HTMLElement;
+      .nativeElement as HTMLElement;
 
     frozenItemsContainer.style.position = 'absolute';
     frozenItemsContainer.style.left = `${gridRect.left}px`;
     frozenItemsContainer.style.top = `${gridRect.top}px`;
-    
+
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     if (!this.isResizing) {
       this.startResize();
-    }else{
-      this.resizeSubject.next(event);  
+    } else {
+      this.resizeSubject.next(event);
     }
     this.updateGridSize();
 
@@ -89,7 +121,7 @@ export class BoxListComponent implements OnInit {
 
     const grid = this.gridRef.nativeElement as HTMLElement;
 
-    
+
     grid.style.opacity = '0';
 
     this.cdRef.detectChanges();
@@ -98,13 +130,13 @@ export class BoxListComponent implements OnInit {
     const tempOldItemPosition: { id: number; top: number; left: number }[] = [
       ...this.oldItemPosition,
     ];
-    if(!this.isFrozen){
+    if (!this.isFrozen) {
       this.freezeItems(tempOldItemPosition);
     }
     this.oldItemPosition = this.getItemPositions(grid);
   }
 
-  stopResize(){
+  stopResize() {
     console.log("End");
 
     const grid = this.gridRef.nativeElement as HTMLElement;
@@ -149,7 +181,7 @@ export class BoxListComponent implements OnInit {
       const rect = item.getBoundingClientRect();
       itemPos.push({
         id: index,
-        top: rect.top - gridRect.top +  window.scrollY,
+        top: rect.top - gridRect.top + window.scrollY,
         left: rect.left - gridRect.left + window.scrollX,
       });
     });
@@ -159,7 +191,7 @@ export class BoxListComponent implements OnInit {
 
   freezeItems(oldPos: { id: number; top: number; left: number }[]) {
 
-    if(this.isFrozen){
+    if (this.isFrozen) {
       return;
     }
 
@@ -279,7 +311,7 @@ export class BoxListComponent implements OnInit {
 
       //console.log("X "+ Math.abs(currentX - expectedX) + " VS " + tolerance)
       //console.log("Y" + Math.abs(currentY - expectedY) + " VS " + tolerance)
- 
+
       return (
         Math.abs(currentX - expectedX) < tolerance &&
         Math.abs(currentY - expectedY) < tolerance

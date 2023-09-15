@@ -14,14 +14,18 @@ export class AuthenticationService {
     this.checkAndSignInAnonymously();
   }
 
-  async getToken(){
+  async getToken(remainingAttempts = 15, delayMs = 300): Promise<string> {
     const auth = getAuth();
     const { currentUser } = auth;
-    let token = "TOKEN NOT FOUND";
-    if(currentUser != null){
-      token = await getIdToken(currentUser, true);
+    
+    if (currentUser != null) {
+      return await getIdToken(currentUser, true);
+    } else if (remainingAttempts > 0) {
+      await new Promise(resolve => setTimeout(resolve, delayMs));
+      return this.getToken(remainingAttempts - 1, delayMs);
+    } else {
+      return "TOKEN NOT FOUND";
     }
-    return token;
   }
     
 
