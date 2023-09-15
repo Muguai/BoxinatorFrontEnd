@@ -41,4 +41,8 @@ export class UserService {
     
     return this.http.put<any>(`${this.apiBaseUrl}/api/Users/${userId}`, user, { headers });
   }
+
+  getAllUsersShipments(token: string, userId: string){
+    
+  }
 }

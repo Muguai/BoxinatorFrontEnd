@@ -1,5 +1,7 @@
 <div class="profile-card shipment-card">
-    <h1 class="shipment-header">Shipment History</h1>
+    <h1 class="shipment-header">Order History</h1>
+    <h5 *ngIf="isLoading">Loading...</h5>
+    <h5 *ngIf="shipments.length === 0 && !isLoading">No Orders</h5>
     <ul class="shipment-list">
         <div></div>
         <app-shipment-history-item *ngFor="let shipment of shipments" [shipment]="shipment"></app-shipment-history-item>

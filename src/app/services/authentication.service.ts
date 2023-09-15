@@ -14,7 +14,7 @@ export class AuthenticationService {
     this.checkAndSignInAnonymously();
   }
 
-  async getToken(remainingAttempts = 15, delayMs = 300): Promise<string> {
+  async getToken(remainingAttempts = 15, delayMs = 100): Promise<string> {
     const auth = getAuth();
     const { currentUser } = auth;
     
