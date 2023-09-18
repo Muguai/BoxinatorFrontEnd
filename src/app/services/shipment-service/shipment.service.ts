@@ -13,6 +13,16 @@ export class ShipmentService {
 
   constructor(private http: HttpClient) { }
 
+  getShipments(token: string): Observable<any> {
+    console.log("THIS IS THE TOKEN " + token);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(`${apiBaseUrl}/api/Shipments`, { headers });
+  }
+
   getShipmentHistoryOfUser(token: string, userId: number): Observable<any> {
     console.log("THIS IS THE TOKEN " + token);
     const headers = new HttpHeaders({
