@@ -1,31 +1,50 @@
-import { Component } from '@angular/core';
-import { Order } from 'src/app/models/adminOrders';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderReviewPopupComponent } from '../order-review-popup/order-review-popup.component';
-import { Status } from 'src/app/models/status';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { ReadShipmentDTO, Status } from 'src/app/models/DTOs/Shipment/readShipmentDTO';
+import { ShipmentService } from 'src/app/services/shipment-service/shipment.service';
 
 @Component({
   selector: 'app-admin-orders',
   templateUrl: './admin-orders.component.html',
   styleUrls: ['./admin-orders.component.scss']
 })
-export class AdminOrdersComponent {
+export class AdminOrdersComponent implements OnInit {
   // controls which columns to render and in what order
   displayedColumns: string[] = ['order', 'date', 'user', 'details', 'status'];
-  orders: Order[] = [
-    {id: 1001, date: '14/8 2023', user: 'john.doe@mail.com', status: Status.Placed},
-    {id: 987, date: '1/8 2023', user: 'jane.doe@mail.com', status: Status.InTransit},
-    {id: 771, date: '29/7 2023', user: 'john.doe@mail.com', status: Status.Delivered}
-  ];
+  orders: ReadShipmentDTO[] = [];
   // array with Status values
   statuses = Object.values(Status);
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private readonly authService: AuthenticationService,
+    private readonly shipmentService: ShipmentService) {}
 
-  showDetails(value: number): void {
+  ngOnInit(): void {
+    this.fetchOrders();
+  }
+
+  async fetchOrders(): Promise<void> {
+    const token = await this.authService.getToken();
+    this.shipmentService.getShipments(token).subscribe({
+      next: (res: ReadShipmentDTO[]) => {
+        // make it possible to use toDateString() in template
+        for (let box of res) {
+          const date = new Date(box.created);
+          box.created = date;
+        }
+        this.orders = res;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
+  showDetails(order: ReadShipmentDTO): void {
     this.dialog.open(OrderReviewPopupComponent, {
       width: '570px',
-      data: {id: value}
+      data: order
     });
   }
 

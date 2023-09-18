@@ -3,12 +3,14 @@ export interface ReadShipmentDTO {
     created: Date,
     status: Status
     email: string,
-    shippingAddres: string,
+    shippingAddress: string,
     billingAddress: string,
     zipCode: string,
     instructions: string | null,
     giftMessage: string | null,
-    totalCost: number
+    totalCost: number,
+    userId: number,
+    countryId: number
 }
 
 export enum Status {

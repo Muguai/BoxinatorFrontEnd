@@ -32,6 +32,16 @@ export class UserService {
     return this.http.get<any>(`${this.apiBaseUrl}/api/Users/get/${userId}`, { headers });
   }
 
+  getUser(token: string, id: number): Observable<any> {
+    console.log("THIS IS THE TOKEN " + token);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(`${this.apiBaseUrl}/api/Users/${id}`, { headers });
+  }
+
   postUserToDb(token: string): Observable<any> {
     console.log("THIS IS THE TOKEN " + token);
     const headers = new HttpHeaders({
