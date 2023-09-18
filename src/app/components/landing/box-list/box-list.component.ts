@@ -54,6 +54,7 @@ export class BoxListComponent implements OnInit {
   }
 
   async setupBoxes() {
+    this.updateGridSize();
 
     const token = await this.authService.getToken();
 

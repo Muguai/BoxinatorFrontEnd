@@ -1,6 +1,11 @@
 <div class="profile-card shipment-card">
     <h1 class="shipment-header">Order History</h1>
-    <h5 *ngIf="isLoading">Loading...</h5>
+    <div *ngIf="isLoading || shipments.length === 0" [ngStyle]="{ 'margin-top': '20px' }"></div>
+    <div *ngIf="isLoading" class="loading-dot-container">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+    </div>
     <h5 *ngIf="shipments.length === 0 && !isLoading">No Orders</h5>
     <ul class="shipment-list">
         <div></div>
