@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
-import { Country } from 'src/app/models/country';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CountryService } from 'src/app/services/country/country.service';
 
@@ -11,26 +10,35 @@ import { CountryService } from 'src/app/services/country/country.service';
   styleUrls: ['./admin-countries.component.scss']
 })
 export class AdminCountriesComponent implements OnInit {
-  scandinavia: Country = {id: 1, name: 'Scandinavia', rate: 5};
-  countries: Country[] = [
-    {id: 2, name: 'England', rate: 7},
-    {id: 3, name: 'Japan', rate: 15},
-    {id: 4, name: 'Canada', rate: 10}
-  ];
+  scandinaviaShippingRate?: number;
+  // countries excluding scandinavian countries
+  countries: ReadCountryDTO[] = [];
 
   constructor(private readonly authService: AuthenticationService,
     private readonly countryService: CountryService) {}
 
   ngOnInit(): void {
-    this.fetchCountries();
+    this.fetchScandinavia();
+    this.fetchCountriesExcludingScandinavia();
   }
 
-  async fetchCountries(): Promise<void> {
+  private async fetchScandinavia(): Promise<void> {
     const token = await this.authService.getToken();
-    this.countryService.getCountries(token).subscribe({
+    this.countryService.getCountry(token, 1).subscribe({
+      next: (res: ReadCountryDTO) => {
+        this.scandinaviaShippingRate = res.shippingRate;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
+  private async fetchCountriesExcludingScandinavia(): Promise<void> {
+    const token = await this.authService.getToken();
+    this.countryService.getCountriesExcludingScandinavia(token).subscribe({
       next: (res: ReadCountryDTO[]) => {
-        // this.countries = res;
-        console.log(res)
+        this.countries = res;
       },
       error: err => {
         console.error(err);

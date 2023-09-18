@@ -8,12 +8,13 @@
                 <div class="split">
                     <mat-form-field>
                         <mat-label>Rate</mat-label>
-                        <input matInput required [ngModel]="scandinavia.rate" name="rate"
-                        #scandinavianRate type="number" [placeholder]="'Current: ' + scandinavia.rate.toString()">
+                        <input matInput required [ngModel]="scandinaviaShippingRate" name="shippingRate"
+                        #scandinavianRate type="number" [placeholder]="'Current: ' + scandinaviaShippingRate"
+                        min="0.01">
                     </mat-form-field>
-                    <!-- disabled if value is the original value or no value is given -->
+                    <!-- disabled if value is the original value, no value is given or less than 0.01 -->
                     <button mat-flat-button color="accent"
-                    type="submit" [disabled]="(scandinavia.rate === scandinavianRate.valueAsNumber
+                    type="submit" [disabled]="(scandinaviaShippingRate === scandinavianRate.valueAsNumber
                     || editRateScandinaviaForm.invalid)">Save</button>
                 </div>
             </form>
@@ -36,13 +37,15 @@
                 <div class="split">
                     <mat-form-field>
                         <mat-label>Rate</mat-label>
-                        <input matInput required [ngModel]="country.value?.rate" name="rate"
-                        #rate type="number" [disabled]="!country.value" [placeholder]="'Current: ' + country.value?.rate">
+                        <input matInput required [ngModel]="country.value?.shippingRate" name="shippingRate"
+                        #rate type="number" [disabled]="!country.value" [placeholder]="'Current: ' + country.value?.shippingRate"
+                        min="0.01">
                     </mat-form-field>
-                    <!-- disabled if value is the original value, no value is given or value is lower than the scandinavian rate -->
+                    <!-- disabled if value is the original value, no value is given, value is lower than the scandinavian rate
+                    or less than 0.01 -->
                     <button mat-flat-button color="accent" type="submit"
-                    [disabled]="(country.value?.rate === rate.valueAsNumber || editRateForm.invalid ||
-                    rate.valueAsNumber <= scandinavia.rate)"
+                    [disabled]="(country.value?.shippingRate === rate.valueAsNumber || editRateForm.invalid ||
+                    rate.valueAsNumber <= scandinaviaShippingRate! || !country.value)"
                     >Save</button>
                 </div>
             </form>

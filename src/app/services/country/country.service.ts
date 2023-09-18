@@ -14,17 +14,27 @@ export class CountryService {
     console.log("THIS IS THE TOKEN " + token);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
 
     return this.http.get<any>(`${apiBaseUrl}/api/Countries`, { headers });
+  }
+
+  getCountriesExcludingScandinavia(token: string): Observable<any> {
+    console.log("THIS IS THE TOKEN " + token);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(`${apiBaseUrl}/api/Countries/GetCountriesExceptScandinavia`, { headers });
   }
 
   getCountry(token: string, id: number): Observable<any> {
     console.log("THIS IS THE TOKEN " + token);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
 
     return this.http.get<any>(`${apiBaseUrl}/api/Countries/${id}`, { headers });

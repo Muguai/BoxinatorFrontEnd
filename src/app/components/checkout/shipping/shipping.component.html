@@ -16,7 +16,8 @@
     </mat-form-field>
     <mat-form-field class="fullWidth">
         <mat-label>Billing Address</mat-label>
-        <input matInput type="text" [(ngModel)]="billingAddress" (change)="inputChange()" name="billingAddress">
+        <input matInput type="text" [(ngModel)]="billingAddress" (change)="inputChange()"
+        minlength="8" name="billingAddress">
         <mat-hint>If billing address is left empty, shipping address will be used</mat-hint>
     </mat-form-field>
     <div class="split">
