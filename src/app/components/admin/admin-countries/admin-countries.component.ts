@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
+import { UpdateCountryDTO } from 'src/app/models/DTOs/Country/updateCountryDTO';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CountryService } from 'src/app/services/country/country.service';
 
@@ -10,7 +11,7 @@ import { CountryService } from 'src/app/services/country/country.service';
   styleUrls: ['./admin-countries.component.scss']
 })
 export class AdminCountriesComponent implements OnInit {
-  scandinaviaShippingRate?: number;
+  scandinavia?: ReadCountryDTO;
   // countries excluding scandinavian countries
   countries: ReadCountryDTO[] = [];
 
@@ -26,7 +27,7 @@ export class AdminCountriesComponent implements OnInit {
     const token = await this.authService.getToken();
     this.countryService.getCountry(token, 1).subscribe({
       next: (res: ReadCountryDTO) => {
-        this.scandinaviaShippingRate = res.shippingRate;
+        this.scandinavia = res;
       },
       error: err => {
         console.error(err);
@@ -46,11 +47,39 @@ export class AdminCountriesComponent implements OnInit {
     });
   }
 
-  onSubmitScandinavia(form: NgForm) {
-    console.log(form.value); // VALUE FOR PUT REQUEST
+  async onSubmitScandinavia(form: NgForm) {
+    this.scandinavia!.shippingRate = form.value.shippingRate;
+    const scandinaviaCopy = {...this.scandinavia!};
+    // convert from ReadCountryDTO to UpdateCountryDTO
+    const uDTO = ((rDTO: ReadCountryDTO) => {
+      delete (rDTO as any).users;
+      delete (rDTO as any).shipments;
+      return rDTO as UpdateCountryDTO;
+    })(scandinaviaCopy);
+
+    const token = await this.authService.getToken();
+    this.countryService.putScandinavia(token, uDTO).subscribe({
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 
-  onSubmit(form: NgForm) {
-    console.log(form.value); // VALUE FOR PUT REQUEST
+  async onSubmit(form: NgForm) {
+    form.value.country.shippingRate = form.value.shippingRate;
+    const countryCopy = {...form.value.country};
+    // convert from ReadCountryDTO to UpdateCountryDTO
+    const uDTO = ((rDTO: ReadCountryDTO) => {
+      delete (rDTO as any).users;
+      delete (rDTO as any).shipments;
+      return rDTO as UpdateCountryDTO;
+    })(countryCopy);
+
+    const token = await this.authService.getToken();
+    this.countryService.putCountry(token, form.value.country.id, uDTO).subscribe({
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 }

@@ -8,13 +8,13 @@
                 <div class="split">
                     <mat-form-field>
                         <mat-label>Rate</mat-label>
-                        <input matInput required [ngModel]="scandinaviaShippingRate" name="shippingRate"
-                        #scandinavianRate type="number" [placeholder]="'Current: ' + scandinaviaShippingRate"
+                        <input matInput required [ngModel]="scandinavia?.shippingRate" name="shippingRate"
+                        #scandinavianRate type="number" [placeholder]="'Current: ' + scandinavia?.shippingRate"
                         min="0.01">
                     </mat-form-field>
                     <!-- disabled if value is the original value, no value is given or less than 0.01 -->
                     <button mat-flat-button color="accent"
-                    type="submit" [disabled]="(scandinaviaShippingRate === scandinavianRate.valueAsNumber
+                    type="submit" [disabled]="(scandinavia?.shippingRate === scandinavianRate.valueAsNumber
                     || editRateScandinaviaForm.invalid)">Save</button>
                 </div>
             </form>
@@ -45,7 +45,7 @@
                     or less than 0.01 -->
                     <button mat-flat-button color="accent" type="submit"
                     [disabled]="(country.value?.shippingRate === rate.valueAsNumber || editRateForm.invalid ||
-                    rate.valueAsNumber <= scandinaviaShippingRate! || !country.value)"
+                    rate.valueAsNumber <= scandinavia?.shippingRate! || !country.value)"
                     >Save</button>
                 </div>
             </form>
