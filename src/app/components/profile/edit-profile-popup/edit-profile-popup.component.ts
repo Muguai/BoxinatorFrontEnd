@@ -37,6 +37,7 @@ export class EditProfilePopupComponent implements OnInit {
   loadingDots: string = '';
   startRandomDate: Date = new Date('1980-01-01');
   endRandomDate: Date = new Date('2000-12-31');
+  dotsAnimation:boolean = true;
 
   constructor(
     private authService: AuthenticationService,
@@ -46,6 +47,8 @@ export class EditProfilePopupComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.isLoading = true;
 
+    const intervalDelay = this.dotsAnimation ? 75 : 50;
+
     const intervalId = setInterval(() => {
       this.loadingDots =
         this.loadingDots === '...' ? '' : this.loadingDots + '.';
@@ -53,18 +56,18 @@ export class EditProfilePopupComponent implements OnInit {
         this.currentUser = {
           id: -1,
           uId: 'none',
-          name: this.getRandomLetterString(10),
-          email: this.getRandomLetterString(10) + "@" + this.getRandomLetterString(10) + "." + this.getRandomLetterString(3) ,
-          shippingAddress: this.getRandomLetterString(30), 
-          billingAddress: this.getRandomLetterString(30), 
-          zipCode: this.getRandomNumberString(5), 
-          phoneNumber: this.getRandomNumberString(10), 
+          name: this.dotsAnimation ? "Loading" + this.loadingDots : this.getRandomLetterString(10),
+          email: this.dotsAnimation ? "Loading" + this.loadingDots : this.getRandomLetterString(10) + "@" + this.getRandomLetterString(10) + "." + this.getRandomLetterString(3) ,
+          shippingAddress:  this.dotsAnimation ? "Loading" + this.loadingDots : this.getRandomLetterString(30), 
+          billingAddress: this.dotsAnimation ? "Loading" + this.loadingDots : this.getRandomLetterString(30), 
+          zipCode: this.dotsAnimation ? "Loading" + this.loadingDots : this.getRandomNumberString(5), 
+          phoneNumber: this.dotsAnimation ? "Loading" + this.loadingDots : this.getRandomNumberString(10), 
           birthDate: this.getRandomDate(this.startRandomDate, this.endRandomDate),
           countryId: null,
           isActive: 'n/a',
           shipment: null,
         };
-    }, 50);
+    }, intervalDelay);
 
     const token = await this.authService.getToken();
     this.countryService.getCountries(token).subscribe({
