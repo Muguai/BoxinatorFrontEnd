@@ -1,8 +1,7 @@
 import { Status } from "../../status"
 
-export interface ReadShipmentDTO {
+export interface UpdateShipmentDTO {
     id: number,
-    created: Date,
     status: Status,
     email: string,
     shippingAddress: string,
