@@ -4,7 +4,7 @@ import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
 import { ReadShipmentDTO } from 'src/app/models/DTOs/Shipment/readShipmentDTO';
 import { ReadUserDTO } from 'src/app/models/DTOs/User/readUserDTO';
 import { Box } from 'src/app/models/mysteryBox';
-import { Order, OrderContent } from 'src/app/models/order';
+import { OrderContent } from 'src/app/models/orderContent';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { BoxServiceService } from 'src/app/services/box-service/box-service.service';
 import { CheckoutService } from 'src/app/services/checkout/checkout.service';
@@ -92,7 +92,6 @@ export class OrderReviewComponent implements OnInit {
     const token = await this.authService.getToken();
     this.boxService.getShipmentBoxes(token, id).subscribe({
       next: (res: ReadBoxDTO[]) => {
-        let orderContent: OrderContent[] = [];
         // find unique names
         const names = [...new Set(res.map(item => item.boxName))];
         for (const name of names) {
@@ -102,9 +101,8 @@ export class OrderReviewComponent implements OnInit {
             boxName: name,
             quantity: matches!.length
           }
-          orderContent.push(orderBox);
+          this.orderContent.push(orderBox);
         }
-        this.orderContent = orderContent;
       },
       error: err => {
         console.error(err);

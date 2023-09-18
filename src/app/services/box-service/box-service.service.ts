@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { apiBaseUrl } from 'src/app/consts/urls';
+import { UpdateBoxDTO } from 'src/app/models/DTOs/Box/updateBoxyDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,14 @@ export class BoxServiceService {
     });
 
     return this.http.get<any>(`${this.apiBaseUrl}/api/Boxes/getboxesbyshipment/${id}`, { headers });
+  }
+
+  putBox(token: string, id: number, box: UpdateBoxDTO): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    
+    return this.http.put<any>(`${this.apiBaseUrl}/api/Boxes/${id}`, box, { headers });
   }
 }

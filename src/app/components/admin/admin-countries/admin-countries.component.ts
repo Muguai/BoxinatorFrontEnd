@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
-import { Country } from 'src/app/models/country';
+import { UpdateCountryDTO } from 'src/app/models/DTOs/Country/updateCountryDTO';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CountryService } from 'src/app/services/country/country.service';
 
@@ -11,26 +11,23 @@ import { CountryService } from 'src/app/services/country/country.service';
   styleUrls: ['./admin-countries.component.scss']
 })
 export class AdminCountriesComponent implements OnInit {
-  scandinavia: Country = {id: 1, name: 'Scandinavia', rate: 5};
-  countries: Country[] = [
-    {id: 2, name: 'England', rate: 7},
-    {id: 3, name: 'Japan', rate: 15},
-    {id: 4, name: 'Canada', rate: 10}
-  ];
+  scandinavia?: ReadCountryDTO;
+  // countries excluding scandinavian countries
+  countries: ReadCountryDTO[] = [];
 
   constructor(private readonly authService: AuthenticationService,
     private readonly countryService: CountryService) {}
 
   ngOnInit(): void {
-    this.fetchCountries();
+    this.fetchScandinavia();
+    this.fetchCountriesExcludingScandinavia();
   }
 
-  async fetchCountries(): Promise<void> {
+  private async fetchScandinavia(): Promise<void> {
     const token = await this.authService.getToken();
-    this.countryService.getCountries(token).subscribe({
-      next: (res: ReadCountryDTO[]) => {
-        // this.countries = res;
-        console.log(res)
+    this.countryService.getCountry(token, 1).subscribe({
+      next: (res: ReadCountryDTO) => {
+        this.scandinavia = res;
       },
       error: err => {
         console.error(err);
@@ -38,11 +35,51 @@ export class AdminCountriesComponent implements OnInit {
     });
   }
 
-  onSubmitScandinavia(form: NgForm) {
-    console.log(form.value); // VALUE FOR PUT REQUEST
+  private async fetchCountriesExcludingScandinavia(): Promise<void> {
+    const token = await this.authService.getToken();
+    this.countryService.getCountriesExcludingScandinavia(token).subscribe({
+      next: (res: ReadCountryDTO[]) => {
+        this.countries = res;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 
-  onSubmit(form: NgForm) {
-    console.log(form.value); // VALUE FOR PUT REQUEST
+  async onSubmitScandinavia(form: NgForm) {
+    this.scandinavia!.shippingRate = form.value.shippingRate;
+    const scandinaviaCopy = {...this.scandinavia!};
+    // convert from ReadCountryDTO to UpdateCountryDTO
+    const uDTO = ((rDTO: ReadCountryDTO) => {
+      delete (rDTO as any).users;
+      delete (rDTO as any).shipments;
+      return rDTO as UpdateCountryDTO;
+    })(scandinaviaCopy);
+
+    const token = await this.authService.getToken();
+    this.countryService.putScandinavia(token, uDTO).subscribe({
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
+  async onSubmit(form: NgForm) {
+    form.value.country.shippingRate = form.value.shippingRate;
+    const countryCopy = {...form.value.country};
+    // convert from ReadCountryDTO to UpdateCountryDTO
+    const uDTO = ((rDTO: ReadCountryDTO) => {
+      delete (rDTO as any).users;
+      delete (rDTO as any).shipments;
+      return rDTO as UpdateCountryDTO;
+    })(countryCopy);
+
+    const token = await this.authService.getToken();
+    this.countryService.putCountry(token, form.value.country.id, uDTO).subscribe({
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 }

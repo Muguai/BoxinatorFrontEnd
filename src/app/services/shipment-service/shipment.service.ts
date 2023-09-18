@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiBaseUrl } from 'src/app/consts/urls';
+import { UpdateShipmentDTO } from 'src/app/models/DTOs/Shipment/updateShipmentDTO';
 
 
 @Injectable({
@@ -33,5 +34,13 @@ export class ShipmentService {
     return this.http.get<any>(`${this.apiBaseUrl}/api/Shipments/getbyuseruid/${userId}`, { headers });
   }
 
-
+  putShipment(token: string, id: number, shipment: UpdateShipmentDTO): Observable<any> {
+    console.log("THIS IS THE TOKEN " + token);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    
+    return this.http.put<any>(`${this.apiBaseUrl}/api/Shipments/${id}`, shipment, { headers });
+  }
 }

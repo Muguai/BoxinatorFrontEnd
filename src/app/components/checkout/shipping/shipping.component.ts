@@ -1,52 +1,76 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Country } from 'src/app/models/country';
+import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
+import { ReadUserDTO } from 'src/app/models/DTOs/User/readUserDTO';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CheckoutService } from 'src/app/services/checkout/checkout.service';
+import { CountryService } from 'src/app/services/country/country.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-shipping',
   templateUrl: './shipping.component.html',
   styleUrls: ['./shipping.component.scss']
 })
-export class ShippingComponent {
-  countries: Country[] = [
-    {id: 1, name: 'Norway', rate: 5},
-    {id: 2, name: 'England', rate: 7},
-    {id: 3, name: 'Japan', rate: 15},
-    {id: 4, name: 'Canada', rate: 10},
-    {id: 5, name: 'Sweden', rate: 5}
-  ];
+export class ShippingComponent implements OnInit {
+  countries: ReadCountryDTO[] = [];
 
   @ViewChild('shippingForm') shippingForm!: NgForm;
 
   // binding properties
   name: string = '';
   email: string = '';
-  selectedCountry?: Country;
-  shippingAddress: string = '';
-  billingAddress: string = '';
-  zipCode: string = '';
+  selectedCountry?: ReadCountryDTO;
+  shippingAddress: string | null = null;
+  billingAddress: string | null = null;
+  zipCode: string | null = null;
   countryId: number = 0;
   instructions: string | null = null;
   giftMessage: string | null = null;
 
   constructor(private readonly authService: AuthenticationService,
-    private readonly checkoutService: CheckoutService) {
-    authService.currentUser$.subscribe((user) => {
-      // ADD API CALL TO GET THE DATA BELOW
-      if (!user.isAnonymous) {
-        this.name = 'John Doe',
-        this.email = 'john.doe@mail.com',
-        this.shippingAddress = 'Some address',
-        this.billingAddress = 'Some address',
-        this.zipCode = '12345',
-        // find matching country object
-        this.selectedCountry = this.countries.find(c => c.id === 5);
+    private readonly checkoutService: CheckoutService,
+    private readonly userService: UserService,
+    private readonly countryService: CountryService) {}
 
+  ngOnInit(): void {
+    this.authService.currentUser$.subscribe((user) => {
+      if (!user.isAnonymous) {
+        this.fetchUser(1);
+      }
+    });
+  }
+
+  private async fetchUser(id: number): Promise<void> {
+    const token = await this.authService.getToken();
+    this.userService.getUser(token, id).subscribe({
+      next: (res: ReadUserDTO) => {
+        this.name = res.name;
+        this.email = res.email;
+        this.shippingAddress = res.shippingAddress;
+        this.billingAddress = res.billingAddress;
+        this.zipCode = res.zipCode;
+        this.fetchCountries(5);
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
+  private async fetchCountries(savedUserCountryId: number): Promise<void> {
+    const token = await this.authService.getToken();
+    this.countryService.getCountriesExcludingScandinavia(token).subscribe({
+      next: (res: ReadCountryDTO[]) => {
+        this.countries = res;
+        // find matching country object
+        this.selectedCountry = this.countries.find(c => c.id === savedUserCountryId);
         this.save();
         // auto populated form counts as invalid, so manually set
         this.checkoutService.activateReviewPaymentTabs = true;
+      },
+      error: err => {
+        console.error(err);
       }
     });
   }
@@ -61,7 +85,7 @@ export class ShippingComponent {
   private save(): void {
     const messageValue = this.giftMessage === '' ? null : this.giftMessage;
     const instructionsValue = this.instructions === '' ? null : this.instructions;
-    const billingAddressValue = this.billingAddress === '' ? this.shippingAddress : this.billingAddress;
+    const billingAddressValue = this.billingAddress === null || this.billingAddress === '' ? this.shippingAddress : this.billingAddress;
 
     const shippingDetails = {
       name: this.name,
@@ -71,10 +95,12 @@ export class ShippingComponent {
       zipCode: this.zipCode,
       countryId: this.selectedCountry?.id || 0,
       countryName: this.selectedCountry?.name || '',
-      countryRate: this.selectedCountry?.rate || 0,
+      countryRate: this.selectedCountry?.shippingRate || 0,
       instructions: instructionsValue,
       giftMessage: messageValue
     };
+
+    console.log(shippingDetails)
     
     this.checkoutService.shippingDetails = shippingDetails;
     this.checkoutService.shippingDetailsChange.emit();
