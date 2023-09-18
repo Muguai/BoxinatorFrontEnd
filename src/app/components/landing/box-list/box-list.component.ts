@@ -20,6 +20,7 @@ import { GridChangeService } from 'src/app/services/grid-change/grid-change.serv
 })
 export class BoxListComponent implements OnInit {
   @ViewChild('grid', { static: true }) gridRef!: ElementRef;
+  @ViewChild('loadingGrid', { static: true }) loadingGridRef!: ElementRef;
   @ViewChild('frozenItems', { static: true }) frozenItemsRef!: ElementRef;
 
   boxes: Box[] = [];
@@ -33,7 +34,7 @@ export class BoxListComponent implements OnInit {
   oldItemPosition: { id: number; top: number; left: number }[] = [];
   isFrozen: boolean = false;
   isResizing: boolean = false;
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   isError: boolean = false;
   private resizeSubject = new Subject<Event>();
 
@@ -47,10 +48,13 @@ export class BoxListComponent implements OnInit {
         this.stopResize();
       });
 
+      
+    
+
   }
 
   async setupBoxes() {
-    this.isLoading = true;
+
     const token = await this.authService.getToken();
 
     this.boxService.getBoxData(token).subscribe({
@@ -81,9 +85,12 @@ export class BoxListComponent implements OnInit {
 
   ngAfterContentInit() {
     
-    this.isLoading = false;
     this.isError = false;
-    this.setupBoxes()
+    this.setupBoxes();
+    
+    setTimeout(() => {
+      this.updateGridSize();
+    }, 1);
   }
 
   gridPosSetup() {
@@ -106,9 +113,9 @@ export class BoxListComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
-    if (!this.isResizing) {
+    if (!this.isResizing && this.isLoading == false) {
       this.startResize();
-    } else {
+    } else if(this.isLoading == false){
       this.resizeSubject.next(event);
     }
     this.updateGridSize();
@@ -146,7 +153,11 @@ export class BoxListComponent implements OnInit {
   }
 
   updateGridSize() {
-    const grid = this.gridRef.nativeElement as HTMLElement;
+    
+    const grid = this.isLoading
+      ? this.loadingGridRef.nativeElement as HTMLElement
+      : this.gridRef.nativeElement as HTMLElement;
+
     const gridComputedStyle = window.getComputedStyle(grid);
 
     this.itemPositions = this.getItemPositions(grid);

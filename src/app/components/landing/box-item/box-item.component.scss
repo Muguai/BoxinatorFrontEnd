@@ -1,6 +1,8 @@
+@import 'src/app/pages/landing/landing.page.scss';
+
 .card {
-  width: 450px;
-  min-height: 550px;
+  width: $cardWidth;
+  min-height: $cardHeight;
   border: thin solid black;
   background-color: white;
   border-width: 3px;
@@ -15,20 +17,14 @@
 }
 
 
-.hover{
+.can-hover{
     /*empty class to simply add/remove hover*/
 }
 
 
-.hover:hover {
+.can-hover:hover {
     box-shadow: 0 10px 14px rgba(0, 0, 0, 0.3);
     scale: 1.05;
-  }
-  
-
-.no-hover:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    scale: 1;
   }
   
 
@@ -47,8 +43,7 @@
 
 .box-info{
     width: 100%;
-    
-    min-height: 150px;
+    min-height: $cardContentHeight;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -110,16 +105,13 @@
     margin-top: 10px;
     width: 200px;
     max-height: 70px;
-
 }
 .content-image{
     cursor: help;
-
     height: 30px;
     width: 30px;
 }
 .box-content-images{
-    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,7 +119,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
     max-height: 40px;
-
 }
 
 .custom-tooltip {
@@ -165,23 +156,21 @@
     box-sizing: border-box;
     background-color: white;
     width: 91%;
-    height: 150px;
+    height: $cardContentHeight + 2px;
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     transform: translateY(0px);
     transition: transform 0.6s ease-out;
-
   }
 
   .back-face{
     position: absolute;
     backface-visibility: hidden; 
     background-color: lightgrey;
-    height: 150px;
+    height: $cardContentHeight;
     border-radius: 5px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -192,36 +181,11 @@
   .card.hovered .front-face {
     transition: transform 0.7s ease-in;
     transform: translateY(-180px);
-
   }
 
   .card:not(.hovered) .front-face {
     transition: transform 0.6s ease-out;
-
     transform: translateY(0px);
-
   }
   
-
-  @keyframes showContentAnimation {
-    0%{
-        transform: translateY(0);
-    }
-
-    100%{
-        transform: translateY(-180px);
-    }
-    
-  }
-
-  @keyframes hideContentAnimation {
-    0%{
-        transform: translateY(-180px);
-    }
-
-    100%{
-        transform: translateY(0);
-    }
-    
-  }
 

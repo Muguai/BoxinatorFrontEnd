@@ -23,15 +23,14 @@ export class ShipmentService {
     return this.http.get<any>(`${apiBaseUrl}/api/Shipments`, { headers });
   }
 
-  getShipmentHistoryOfUser(token: string, userId: number): Observable<any> {
+  getShipmentHistoryOfUser(token: string, userId: string): Observable<any> {
     console.log("THIS IS THE TOKEN " + token);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.get<any>(`${this.apiBaseUrl}/api/Shipments/${userId}/user`, { headers });
-    //api/Shipments/1/user
+    return this.http.get<any>(`${this.apiBaseUrl}/api/Shipments/getbyuseruid/${userId}`, { headers });
   }
 
 

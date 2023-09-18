@@ -1,0 +1,20 @@
+@import 'src/app/pages/landing/landing.page.scss';
+
+
+.loading-card {
+    height: $cardHeight;
+    width: $cardWidth;
+    background: linear-gradient(45deg, #ccc, #ddd, #ccc); 
+    background-size: 200% 200%;
+    border-radius: 5px;
+    animation: gradientAnimation 2s infinite; 
+  }
+  
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
