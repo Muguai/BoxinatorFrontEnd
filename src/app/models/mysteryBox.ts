@@ -1,7 +1,7 @@
 
 export interface Box {
     id: number,
-    boxType: string;
+    boxName: string;
     description: string;
     imageUrl: string;
     price: number;
@@ -17,7 +17,7 @@ export interface Box {
   export const dummyBoxes: Box[] = [
     {
       id: 1,
-      boxType: "Arctic Adventure Box",
+      boxName: "Arctic Adventure Box",
       description: "Exploration gear for the rugged adventurer",
       imageUrl: '/assets/img/Arctic.jpg',
       price: 99.99,
@@ -28,7 +28,7 @@ export interface Box {
     },
     {
       id: 2,
-      boxType: "Hygge Home Box",
+      boxName: "Hygge Home Box",
       description: "Cozy essentials for creating a warm and inviting atmosphere",
       imageUrl: '/assets/img/Home.jpg', 
       price: 88.88,
@@ -39,7 +39,7 @@ export interface Box {
     },
     {
       id: 3,
-      boxType: "Forest Forager Box",
+      boxName: "Forest Forager Box",
       description: "A foraging kit",
       imageUrl: '/assets/img/Forest.jpg', 
       price: 44.88,
@@ -50,7 +50,7 @@ export interface Box {
     },
     {
       id: 4,
-      boxType: "Viking Legends Box",
+      boxName: "Viking Legends Box",
       description: "Items inspired by Viking history and mythology",
       imageUrl: '/assets/img/Viking.jpg', 
       price: 45.88,
@@ -62,7 +62,7 @@ export interface Box {
     },
     {
       id: 5,
-      boxType: "Mystical Fjord Box",
+      boxName: "Mystical Fjord Box",
       description: "Items inspired by the mystery of Scandinavian fjords",
       imageUrl: '/assets/img/Fjord.jpg',
       price: 65.88,
@@ -74,7 +74,7 @@ export interface Box {
     },
     {
       id: 6,
-      boxType: "Midsummer Magic Box",
+      boxName: "Midsummer Magic Box",
       description: "Celebrate the enchanting Swedish Midsummer festival with items like flower crowns",
       imageUrl: '/assets/img/Midsummer.jpg', 
       price: 55.88,
@@ -86,7 +86,7 @@ export interface Box {
     },
     {
       id: 7,
-      boxType: "Nordic Delights Box",
+      boxName: "Nordic Delights Box",
       description: "Gourmet Scandinavian treats",
       imageUrl: '/assets/img/Delights.jpg', 
       price: 66.88,
@@ -98,7 +98,7 @@ export interface Box {
     },
     {
       id: 8,
-      boxType: "Scandinavian Design Box",
+      boxName: "Scandinavian Design Box",
       description: "Chic home decor items that showcase the minimalist elegance of Scandinavian design",
       imageUrl: '/assets/img/Design.jpg', 
       price: 77.88,

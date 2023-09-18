@@ -136,7 +136,7 @@ export class OrderReviewComponent implements OnInit {
 
       for (const box of this.boxes!) {
         let orderBox: OrderContent = {
-          boxName: box.boxType,
+          boxName: box.boxName,
           quantity: box.amount
         }
         this.orderContent.push(orderBox);

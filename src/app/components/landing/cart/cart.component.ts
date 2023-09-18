@@ -102,7 +102,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   deleteItem(box: Box, deleteFully: boolean) {
     const existingBox = this.boxes.find(
-      (existing) => existing.boxType === box.boxType
+      (existing) => existing.boxName === box.boxName
     );
 
     if (existingBox) {
@@ -147,7 +147,7 @@ export class CartComponent implements OnInit, OnDestroy {
     if (this.isDeleting) return;
 
     const existingBox = this.boxes.find(
-      (existing) => existing.boxType === box.boxType
+      (existing) => existing.boxName === box.boxName
     );
 
     if (existingBox) {

@@ -64,6 +64,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DeleteUserPopupComponent } from './components/admin/delete-user-popup/delete-user-popup.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteUserSnackbarComponent } from './components/admin/delete-user-snackbar/delete-user-snackbar.component';
+import { LoadingBoxItemComponent } from './components/landing/loading-box-item/loading-box-item.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { DeleteUserSnackbarComponent } from './components/admin/delete-user-snac
     EditProfilePopupComponent,
     NavbarComponent,
     DeleteUserPopupComponent,
-    DeleteUserSnackbarComponent
+    DeleteUserSnackbarComponent,
+    LoadingBoxItemComponent
   ],
   imports: [
     BrowserModule,

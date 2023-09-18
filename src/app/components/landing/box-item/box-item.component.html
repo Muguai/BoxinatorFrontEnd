@@ -1,4 +1,4 @@
-<div [class.hover]="!disableGrid" class="card" [class.not-hovered]="!hovered"  [class.hovered]="hovered" (mouseenter)="onCardMouseEnter()" (mouseleave)="onCardMouseLeave()">
+<div [class.can-hover]="!disableGrid" class="card" [class.not-hovered]="!hovered"  [class.hovered]="hovered" (mouseenter)="onCardMouseEnter()" (mouseleave)="onCardMouseLeave()">
   <div
     class="image-container"
     [style.background-image]="'url(' + box.imageUrl + ')'"
@@ -7,7 +7,7 @@
   </div>
   <div class="break-line"></div>
   <div class="box-title">
-    <h1>{{ box.boxType }}</h1>
+    <h1>{{ addSpacesToPascalCase(box.boxName) }}</h1>
     <div class="custom-tooltip">
       {{ box.description }}
     </div>

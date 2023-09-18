@@ -24,26 +24,16 @@ export class ShipmentHistoryComponent implements OnInit {
     this.authService.currentUser$.subscribe({
       next: (user: any) => {
         console.log(user);
-        this.userService.getUserData(token, user.uid).subscribe({
-          next: (userData: any) => {
-            console.log(userData.id);
-            this.shipmentService.getShipmentHistoryOfUser(token, userData.id).subscribe({
-              next: (shipmentData: any) => {
-                console.log(shipmentData);
-                this.shipments = shipmentData;
-                this.isLoading = false;
-              },
-              error: (error: any) => {
-                console.log(error);
-                this.isLoading = false;
-              }
-            })
-
+        this.shipmentService.getShipmentHistoryOfUser(token, user.uid).subscribe({
+          next: (shipmentData: any) => {
+            console.log(shipmentData);
+            this.shipments = shipmentData;
+            this.isLoading = false;
           },
           error: (error: any) => {
             console.log(error);
             this.isLoading = false;
-          },
+          }
         });
       },
       error: (error: any) => {

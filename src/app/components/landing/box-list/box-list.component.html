@@ -4,12 +4,12 @@
             Error Loading Page
         </mat-error>
     </div>
-    <div class="prompt-text" *ngIf="isLoading">
-        <p>
-            Loading...
-        </p>
+    <div [class.loading-done]="!isLoading" class="grid-container">
+        <div #loadingGrid class="grid">
+            <app-loading-box-item *ngFor="let _ of [].constructor(10); let i = index"></app-loading-box-item>
+        </div>
     </div>
-    <div class="grid-container">
+    <div class="grid-container"> 
         <div #frozenItems [class.frozen]="isFrozen" class="frozen-items-container">
             <app-box-item  [class.hover]="!isFrozen || isResizing" #boxItem *ngFor="let box of boxes" [box]="box"></app-box-item>
          </div>
