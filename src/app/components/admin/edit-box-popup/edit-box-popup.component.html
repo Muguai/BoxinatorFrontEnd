@@ -3,7 +3,7 @@
         <div class="row-gap">
             <mat-form-field class="full-width">
                 <mat-label>Name</mat-label>
-                <input type="text" matInput required [ngModel]="data.boxName" name="name"
+                <input type="text" matInput required [ngModel]="data.boxName" name="boxName"
                 maxlength="50">
             </mat-form-field>
             <mat-form-field id="price">
@@ -26,7 +26,7 @@
         </div>
         <mat-form-field class="full-width">
             <mat-label>Image URL</mat-label>
-            <input type="text" matInput required [ngModel]="data.imageUrl" name="url"
+            <input type="text" matInput required [ngModel]="data.imageUrl" name="imageUrl"
             maxlength="200">
         </mat-form-field>
         <mat-form-field class="full-width">
@@ -42,7 +42,7 @@
         <div class="row-gap btn-split">
             <button mat-stroked-button [mat-dialog-close] id="cancel">Cancel</button>
             <button mat-flat-button [mat-dialog-close] color="accent"
-            type="submit" [disabled]="editForm.invalid">Save</button>
+            type="submit" [disabled]="editForm.invalid || editForm.untouched">Save</button>
         </div>
     </form>
 </div>
