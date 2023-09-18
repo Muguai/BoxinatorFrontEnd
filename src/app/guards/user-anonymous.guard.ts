@@ -1,7 +1,7 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 import { map, take } from 'rxjs/operators';
 
 export const userAnonymousGuard: CanActivateFn = (route, state) => {

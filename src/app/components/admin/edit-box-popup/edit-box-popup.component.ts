@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Box, dummyBoxes } from 'src/app/models/mysteryBox';
+import { Box } from 'src/app/models/mysteryBox';
 import { NgForm } from '@angular/forms';
+import { BoxType } from 'src/app/models/DTOs/Box/readBoxDTO';
 
 @Component({
   selector: 'app-edit-box-popup',
@@ -9,15 +10,16 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-box-popup.component.scss']
 })
 export class EditBoxPopupComponent {
-  id: number; // USE FOR FUTURE API CALL
   box: Box;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: any) {
-    this.id = data.id;
-    this.box = dummyBoxes[data.id - 1];
+  constructor(@Inject(MAT_DIALOG_DATA) data: Box) {
+    this.box = data;
   }
 
   onSubmit(form: NgForm): void {
-    console.log(form.value); // VALUES FOR PUT REQUEST
+    // VALUES FOR PUT REQUEST
+    console.log(form.value);
+    // convert back to BoxType key
+    console.log(Object.entries(BoxType).find(([, v]) => v === this.box.boxType)![0]);
   }
 }

@@ -13,7 +13,7 @@ export interface ReadUserDTO {
     shipment: number[] | null;
 }
 
-const mockUser: ReadUserDTO = {
+export const mockUser: ReadUserDTO = {
     id: -1, 
     uId: "Loading...", 
     name: "Loading...", 
