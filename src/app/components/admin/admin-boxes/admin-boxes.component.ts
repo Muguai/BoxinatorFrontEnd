@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditBoxPopupComponent } from '../edit-box-popup/edit-box-popup.component';
 import { BoxServiceService } from 'src/app/services/box-service/box-service.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { ReadBoxDTO, BoxType, mockBox } from 'src/app/models/DTOs/Box/readBoxDTO';
+import { ReadBoxDTO, mockBox } from 'src/app/models/DTOs/Box/readBoxDTO';
 
 @Component({
   selector: 'app-admin-boxes',
@@ -26,10 +26,6 @@ export class AdminBoxesComponent implements OnInit {
     const token = await this.authService.getToken();
     this.boxService.getBoxData(token).subscribe({
       next: (res: ReadBoxDTO[]) => {
-        // get corresponding values from BoxType keys
-        for (let box of res) {
-          box.boxType = BoxType[box.boxType as keyof typeof BoxType];
-        }
         this.boxes = res;
       },
       error: err => {

@@ -22,7 +22,7 @@ export class ShippingComponent {
 
   // binding properties
   name: string = '';
-  mail: string = '';
+  email: string = '';
   selectedCountry?: Country;
   shippingAddress: string = '';
   billingAddress: string = '';
@@ -37,7 +37,7 @@ export class ShippingComponent {
       // ADD API CALL TO GET THE DATA BELOW
       if (!user.isAnonymous) {
         this.name = 'John Doe',
-        this.mail = 'john.doe@mail.com',
+        this.email = 'john.doe@mail.com',
         this.shippingAddress = 'Some address',
         this.billingAddress = 'Some address',
         this.zipCode = '12345',
@@ -65,7 +65,7 @@ export class ShippingComponent {
 
     const shippingDetails = {
       name: this.name,
-      mail: this.mail,
+      email: this.email,
       shippingAddress: this.shippingAddress,
       billingAddress: billingAddressValue,
       zipCode: this.zipCode,

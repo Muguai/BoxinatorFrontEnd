@@ -1,8 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BoxType } from 'src/app/models/DTOs/Box/readBoxDTO';
+import { ReadBoxDTO } from 'src/app/models/DTOs/Box/readBoxDTO';
+import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
+import { ReadShipmentDTO } from 'src/app/models/DTOs/Shipment/readShipmentDTO';
+import { ReadUserDTO } from 'src/app/models/DTOs/User/readUserDTO';
 import { Box } from 'src/app/models/mysteryBox';
 import { Order, OrderContent } from 'src/app/models/order';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { BoxServiceService } from 'src/app/services/box-service/box-service.service';
 import { CheckoutService } from 'src/app/services/checkout/checkout.service';
+import { CountryService } from 'src/app/services/country/country.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-order-review',
@@ -10,46 +17,114 @@ import { CheckoutService } from 'src/app/services/checkout/checkout.service';
   styleUrls: ['./order-review.component.scss']
 })
 export class OrderReviewComponent implements OnInit {
-  // order id
-  @Input() id?: number; // USE FOR FUTURE API CALL
+  // potential input from order-review-popup component
+  @Input() shipment?: ReadShipmentDTO; // USE FOR FUTURE API CALL
+  // potential input from checkout component
   @Input() boxes?: Box[];
-  order?: Order;
-  totalCost?: number;
 
-  constructor(private readonly checkoutService: CheckoutService) {}
+  name: string = 'Loading...';
+  email?: string;
+  shippingAddress?: string;
+  billingAddress?: string;
+  zipCode?: string;
+  country: string = 'Loading...';
+  instructions?: string | null;
+  giftMessage?: string | null;
+  orderCost?: number;
+  totalCost?: number;
+  shippingRate: number | 'Loading...' = 'Loading...';
+  orderContent: OrderContent[] = [];
+
+  constructor(private readonly checkoutService: CheckoutService,
+    private readonly authService: AuthenticationService,
+    private readonly userService: UserService, 
+    private readonly countryService: CountryService,
+    private readonly boxService: BoxServiceService) {}
 
   ngOnInit(): void {
-    if (this.id) {
-      this.populateById();
-    } else {
-      this.populateByOrderDetails();
+    if (this.shipment) {
+      this.fetchUser(this.shipment.userId)
+      this.fetchCountry(this.shipment.countryId);
+      this.fetchBoxes(this.shipment.id);
+      this.admin();
+    } else if (this.boxes) {
+      this.checkout();
     }
   }
 
-  private populateById() {
-    // DUMMY POPULATION, USE API DATA LATER
-    this.order = {
-      name: 'John Doe',
-      mail: 'john.doe@mail.com',
-      shippingAddress: 'Some address',
-      billingAddress: 'Some address',
-      zipCode: '12345',
-      country: 'Sweden',
-      instructions: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quo dicta sequi officia fugit. Corporis, facere odit maxime illum hic nesciunt, suscipit deserunt quidem accusantium, enim repellat at animi aliquam.',
-      giftMessage: null,
-      rate: 10,
-      cost: 159,
-      content: [
-        {boxType: BoxType.ArcticAdventureBox, quantity: 1},
-        {boxType: BoxType.ForestForagerBox, quantity: 1}
-      ]
-    };
-    this.totalCost = 169;
+  private async admin() {
+    this.email = this.shipment!.email;
+    this.shippingAddress = this.shipment!.shippingAddress;
+    this.billingAddress = this.shipment!.billingAddress;
+    this.zipCode = this.shipment!.zipCode;
+    this.instructions = this.shipment!.instructions;
+    this.giftMessage = this.shipment!.giftMessage;
+    this.totalCost = this.shipment!.totalCost;
   }
 
-  private populateByOrderDetails() {
+  private async fetchUser(id: number): Promise<void> {
+    const token = await this.authService.getToken();
+    this.userService.getUser(token, id).subscribe({
+      next: (res: ReadUserDTO) => {
+        this.name = res.name;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
+  private async fetchCountry(id: number): Promise<void> {
+    const token = await this.authService.getToken();
+    this.countryService.getCountry(token, id).subscribe({
+      next: (res: ReadCountryDTO) => {
+        this.country = res.name;
+        this.shippingRate = res.shippingRate;
+        this.orderCost = this.shipment!.totalCost - res.shippingRate;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
+  private async fetchBoxes(id: number): Promise<void> {
+    const token = await this.authService.getToken();
+    this.boxService.getShipmentBoxes(token, id).subscribe({
+      next: (res: ReadBoxDTO[]) => {
+        let orderContent: OrderContent[] = [];
+        // find unique names
+        const names = [...new Set(res.map(item => item.boxName))];
+        for (const name of names) {
+          // find all objects that has the name
+          let matches = res.filter(o => o.boxName === name);
+          let orderBox: OrderContent = {
+            boxName: name,
+            quantity: matches!.length
+          }
+          orderContent.push(orderBox);
+        }
+        this.orderContent = orderContent;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
+  private checkout() {
     this.checkoutService.shippingDetailsChange.subscribe(() => {
       const shippingDetailsData = this.checkoutService?.shippingDetails;
+
+      this.name = shippingDetailsData.name;
+      this.email = shippingDetailsData.email;
+      this.shippingAddress = shippingDetailsData.shippingAddress;
+      this.billingAddress = shippingDetailsData.billingAddress;
+      this.zipCode = shippingDetailsData.zipCode;
+      this.country = shippingDetailsData.countryName;
+      this.instructions = shippingDetailsData.instructions;
+      this.giftMessage = shippingDetailsData.giftMessage;
+      this.shippingRate = shippingDetailsData.countryRate;
 
       // calc total price for order
       let orderSum: number = 0;
@@ -58,31 +133,16 @@ export class OrderReviewComponent implements OnInit {
       }
       // round to two decimals
       orderSum = Number(orderSum.toFixed(2));
+      this.orderCost = orderSum;
+      this.totalCost = orderSum + shippingDetailsData?.countryRate;
 
-      // turn to type OrderContent - ONLY FOR DEV PURPOSES
-      let orderContent: OrderContent[] = [];
       for (const box of this.boxes!) {
         let orderBox: OrderContent = {
-          boxType: <BoxType> box.boxType,
+          boxName: box.boxType,
           quantity: box.amount
         }
-        orderContent.push(orderBox);
+        this.orderContent.push(orderBox);
       }
-      
-      this.totalCost = orderSum + shippingDetailsData?.countryRate;
-      this.order = {
-        name: shippingDetailsData?.name,
-        mail: shippingDetailsData?.mail,
-        shippingAddress: shippingDetailsData?.shippingAddress,
-        billingAddress: shippingDetailsData?.billingAddress,
-        zipCode: shippingDetailsData?.zipCode,
-        country: shippingDetailsData?.countryName,
-        instructions: shippingDetailsData?.instructions,
-        giftMessage: shippingDetailsData?.giftMessage,
-        rate: shippingDetailsData?.countryRate,
-        cost: orderSum,
-        content: orderContent
-      };
     });
   }
 }
