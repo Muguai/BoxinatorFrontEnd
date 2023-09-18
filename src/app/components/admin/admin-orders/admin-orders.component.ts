@@ -59,8 +59,15 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   async statusChange(order: ReadShipmentDTO): Promise<void> {
+    const orderCopy = {...order};
+    // convert from ReadShipmentDTO to UpdateShipmentDTO
+    const uDTO = ((rDTO: ReadShipmentDTO) => {
+      delete (rDTO as any).created;
+      return rDTO as UpdateShipmentDTO;
+    })(orderCopy);
+
     const token = await this.authService.getToken();
-    this.shipmentService.putShipment(token, order.id, order).subscribe({
+    this.shipmentService.putShipment(token, order.id, uDTO).subscribe({
       error: err => {
         console.error(err);
       }
