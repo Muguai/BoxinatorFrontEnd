@@ -12,6 +12,16 @@ export class UserService {
   
   constructor(private http: HttpClient) { }
 
+  getUsers(token: string): Observable<any> {
+    console.log("THIS IS THE TOKEN " + token);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(`${this.apiBaseUrl}/api/Users`, { headers });
+  }
+
   getUserData(token: string, userId: string): Observable<any> {
     console.log("THIS IS THE TOKEN " + token);
     const headers = new HttpHeaders({

@@ -1,4 +1,5 @@
-import { BoxType } from "./boxType";
+import { BoxType } from "./DTOs/Box/readBoxDTO";
+
 
 export type Order = {
     name: string,

@@ -9,7 +9,7 @@ import {
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { dummyBoxes, Box } from 'src/app/models/mysteryBox';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { BoxServiceService } from 'src/app/services/box-service/box-service.service';
 import { GridChangeService } from 'src/app/services/grid-change/grid-change.service';
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BoxType } from 'src/app/models/boxType';
+import { BoxType } from 'src/app/models/DTOs/Box/readBoxDTO';
 import { Box } from 'src/app/models/mysteryBox';
 import { Order, OrderContent } from 'src/app/models/order';
 import { CheckoutService } from 'src/app/services/checkout/checkout.service';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfilePopupComponent } from '../edit-profile-popup/edit-profile-popup.component';
 

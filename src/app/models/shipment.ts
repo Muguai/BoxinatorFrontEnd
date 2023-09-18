@@ -1,5 +1,5 @@
+import { Status } from './DTOs/Shipment/readShipmentDTO';
 import { Box, dummyBoxes } from './mysteryBox';
-import { Status } from './status';
 
 export type Shipment = {
   id: number;

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ReadCountryDTO } from 'src/app/models/readCountryDTO';
-import { ReadUserDTO } from 'src/app/models/readUserDTO';
-import { UpdateUserDTO, UserType } from 'src/app/models/updateUserDTO';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { CountryService } from 'src/app/services/country.service';
-import { UserService } from 'src/app/services/user.service';
+import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
+import { ReadUserDTO } from 'src/app/models/DTOs/User/readUserDTO';
+import { UpdateUserDTO, UserType } from 'src/app/models/DTOs/User/updateUserDTO';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { CountryService } from 'src/app/services/country/country.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-edit-profile-popup',

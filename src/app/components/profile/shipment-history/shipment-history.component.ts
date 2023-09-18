@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import dummyShipments, { Shipment } from 'src/app/models/shipment';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ShipmentService } from 'src/app/services/shipment-service/shipment.service';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-shipment-history',
