@@ -15,14 +15,11 @@ export type Shipment = {
   rate: number;
   cost: number;
   status: Status;
-  content: ShipmentContent[];
+  content: Box[]; // Change ShipmentContent[] to Box[]
 };
 
-type ShipmentContent = {
-  Box: Box;
-};
 
-// Dummy shipments
+// Modify your dummy data to match the updated structure
 const dummyShipments: Shipment[] = [
   {
     id: 1,
@@ -38,13 +35,7 @@ const dummyShipments: Shipment[] = [
     rate: 0,
     cost: 0,
     status: Status.Processing,
-    content: [
-      { Box: dummyBoxes[0] },
-      { Box: dummyBoxes[1] },
-      { Box: dummyBoxes[2] },
-      { Box: dummyBoxes[3] },
-      { Box: dummyBoxes[4] },
-    ],
+    content: [dummyBoxes[0], dummyBoxes[1], dummyBoxes[2], dummyBoxes[3], dummyBoxes[4]],
   },
   {
     id: 2,
@@ -60,56 +51,9 @@ const dummyShipments: Shipment[] = [
     rate: 0,
     cost: 0,
     status: Status.Shipped,
-    content: [{ Box: dummyBoxes[1] }, { Box: dummyBoxes[3] }],
+    content: [dummyBoxes[1], dummyBoxes[3]],
   },
-  {
-    id: 3,
-    name: 'Bob Johnson',
-    date: '2023-09-10',
-    shippingAddress: '789 Oak Ave, Unit 3C',
-    billingAddress: '789 Oak Ave, Unit 3C',
-    mail: 'bob.johnson@example.com',
-    zipCode: '54321',
-    country: 'USA',
-    instructions: null,
-    giftMessage: 'Happy Birthday!',
-    rate: 0,
-    cost: 0,
-    status: Status.Delivered,
-    content: [{ Box: dummyBoxes[4] }],
-  },
-  {
-    id: 4,
-    name: 'Eve Wilson',
-    date: '2023-09-11',
-    shippingAddress: '101 Pine Rd, Apt 2D',
-    billingAddress: '101 Pine Rd, Apt 2D',
-    mail: 'eve.wilson@example.com',
-    zipCode: '98765',
-    country: 'USA',
-    instructions: null,
-    giftMessage: null,
-    rate: 0,
-    cost: 0,
-    status: Status.Processing,
-    content: [{ Box: dummyBoxes[5] }],
-  },
-  {
-    id: 5,
-    name: 'Charlie Brown',
-    date: '2023-09-12',
-    shippingAddress: '321 Cedar Ln, House',
-    billingAddress: '321 Cedar Ln, House',
-    mail: 'charlie.brown@example.com',
-    zipCode: '13579',
-    country: 'USA',
-    instructions: 'Deliver after 5 PM',
-    giftMessage: 'Congratulations!',
-    rate: 0,
-    cost: 0,
-    status: Status.Shipped,
-    content: [{ Box: dummyBoxes[6] }],
-  },
+  // Add more shipments here...
 ];
 
 export default dummyShipments;

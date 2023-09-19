@@ -21,7 +21,7 @@ export class ShipmentHistoryItemComponent {
     let total = 0;
 
     this.shipment.content.forEach(element => {
-        total += (element.Box.price * element.Box.amount);
+        total += (element.price * element.amount);
     });
 
     return total;

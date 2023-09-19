@@ -1,4 +1,4 @@
-<div #cartItem [class.remove]="isRemoving" (animationend)="onAnimationEnd($event)" class="cart-item">
+<div #cartItem [@popInOut]="currentState" [class.remove]="isRemoving" (animationend)="onAnimationEnd($event)" class="cart-item">
     <div class="cart-item-info">
         <img draggable="false" class="cart-item-image" [src]="box.imageUrl" alt="{{ box.boxName }}">
         <div class="cart-item-name">

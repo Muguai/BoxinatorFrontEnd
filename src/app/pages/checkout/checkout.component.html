@@ -11,7 +11,8 @@
                     <app-summary [boxes]="boxes" />
                 </mat-card-content>
             </mat-card>
-            <div class="btn-container" id="right">
+            <div class="btn-container split">
+                <button mat-stroked-button routerLink="/" >Cancel</button>
                 <button mat-flat-button color="primary"
             (click)="tabGroup.selectedIndex=1">Next</button>
             </div>

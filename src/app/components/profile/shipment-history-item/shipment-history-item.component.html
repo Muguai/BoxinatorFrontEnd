@@ -42,8 +42,8 @@
         <ul>
           <div [ngStyle]="{ 'margin-top': '2%' }"></div>
           <li *ngFor="let box of shipment.content">
-            {{ box.Box.boxName }} - x {{ box.Box.amount }} - Price:
-            {{ box.Box.price * box.Box.amount }}
+            {{ box.boxName }} - x {{ box.amount }} - Price:
+            {{ box.price * box.amount }}
           </li>
           <div [ngStyle]="{ 'margin-bottom': '2%' }"></div>
         </ul>

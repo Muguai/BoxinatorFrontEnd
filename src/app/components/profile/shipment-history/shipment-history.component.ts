@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import dummyShipments, { Shipment } from 'src/app/models/shipment';
+import { dummyBoxes, Box } from 'src/app/models/mysteryBox';
+import dummyShipments, { Shipment  } from 'src/app/models/shipment';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ShipmentService } from 'src/app/services/shipment-service/shipment.service';
 import { UserService } from 'src/app/services/user/user.service';
-
 @Component({
   selector: 'app-shipment-history',
   templateUrl: './shipment-history.component.html',
@@ -27,7 +27,33 @@ export class ShipmentHistoryComponent implements OnInit {
         this.shipmentService.getShipmentHistoryOfUser(token, user.uid).subscribe({
           next: (shipmentData: any) => {
             console.log(shipmentData);
-            this.shipments = shipmentData;
+
+
+             // Map the received data to the Shipment model
+             this.shipments = shipmentData.map((shipment: any) => {
+              const mappedShipment: Shipment = {
+                id: shipment.id,
+                name: shipment.name,
+                date: shipment.created,
+                shippingAddress: shipment.shippingAddress,
+                billingAddress: shipment.billingAddress,
+                mail: shipment.email,
+                zipCode: shipment.zipCode,
+                country: 'YourCountry', // You need to set the correct country here.
+                instructions: shipment.instructions,
+                giftMessage: shipment.giftMessage,
+                rate: 0, // Set the correct rate if available.
+                cost: shipment.totalCost,
+                status: shipment.status,
+                content: shipment.boxShipments.map((boxShipment: any) => {
+                  const box: Box = boxShipment.box; // Declare box here
+                  box.amount = boxShipment.quantity;
+                  return box;
+                }),
+              };
+              return mappedShipment;
+            });
+            
             this.isLoading = false;
           },
           error: (error: any) => {
