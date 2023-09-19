@@ -12,6 +12,7 @@ import { SignUpPage } from './pages/sign-up/sign-up.page';
 import { LoginPage } from './pages/login/login.page';
 import { ProfilePage } from './pages/profile/profile.page';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -42,7 +43,8 @@ const routes: Routes = [
       {path: 'boxes', component: AdminBoxesComponent},
       {path: 'users', component: AdminUsersComponent},
       {path: 'countries', component: AdminCountriesComponent}
-    ]
+    ],
+    canActivate: [adminGuard]
   },
   {
     path: 'checkout',
