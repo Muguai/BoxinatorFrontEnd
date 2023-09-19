@@ -36,21 +36,23 @@ export class ShippingComponent implements OnInit {
   ngOnInit(): void {
     this.authService.currentUser$.subscribe((user) => {
       if (!user.isAnonymous) {
-        this.fetchUser(1);
+        this.fetchUser(user.uid);
       }
+      this.fetchCountries();
     });
   }
 
-  private async fetchUser(id: number): Promise<void> {
+  private async fetchUser(id: string): Promise<void> {
     const token = await this.authService.getToken();
-    this.userService.getUser(token, id).subscribe({
+    this.userService.getUserData(token, id).subscribe({
       next: (res: ReadUserDTO) => {
+        console.log(res)
         this.name = res.name;
         this.email = res.email;
         this.shippingAddress = res.shippingAddress;
         this.billingAddress = res.billingAddress;
         this.zipCode = res.zipCode;
-        this.fetchCountries(5);
+        this.fetchCountries(this.countryId);
       },
       error: err => {
         console.error(err);
@@ -58,16 +60,18 @@ export class ShippingComponent implements OnInit {
     });
   }
 
-  private async fetchCountries(savedUserCountryId: number): Promise<void> {
+  private async fetchCountries(savedUserCountryId?: number): Promise<void> {
     const token = await this.authService.getToken();
-    this.countryService.getCountriesExcludingScandinavia(token).subscribe({
+    this.countryService.getCountries(token).subscribe({
       next: (res: ReadCountryDTO[]) => {
         this.countries = res;
-        // find matching country object
-        this.selectedCountry = this.countries.find(c => c.id === savedUserCountryId);
-        this.save();
-        // auto populated form counts as invalid, so manually set
-        this.checkoutService.activateReviewPaymentTabs = true;
+        if (savedUserCountryId) {
+          // find matching country object
+          this.selectedCountry = this.countries.find(c => c.id === savedUserCountryId);
+          this.save();
+          // auto populated form counts as invalid, so manually set
+          this.checkoutService.activateReviewPaymentTabs = true;
+        }
       },
       error: err => {
         console.error(err);
@@ -99,8 +103,6 @@ export class ShippingComponent implements OnInit {
       instructions: instructionsValue,
       giftMessage: messageValue
     };
-
-    console.log(shippingDetails)
     
     this.checkoutService.shippingDetails = shippingDetails;
     this.checkoutService.shippingDetailsChange.emit();

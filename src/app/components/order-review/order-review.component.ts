@@ -48,6 +48,7 @@ export class OrderReviewComponent implements OnInit {
       this.fetchBoxes(this.shipment.id);
       this.admin();
     } else if (this.boxes) {
+      console.log('guest')
       this.checkout();
     }
   }
@@ -134,6 +135,7 @@ export class OrderReviewComponent implements OnInit {
       this.orderCost = orderSum;
       this.totalCost = orderSum + shippingDetailsData?.countryRate;
 
+      this.orderContent = [];
       for (const box of this.boxes!) {
         let orderBox: OrderContent = {
           boxName: box.boxName,
