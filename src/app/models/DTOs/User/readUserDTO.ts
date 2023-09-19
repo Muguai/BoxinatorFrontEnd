@@ -1,3 +1,5 @@
+import { UserType } from "../../userType";
+
 export interface ReadUserDTO {
     id: number
     uId: string
@@ -8,6 +10,7 @@ export interface ReadUserDTO {
     zipCode: string | null;
     phoneNumber: string | null;
     birthDate: Date | null;
+    userType?: UserType | null;
     countryId: number | null;
     isActive: string;
     shipment: number[] | null;

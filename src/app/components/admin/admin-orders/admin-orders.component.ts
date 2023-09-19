@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderReviewPopupComponent } from '../order-review-popup/order-review-popup.component';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { ReadShipmentDTO } from 'src/app/models/DTOs/Shipment/readShipmentDTO';
+import { ReadShipmentDTO, mockShipment } from 'src/app/models/DTOs/Shipment/readShipmentDTO';
 import { ShipmentService } from 'src/app/services/shipment-service/shipment.service';
 import { Status } from 'src/app/models/status';
 import { UpdateShipmentDTO } from 'src/app/models/DTOs/Shipment/updateShipmentDTO';
@@ -15,7 +15,7 @@ import { UpdateShipmentDTO } from 'src/app/models/DTOs/Shipment/updateShipmentDT
 export class AdminOrdersComponent implements OnInit {
   // controls which columns to render and in what order
   displayedColumns: string[] = ['order', 'date', 'user', 'details', 'status'];
-  orders: ReadShipmentDTO[] = [];
+  orders: ReadShipmentDTO[] = [mockShipment];
   // array with Status values
   statuses: any[] = [];
   

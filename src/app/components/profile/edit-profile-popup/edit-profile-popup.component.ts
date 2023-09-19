@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
 import { ReadUserDTO } from 'src/app/models/DTOs/User/readUserDTO';
-import {
-  UpdateUserDTO,
-  UserType,
-} from 'src/app/models/DTOs/User/updateUserDTO';
+import { UpdateUserDTO } from 'src/app/models/DTOs/User/updateUserDTO';
+import { UserType } from 'src/app/models/userType';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CountryService } from 'src/app/services/country/country.service';
 import { UserService } from 'src/app/services/user/user.service';
