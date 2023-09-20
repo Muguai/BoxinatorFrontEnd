@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CartService } from 'src/app/services/cart-service/cart-serivce.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { map, switchMap } from 'rxjs/operators';
+import { from, catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +18,7 @@ export class NavbarComponent {
   cartAmount: number = 0;
   
 
-  constructor(public authService: AuthenticationService, private router: Router, private cartService: CartService){
+  constructor(private userService: UserService ,public authService: AuthenticationService, private router: Router, private cartService: CartService){
 
     this.cartService.cartAmountChange.subscribe((amount) => {
       this.setCartAmount(amount);

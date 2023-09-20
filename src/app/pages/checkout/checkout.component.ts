@@ -56,6 +56,10 @@ export class CheckoutComponent implements OnInit {
         this.userService.getUserData(token, user.uid).subscribe({
           next: (userData: any) => {
             const userId = userData.id;
+            if(userData.id === null){
+              console.log("ERROR userid is null");
+              return;
+            }
     
             this.handleOrder(this.createShipmentDto(userId), token);
           },
