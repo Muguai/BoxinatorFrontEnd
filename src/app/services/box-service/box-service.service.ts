@@ -24,6 +24,17 @@ export class BoxServiceService {
     return this.http.get<any>(`${this.apiBaseUrl}/api/Boxes`, { headers });
   }
 
+  getBoxById(token: string, id: number): Observable<any> {
+    console.log("THIS IS THE TOKEN " + token);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<any>(`${this.apiBaseUrl}/api/Boxes/${id}`, { headers });
+  }
+
   getShipmentBoxes(token: string, id: number): Observable<any> {
     console.log("THIS IS THE TOKEN " + token);
 

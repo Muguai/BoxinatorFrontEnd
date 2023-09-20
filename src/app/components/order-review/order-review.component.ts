@@ -43,7 +43,8 @@ export class OrderReviewComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.shipment) {
-      this.fetchUser(this.shipment.userId)
+      console.log(this.shipment)
+      this.fetchUser(this.shipment.userId);
       this.fetchCountry(this.shipment.countryId);
       this.fetchBoxes(this.shipment.id);
       this.admin();
@@ -92,17 +93,21 @@ export class OrderReviewComponent implements OnInit {
   private async fetchBoxes(id: number): Promise<void> {
     const token = await this.authService.getToken();
     this.boxService.getShipmentBoxes(token, id).subscribe({
-      next: (res: ReadBoxDTO[]) => {
-        // find unique names
-        const names = [...new Set(res.map(item => item.boxName))];
-        for (const name of names) {
-          // find all objects that has the name
-          let matches = res.filter(o => o.boxName === name);
-          let orderBox: OrderContent = {
-            boxName: name,
-            quantity: matches!.length
-          }
-          this.orderContent.push(orderBox);
+      next: async res => {
+        for (const box of res) {
+          this.boxService.getBoxById(token, box.boxId).subscribe({
+            next: boxData => {
+              let orderBox: OrderContent = {
+                boxName: boxData.boxName,
+                quantity: box.quantity
+              }
+              this.orderContent.push(orderBox);
+              if (this.totalCost === 0) {
+                this.totalCost += boxData.price*box.quantity;
+                this.orderCost! += boxData.price*box.quantity;
+              }
+            }
+          });
         }
       },
       error: err => {
