@@ -2,7 +2,7 @@
     <mat-form-field class="fullWidth">
         <mat-label>Name</mat-label>
         <input matInput type="text" required [(ngModel)]="name" (change)="inputChange()"
-        minlength="5" name="name">
+        minlength="1" name="name">
     </mat-form-field>
     <mat-form-field class="fullWidth">
         <mat-label>Email</mat-label>
@@ -12,12 +12,12 @@
     <mat-form-field class="fullWidth">
         <mat-label>Shipping Address</mat-label>
         <input matInput type="text" required [(ngModel)]="shippingAddress" (change)="inputChange()"
-        minlength="8" name="shippingAddress">
+        minlength="4" name="shippingAddress">
     </mat-form-field>
     <mat-form-field class="fullWidth">
         <mat-label>Billing Address</mat-label>
         <input matInput type="text" [(ngModel)]="billingAddress" (change)="inputChange()"
-        minlength="8" name="billingAddress">
+        minlength="4" name="billingAddress">
         <mat-hint>If billing address is left empty, shipping address will be used</mat-hint>
     </mat-form-field>
     <div class="split">

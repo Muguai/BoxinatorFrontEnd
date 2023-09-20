@@ -8,8 +8,8 @@ export interface CreateShipmentDTO {
     instructions: string | null;
     giftMessage: string | null;
     userId: number | null; 
-    countryId: number;
-    BoxShipments: BoxInfo[]; 
+    countryId: number | null;
+    BoxShipments: BoxInfo[] | null; 
 }
 
 export interface BoxInfo{

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
 import { dummyBoxes, Box } from 'src/app/models/mysteryBox';
 import dummyShipments, { Shipment  } from 'src/app/models/shipment';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { CountryService } from 'src/app/services/country/country.service';
 import { ShipmentService } from 'src/app/services/shipment-service/shipment.service';
 import { UserService } from 'src/app/services/user/user.service';
 @Component({
@@ -12,14 +14,25 @@ import { UserService } from 'src/app/services/user/user.service';
 export class ShipmentHistoryComponent implements OnInit {
 
   shipments: Shipment[] = [];
+  countries: ReadCountryDTO[] = [];
+
   isLoading: boolean = false;
-  constructor(private authService: AuthenticationService, private userService: UserService, private shipmentService: ShipmentService) {
+  constructor(private countryService:CountryService,private authService: AuthenticationService, private userService: UserService, private shipmentService: ShipmentService) {
 
   }
 
   async ngOnInit(): Promise<void> {
     this.isLoading = true;
     const token = await this.authService.getToken();
+    this.countryService.getCountries(token).subscribe({
+      next: (countries: any) => {
+        console.log(countries);
+        this.countries = countries;
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
 
     this.authService.currentUser$.subscribe({
       next: (user: any) => {
@@ -39,10 +52,10 @@ export class ShipmentHistoryComponent implements OnInit {
                 billingAddress: shipment.billingAddress,
                 mail: shipment.email,
                 zipCode: shipment.zipCode,
-                country: 'YourCountry', // You need to set the correct country here.
+                country: this.countries[shipment.countryId].name,
                 instructions: shipment.instructions,
                 giftMessage: shipment.giftMessage,
-                rate: 0, // Set the correct rate if available.
+                rate: this.countries[shipment.countryId].shippingRate, 
                 cost: shipment.totalCost,
                 status: shipment.status,
                 content: shipment.boxShipments.map((boxShipment: any) => {

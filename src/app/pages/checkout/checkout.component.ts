@@ -36,7 +36,6 @@ export class CheckoutComponent implements OnInit {
 
   async placeOrder() {
     console.log(this.checkoutService.shippingDetails);
-    const details = this.checkoutService.shippingDetails;
     console.log(this.boxes);
     this.isLoading = true;
     this.isError = false;
@@ -45,28 +44,20 @@ export class CheckoutComponent implements OnInit {
 
     this.authService.currentUser$.subscribe({
       next: (user: any) => {
+
+        console.log(user)
+
+        if(user.isAnonymous){
+          console.log("User is anonymous");
+          this.handleOrder(this.createShipmentDto(6), token);
+          return;
+        }
+
         this.userService.getUserData(token, user.uid).subscribe({
           next: (userData: any) => {
             const userId = userData.id;
-
-            const shipmentDTO: CreateShipmentDTO = {
-              email: details.email,
-              shippingAddress: details.shippingAddress,
-              billingAddress: details.billingAddress,
-              zipCode: details.zipCode,
-              instructions: details.instructions,
-              giftMessage: details.giftMessage,
-              userId: userId,
-              countryId: details.countryId,
-              BoxShipments: this.boxes.map((box) => ({
-                boxId: box.id,
-                quantity: box.amount, 
-              })),
-            };
-
-            console.log("BOx list ", shipmentDTO);
     
-            this.handleOrder(shipmentDTO, token);
+            this.handleOrder(this.createShipmentDto(userId), token);
           },
           error: (error: any) => {
             console.log(error);
@@ -85,20 +76,44 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  createShipmentDto(userId: any) {
+    const details = this.checkoutService.shippingDetails;
+
+    const shipmentDTO: CreateShipmentDTO = {
+      email: details.email,
+      shippingAddress: details.shippingAddress,
+      billingAddress: details.billingAddress,
+      zipCode: details.zipCode,
+      instructions: details.instructions,
+      giftMessage: details.giftMessage,
+      userId: userId,
+      countryId: details.countryId,
+      BoxShipments: this.boxes.map((box) => ({
+        boxId: box.id,
+        quantity: box.amount, 
+      })),
+    };
+    console.log( this.boxes.map((box) => ({
+      boxId: box.id,
+      quantity: box.amount, 
+    })),)
+    return shipmentDTO;
+  }
+
   async handleOrder(
     shipmentDTO: CreateShipmentDTO,
     token: string
   ): Promise<void> {
 
     console.log(shipmentDTO);
-    console.log("gets here");
 
     this.shipmentService.postShipment(token, shipmentDTO).subscribe({
       next: (response: any) => {
         console.log(response);
-        this.router.navigateByUrl('/');
+        sessionStorage.removeItem("cartData");
         this.isLoading = false;
         this.isError = false;
+        this.router.navigateByUrl('/');
       },
       error: (error: any) => {
         console.log(error);

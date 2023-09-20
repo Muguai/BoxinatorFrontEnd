@@ -45,13 +45,15 @@ export class ShipmentService {
     return this.http.put<any>(`${this.apiBaseUrl}/api/Shipments/${id}`, shipment, { headers });
   }
 
-  postShipment(token: string, shipment: CreateShipmentDTO){
+  postShipment(token: string, shipment: CreateShipmentDTO): Observable<any>{
     console.log("THIS IS THE TOKEN " + token);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     });
     
-    return this.http.post<any>(`${this.apiBaseUrl}/api/Shipments`, shipment, { headers });
+    return this.http.post<any>(`${this.apiBaseUrl}/api/Shipments/add`, shipment, { headers });
   }
+
+
 }
