@@ -85,6 +85,7 @@ export class EditProfilePopupComponent implements OnInit {
           next: (userData: any) => {
             console.log(userData.id);
             this.currentUser = userData;
+            this.selectedCountryId = userData.countryId;
             this.currentUserUid = user.uid;
             this.isLoading = false;
             clearInterval(intervalId);
@@ -154,7 +155,7 @@ export class EditProfilePopupComponent implements OnInit {
         zipCode: this.currentUser!.zipCode,
         phoneNumber: this.currentUser!.phoneNumber,
         birthDate: this.currentUser!.birthDate,
-        userType: UserType.User,
+        userType: this.currentUser!.userType,
         isActive: this.currentUser!.isActive,
         countryId: this.selectedCountryId || null,
       };

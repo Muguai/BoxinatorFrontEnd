@@ -52,10 +52,10 @@ export class ShipmentHistoryComponent implements OnInit {
                 billingAddress: shipment.billingAddress,
                 mail: shipment.email,
                 zipCode: shipment.zipCode,
-                country: this.countries[shipment.countryId].name,
+                country: this.countries[shipment.countryId - 1].name,
                 instructions: shipment.instructions,
                 giftMessage: shipment.giftMessage,
-                rate: this.countries[shipment.countryId].shippingRate, 
+                rate: this.countries[shipment.countryId - 1].shippingRate, 
                 cost: shipment.totalCost,
                 status: shipment.status,
                 content: shipment.boxShipments.map((boxShipment: any) => {
