@@ -49,7 +49,7 @@ export class CheckoutComponent implements OnInit {
 
         if(user.isAnonymous){
           console.log("User is anonymous");
-          this.handleOrder(this.createShipmentDto(6), token);
+          this.handleOrder(this.createShipmentDto(null), token);
           return;
         }
 
@@ -89,12 +89,12 @@ export class CheckoutComponent implements OnInit {
       email: details.email,
       shippingAddress: details.shippingAddress,
       billingAddress: details.billingAddress,
-      zipCode: details.zipCode,
+      zipCode: details.zipCode.toString(),
       instructions: details.instructions,
       giftMessage: details.giftMessage,
       userId: userId,
       countryId: details.countryId,
-      BoxShipments: this.boxes.map((box) => ({
+      boxShipments: this.boxes.map((box) => ({
         boxId: box.id,
         quantity: box.amount, 
       })),

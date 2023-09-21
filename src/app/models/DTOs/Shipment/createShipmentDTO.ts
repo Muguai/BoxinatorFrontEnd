@@ -9,7 +9,7 @@ export interface CreateShipmentDTO {
     giftMessage: string | null;
     userId: number | null; 
     countryId: number | null;
-    BoxShipments: BoxInfo[] | null; 
+    boxShipments: BoxInfo[] | null; 
 }
 
 export interface BoxInfo{
