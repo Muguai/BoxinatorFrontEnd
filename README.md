@@ -50,3 +50,31 @@ This project uses [BoxinatorBackEnd](https://github.com/dennis-schill-experis/Bo
 - Elina Eriksson @ee223mz.
 - Fredrik Hammar @Muguai.
 - Dennis Schill @dennis-schill-experis.
+
+## Screenshots / Gifs
+
+### Landing Page
+
+![LandingPage2](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/a5771c99-e86c-48e2-8dcf-cd32262e0023)
+
+### Profile Page
+
+![ProfilePage](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/6a7cefba-535a-49e8-bebd-6bba79d3fa8d)
+
+### Login Page
+
+![login](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/ef20b22f-6a31-4322-997e-631fa6db0a5e)
+
+### Signout Page
+
+![signin](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/134ce64f-2a21-4337-8280-4b33083eed84)
+
+### Checkout Page
+
+![CheckoutPage](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/0c72fe64-67b2-4acf-9134-a52fc5ae3fcc)
+
+### Admin Page
+
+
+
+
