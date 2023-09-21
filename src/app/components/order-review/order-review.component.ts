@@ -30,9 +30,9 @@ export class OrderReviewComponent implements OnInit {
   country: string = 'Loading...';
   instructions?: string | null;
   giftMessage?: string | null;
-  orderCost?: number;
-  totalCost?: number;
-  shippingRate: number | 'Loading...' = 'Loading...';
+  orderCost: number = 0;
+  totalCost: number = 0;
+  shippingRate: number = 0;
   orderContent: OrderContent[] = [];
 
   constructor(private readonly checkoutService: CheckoutService,
@@ -43,13 +43,11 @@ export class OrderReviewComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.shipment) {
-      console.log(this.shipment)
       this.fetchUser(this.shipment.userId);
       this.fetchCountry(this.shipment.countryId);
       this.fetchBoxes(this.shipment.id);
       this.admin();
     } else if (this.boxes) {
-      console.log('guest')
       this.checkout();
     }
   }
@@ -61,7 +59,6 @@ export class OrderReviewComponent implements OnInit {
     this.zipCode = this.shipment!.zipCode;
     this.instructions = this.shipment!.instructions;
     this.giftMessage = this.shipment!.giftMessage;
-    this.totalCost = this.shipment!.totalCost;
   }
 
   private async fetchUser(id: number): Promise<void> {
@@ -82,7 +79,7 @@ export class OrderReviewComponent implements OnInit {
       next: (res: ReadCountryDTO) => {
         this.country = res.name;
         this.shippingRate = res.shippingRate;
-        this.orderCost = this.shipment!.totalCost - res.shippingRate;
+        this.totalCost = res.shippingRate;
       },
       error: err => {
         console.error(err);
@@ -102,10 +99,8 @@ export class OrderReviewComponent implements OnInit {
                 quantity: box.quantity
               }
               this.orderContent.push(orderBox);
-              if (this.totalCost === 0) {
-                this.totalCost += boxData.price*box.quantity;
-                this.orderCost! += boxData.price*box.quantity;
-              }
+              this.totalCost += boxData.price*box.quantity;
+              this.orderCost! += boxData.price*box.quantity;
             }
           });
         }

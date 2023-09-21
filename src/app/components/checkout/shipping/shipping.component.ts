@@ -46,13 +46,12 @@ export class ShippingComponent implements AfterViewInit {
     const token = await this.authService.getToken();
     this.userService.getUserData(token, id).subscribe({
       next: (res: ReadUserDTO) => {
-        console.log(res)
         this.name = res.name;
         this.email = res.email;
         this.shippingAddress = res.shippingAddress;
         this.billingAddress = res.billingAddress;
         this.zipCode = res.zipCode;
-        this.fetchCountries(this.countryId);
+        this.fetchCountries(res.countryId);
       },
       error: err => {
         console.error(err);
@@ -60,7 +59,7 @@ export class ShippingComponent implements AfterViewInit {
     });
   }
 
-  private async fetchCountries(savedUserCountryId?: number): Promise<void> {
+  private async fetchCountries(savedUserCountryId?: number | null): Promise<void> {
     const token = await this.authService.getToken();
     this.countryService.getCountries(token).subscribe({
       next: (res: ReadCountryDTO[]) => {
@@ -69,8 +68,10 @@ export class ShippingComponent implements AfterViewInit {
           // find matching country object
           this.selectedCountry = this.countries.find(c => c.id === savedUserCountryId);
           this.save();
-          // auto populated form counts as invalid, so manually set
-          this.checkoutService.activateReviewPaymentTabs = true;
+          // auto populated form with all required fields still counts as invalid, so a check for inputs is made instead
+          this.checkoutService.activateReviewPaymentTabs = this.checkoutService.checkInput(
+            [this.name, this.email, this.shippingAddress, this.zipCode, this.countryId]
+          );
         }
       },
       error: err => {

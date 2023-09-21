@@ -10,4 +10,11 @@ export class CheckoutService {
   activateReviewPaymentTabs: boolean = false;
 
   constructor() { }
+
+  checkInput(inputs: any[]): boolean {
+    if (inputs.includes(null) || inputs.includes('') || inputs.includes(undefined)) {
+      return false;
+    }
+    return true;
+  }
 }

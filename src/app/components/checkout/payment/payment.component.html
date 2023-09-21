@@ -2,7 +2,7 @@
     <mat-form-field class="fullWidth">
         <mat-label>Name on Card</mat-label>
         <input matInput type="text" required ngModel (change)="checkValid()"
-        minlength="5" name="name">
+        minlength="1" name="name">
     </mat-form-field>
     <div class="fullWidth split">
         <mat-form-field id="card">
@@ -38,7 +38,7 @@
         <mat-form-field id="year">
             <mat-label>Expiration Year</mat-label>
             <input matInput type="number" required ngModel (change)="checkValid()"
-            min="2023" max="2033" name="year">
+            min="2024" max="2034" name="year">
         </mat-form-field>
     </div>
 </form>
