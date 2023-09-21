@@ -90,5 +90,9 @@ export class NavbarComponent implements OnInit {
     this.cartAmount = cartAmount;
   }
 
+  isOnCheckout(){
+    return this.router.url.includes('/payment-complete') || this.router.url.includes('/checkout') ;
+  }
+
 
 }

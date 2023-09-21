@@ -35,9 +35,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   async placeOrder() {
+    this.isLoading = true;
+
     console.log(this.checkoutService.shippingDetails);
     console.log(this.boxes);
-    this.isLoading = true;
     this.isError = false;
 
     const token = await this.authService.getToken();

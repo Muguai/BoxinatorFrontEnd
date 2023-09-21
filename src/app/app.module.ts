@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -21,7 +20,6 @@ import { RouterModule } from '@angular/router';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { MatMenuItem, MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
-import { TestAuthenticationWeatherComponent } from './components/test-authentication-weather/test-authentication-weather.component';
 import { CartComponent } from './components/landing/cart/cart.component';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -65,14 +63,13 @@ import { DeleteUserPopupComponent } from './components/admin/delete-user-popup/d
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteUserSnackbarComponent } from './components/admin/delete-user-snackbar/delete-user-snackbar.component';
 import { LoadingBoxItemComponent } from './components/landing/loading-box-item/loading-box-item.component';
+import { PaymentCompletePage } from './pages/payment-complete/payment-complete.page';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpFormComponent,
     LoginFormComponent,
-    HomeComponent,
-    TestAuthenticationWeatherComponent,
     CartComponent,
     AdminComponent,
     AdminOrdersComponent,
@@ -104,7 +101,8 @@ import { LoadingBoxItemComponent } from './components/landing/loading-box-item/l
     NavbarComponent,
     DeleteUserPopupComponent,
     DeleteUserSnackbarComponent,
-    LoadingBoxItemComponent
+    LoadingBoxItemComponent,
+    PaymentCompletePage
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,9 @@ import { LoginPage } from './pages/login/login.page';
 import { ProfilePage } from './pages/profile/profile.page';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { adminGuard } from './guards/admin.guard';
+import { userProfileGuard } from './guards/profile-guard.guard';
+import { PaymentCompletePage } from './pages/payment-complete/payment-complete.page';
+
 
 const routes: Routes = [
   {
@@ -32,7 +35,12 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfilePage
+    component: ProfilePage,
+    canActivate: [userProfileGuard]
+  },
+  {
+    path: 'completepay',
+    component: PaymentCompletePage
   },
   {
     path: 'admin',
@@ -49,7 +57,7 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
-  }
+  },
 ];
 
 @NgModule({

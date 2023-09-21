@@ -27,13 +27,13 @@
       <div class="toolbar-guest-buttons">
         Guest
         <!--Login button-->
-        <ng-container *ngIf="isOnSignUpPage() || isOnHomePage()">
+        <ng-container *ngIf="isOnSignUpPage() || isOnHomePage() || isOnCheckout()">
           <button mat-button class="smaller-mat-buttons" routerLink="/login">
             <mat-icon>login</mat-icon>
           </button>
         </ng-container>
         <!--Sign up button-->
-        <ng-container *ngIf="isOnLoginPage() || isOnHomePage()">
+        <ng-container *ngIf="isOnLoginPage() || isOnHomePage() || isOnCheckout()">
           <button mat-button class="smaller-mat-buttons" routerLink="/signup">
             <mat-icon>follow_the_signs</mat-icon>
           </button>

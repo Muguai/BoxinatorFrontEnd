@@ -67,7 +67,7 @@
             <div class="btn-container split">
                 <button mat-stroked-button
                 (click)="tabGroup.selectedIndex=2">Previous</button>
-                <button mat-flat-button color="primary" [disabled]="!checkoutService.activatePlaceOrderBtn"
+                <button  mat-flat-button color="primary" [disabled]="!checkoutService.activatePlaceOrderBtn || isLoading"
                 (click)="placeOrder()">Place Order</button>
             </div>
         </div>
