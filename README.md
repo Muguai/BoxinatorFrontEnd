@@ -11,11 +11,13 @@ A Boxinator user have three possible roles with varying features available:
     - place order
     - view order history
     - save user details
+    - claim packages
 - Admin
     - sign in
     - place order
     - view order history
     - save user details
+    - claim packages
     - view users
     - edit user active status
     - make users admin
