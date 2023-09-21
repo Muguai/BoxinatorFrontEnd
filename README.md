@@ -1,27 +1,48 @@
-# NgProducts
+# <img width="198" alt="Boxinator" src="https://github.com/Muguai/BoxinatorFrontEnd/src/assets/img/logo.png">
+Boxinator is a software solution designed to revolutionize the world of logistics by shipping mystery boxes from the beautiful lands of Scandinavia to destinations around the globe.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.5.
+## Features and Usage
+A Boxinator user have three possible roles with varying features available:
+- Guest
+    - place order
+    - register as user
+- User
+    - sign in
+    - place order
+    - view order history
+    - save user details
+- Admin
+    - sign in
+    - place order
+    - view order history
+    - save user details
+    - view users
+    - edit user active status
+    - make users admin
+    - (soft) delete users
+    - restore users (within 10 seconds)
+    - edit boxes info
+    - view all orders
+    - edit orders' statuses
+    - edit shipping rates
 
-## Development server
+## Installation and deployment
+Clone to a local directory:  
+```bash
+git clone https://github.com/Muguai/BoxinatorFrontEnd
+```
+
+Thereafter run the following command to install the required packages:
+```bash
+npm install
+```
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Requirements
+This project uses [BoxinatorBackEnd](https://github.com/dennis-schill-experis/BoxinatorBackEnd) to handle data. For the full experience follow that guide and create your own back-end. When that is done go into *src/app/consts* folder (front-end project) and edit the *urls.ts* file and switch to your localhost url.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Authors
+- Elina Eriksson @ee223mz.
+- Fredrik Hammar @Muguai.
+- Dennis Schill @dennis-schill-experis.
