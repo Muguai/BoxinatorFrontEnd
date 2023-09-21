@@ -25,6 +25,8 @@ A Boxinator user have three possible roles with varying features available:
     - view all orders
     - edit orders' statuses
     - edit shipping rates
+ 
+  More information can be found in the user manual in the Documentation folder.
 
 ## Installation and deployment
 Clone to a local directory:  
