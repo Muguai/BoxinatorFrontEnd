@@ -180,7 +180,11 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   getTotalPrice(): number {
-    let totalPrice = 0;
+    let totalPrice = 0.00;
+
+    if(this.boxes === undefined || this.boxes === null){
+      return 0.00;
+    }
   
     for (const box of this.boxes) {
       totalPrice += box.amount * box.price;

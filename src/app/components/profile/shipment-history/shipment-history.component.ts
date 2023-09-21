@@ -18,7 +18,12 @@ export class ShipmentHistoryComponent implements OnInit {
 
   isLoading: boolean = false;
   constructor(private countryService:CountryService,private authService: AuthenticationService, private userService: UserService, private shipmentService: ShipmentService) {
+   
 
+    this.shipmentService.updateShipmentEmailComplete.subscribe(() => {
+      console.log("gets here");
+      this.claimPackageComplete();
+    });
   }
 
   async ngOnInit(): Promise<void> {
@@ -38,6 +43,11 @@ export class ShipmentHistoryComponent implements OnInit {
   
   }
 
+  async claimPackageComplete(){
+    const token = await this.authService.getToken();
+    this.addHistoryItem(token);
+  }
+
   async addHistoryItem(token: string){
     this.authService.currentUser$.subscribe({
       next: (user: any) => {
@@ -46,8 +56,6 @@ export class ShipmentHistoryComponent implements OnInit {
           next: (shipmentData: any) => {
             console.log(shipmentData);
 
-
-             // Map the received data to the Shipment model
              this.shipments = shipmentData.map((shipment: any) => {
               const mappedShipment: Shipment = {
                 id: shipment.id,
@@ -64,7 +72,7 @@ export class ShipmentHistoryComponent implements OnInit {
                 cost: shipment.totalCost,
                 status: shipment.status,
                 content: shipment.boxShipments.map((boxShipment: any) => {
-                  const box: Box = boxShipment.box; // Declare box here
+                  const box: Box = boxShipment.box; 
                   box.amount = boxShipment.quantity;
                   return box;
                 }),

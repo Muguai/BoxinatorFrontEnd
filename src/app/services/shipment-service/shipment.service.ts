@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiBaseUrl } from 'src/app/consts/urls';
 import { CreateShipmentDTO } from 'src/app/models/DTOs/Shipment/createShipmentDTO';
@@ -12,6 +12,8 @@ import { UpdateShipmentDTO } from 'src/app/models/DTOs/Shipment/updateShipmentDT
 export class ShipmentService {
 
   private apiBaseUrl = apiBaseUrl;
+  updateShipmentEmailComplete = new EventEmitter();
+
 
   constructor(private http: HttpClient) { }
 
@@ -54,6 +56,20 @@ export class ShipmentService {
     
     return this.http.post<any>(`${this.apiBaseUrl}/api/Shipments/add`, shipment, { headers });
   }
+
+  updateShipmentsByUserEmail(token: string, userUid: string): Observable<any> {
+    console.log("THIS IS THE TOKEN " + token);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+    const url = `${this.apiBaseUrl}/api/Shipments/updatebyuseremail?userUid=${userUid}`;
+
+    return this.http.put<any>(url, null, { headers });
+  }
+
+  
 
 
 }

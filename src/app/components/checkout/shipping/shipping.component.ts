@@ -38,7 +38,7 @@ export class ShippingComponent implements AfterViewInit {
       if (!user.isAnonymous) {
         this.fetchUser(user.uid);
       }
-      this.fetchCountries();
+      this.fetchCountries(null);
     });
   }
 

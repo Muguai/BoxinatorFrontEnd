@@ -34,7 +34,7 @@
       <div class="order-header">
         <p>Order</p>
         <p>
-          {{ shipment.content === null ? "N/A" : getShipmentTotalCost() }}
+          {{ shipment.content === null ? "N/A" : getShipmentTotalCost() | number: '1.0-2' }} 
         </p>
       </div>
       <div class="shipment-details-highlight">
@@ -42,7 +42,7 @@
           <div [ngStyle]="{ 'margin-top': '2%' }"></div>
           <li *ngFor="let box of shipment.content">
             {{ box.boxName }} - x {{ box.amount }} - Price:
-            {{ box.price * box.amount }}
+            {{ box.price * box.amount | number: '1.0-2' }} 
           </li>
           <div [ngStyle]="{ 'margin-bottom': '2%' }"></div>
         </ul>
@@ -60,7 +60,7 @@
             {{
               shipment.content === null
                 ? "N/A"
-                : getShipmentTotalCost() + shipment.rate
+                : getShipmentTotalCost() + shipment.rate | number: '1.0-2'
             }}
           </strong>
         </p>
