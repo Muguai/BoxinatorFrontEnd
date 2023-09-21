@@ -1,4 +1,4 @@
-# <img width="198" alt="Boxinator" src="https://github.com/Muguai/BoxinatorFrontEnd/src/assets/img/logo.png">
+# <img width="198" alt="Boxinator" src="https://github.com/Muguai/BoxinatorFrontEnd/blob/main/src/assets/img/logo.png">
 Boxinator is a software solution designed to revolutionize the world of logistics by shipping mystery boxes from the beautiful lands of Scandinavia to destinations around the globe.
 
 ## Features and Usage
