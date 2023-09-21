@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CartService } from 'src/app/services/cart-service/cart-serivce.service';
@@ -11,11 +11,12 @@ import { from, catchError, of } from 'rxjs';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   title = 'LoginTest';
   items: any[] = []; 
   cartOpen: boolean = false;
   cartAmount: number = 0;
+  isAdmin: boolean = false;
   
 
   constructor(private userService: UserService ,public authService: AuthenticationService, private router: Router, private cartService: CartService){
@@ -28,6 +29,29 @@ export class NavbarComponent {
       this.onCartOpenChange(change);
     });
 
+  }
+
+  ngOnInit(): void {
+    this.authService.currentUser$.subscribe({
+      next: async user => {
+        const token = await this.authService.getToken();
+        if (!user.isAnonymous) {
+          this.userService.getUserData(token, user.uid).subscribe({
+            next: userData => {
+              if (userData.userType === 'Admin') {
+                this.isAdmin = true;
+              }
+            },
+            error: err => {
+              console.error(err);
+            }
+          });
+        }
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 
   logout(){

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CreateShipmentDTO,BoxInfo } from 'src/app/models/DTOs/Shipment/createShipmentDTO';
 import { Box } from 'src/app/models/mysteryBox';
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss'],
 })
-export class CheckoutComponent implements AfterViewInit {
+export class CheckoutComponent implements OnInit {
   boxes: Box[] = [];
   isLoading: boolean = false;
   isError: boolean = false;
@@ -26,7 +26,7 @@ export class CheckoutComponent implements AfterViewInit {
     private shipmentService: ShipmentService
   ) {}
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     const savedCart = sessionStorage.getItem('cartData');
     if (savedCart) {
       const savedCartData = JSON.parse(savedCart);
