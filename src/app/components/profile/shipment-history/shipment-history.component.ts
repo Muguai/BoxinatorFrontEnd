@@ -28,12 +28,17 @@ export class ShipmentHistoryComponent implements OnInit {
       next: (countries: any) => {
         console.log(countries);
         this.countries = countries;
+        this.addHistoryItem(token);
       },
       error: (error: any) => {
         console.log(error);
       },
     });
 
+  
+  }
+
+  async addHistoryItem(token: string){
     this.authService.currentUser$.subscribe({
       next: (user: any) => {
         console.log(user);

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ReadCountryDTO } from 'src/app/models/DTOs/Country/readCountryDTO';
 import { ReadUserDTO } from 'src/app/models/DTOs/User/readUserDTO';
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './shipping.component.html',
   styleUrls: ['./shipping.component.scss']
 })
-export class ShippingComponent implements OnInit {
+export class ShippingComponent implements AfterViewInit {
   countries: ReadCountryDTO[] = [];
 
   @ViewChild('shippingForm') shippingForm!: NgForm;
@@ -33,7 +33,7 @@ export class ShippingComponent implements OnInit {
     private readonly userService: UserService,
     private readonly countryService: CountryService) {}
 
-  ngOnInit(): void {
+    ngAfterViewInit(): void {
     this.authService.currentUser$.subscribe((user) => {
       if (!user.isAnonymous) {
         this.fetchUser(user.uid);
