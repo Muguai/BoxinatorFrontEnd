@@ -75,6 +75,8 @@ This project uses [BoxinatorBackEnd](https://github.com/dennis-schill-experis/Bo
 
 ### Admin Page
 
+![AdminPAge](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/37d0838b-30ab-4c22-b3fc-42477a36960b)
+
 
 
 
