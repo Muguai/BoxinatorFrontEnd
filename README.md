@@ -55,28 +55,27 @@ This project uses [BoxinatorBackEnd](https://github.com/dennis-schill-experis/Bo
 
 ### Landing Page
 
-![LandingPage2](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/a5771c99-e86c-48e2-8dcf-cd32262e0023)
+![LandingPage2](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/a663fb3e-1c3b-4e71-9d90-01e3030f4eba)
 
 ### Profile Page
 
-![ProfilePage](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/6a7cefba-535a-49e8-bebd-6bba79d3fa8d)
+![ProfilePage](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/3d679a3b-0043-4599-8474-21dccc2cf973)
 
 ### Login Page
 
-![login](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/ef20b22f-6a31-4322-997e-631fa6db0a5e)
+![login](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/1fd74678-234a-439c-b3a0-e1fdfdb5b45b)
 
 ### Signout Page
 
-![signin](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/134ce64f-2a21-4337-8280-4b33083eed84)
+![signin](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/2152274f-0423-4b5c-a589-d599c13467cb)
 
 ### Checkout Page
 
-![CheckoutPage](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/0c72fe64-67b2-4acf-9134-a52fc5ae3fcc)
+![CheckoutPage](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/246b99ec-4472-4527-8649-50960c1de212)
 
 ### Admin Page
 
-![AdminPAge](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/37d0838b-30ab-4c22-b3fc-42477a36960b)
-
+![AdminPAge](https://github.com/Muguai/BoxinatorFrontEnd/assets/37656342/2adb3db7-35f1-4e6f-97ce-2eedb4bb3f5b)
 
 
 
